@@ -1,0 +1,702 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "e5004c39-8ae2-465d-8bf5-c1005cfccad7.2",
+                    "groupId": "b159c833-e416-490f-ab9d-8eb3e5adc999@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Condition": {
+            "actions": {
+                "Add_a_row_into_a_table": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSPH7THPNKGFPFHL7PTKRJIAX5KZ": "/EHS/Checklists/Weekly/Fire hose (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "All folds of hose are correctly placed over the pins,inside the hose rack_x002e_": "@triggerBody()?['answer4_with_singular_value']",
+                            "Be sure that nozzle clip is in place and nozzle correctly contained and mounted": "@triggerBody()?['answer5_with_singular_value']",
+                            "Damage to couplings, or hose section, or leakers": "@triggerBody()?['answer10_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Does there appear to be any damage to the nozzle?": "@triggerBody()?['answer15_with_singular_value']",
+                            "Have you tested the hose?": "@triggerBody()?['answer13_with_singular_value']",
+                            "Inspected by (Employee name)": "@triggerBody()?['answer2']",
+                            "Is hand wheel proper size and attached to the valve?": "@triggerBody()?['answer7_with_singular_value']",
+                            "Is hose connected to hose rack nipple? Check to see that the hose rack nipple is not blocked?": "@triggerBody()?['answer11_with_singular_value']",
+                            "Is hose properly installed on pins and and held by retaining device?": "@triggerBody()?['answer6_with_singular_value']",
+                            "Is it leaking?": "@triggerBody()?['answer9_with_singular_value']",
+                            "Is the general condition of the hose good? No leaks": "@triggerBody()?['answer12_with_singular_value']",
+                            "Is the nozzle obstructed?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Is water supplied to the valve": "@triggerBody()?['answer8_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer16']['n'])}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSPH7THPNKGFPFHL7PTKRJIAX5KZ')}/workbook/tables/@{encodeURIComponent('{77F65F07-018F-4DE1-9BDD-2A7A2701CED1}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {},
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "ASL Pack"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_10": {
+            "actions": {
+                "Add_a_row_into_a_table_10": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSO6MKKNSAI66JHKBGUOOYVNJHON": "/EHS/Checklists/Weekly/Fire hose (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "All folds of hose are correctly placed over the pins,inside the hose rack_x002e_": "@triggerBody()?['answer4_with_singular_value']",
+                            "Be sure that nozzle clip is in place and nozzle correctly contained and mounted": "@triggerBody()?['answer5_with_singular_value']",
+                            "Damage to couplings, or hose section, or leakers": "@triggerBody()?['answer10_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Does there appear to be any damage to the nozzle?": "@triggerBody()?['answer15_with_singular_value']",
+                            "Have you tested the hose?": "@triggerBody()?['answer13_with_singular_value']",
+                            "Inspected by (Employee name)": "@triggerBody()?['answer2']",
+                            "Is hand wheel proper size and attached to the valve?": "@triggerBody()?['answer7_with_singular_value']",
+                            "Is hose connected to hose rack nipple? Check to see that the hose rack nipple is not blocked?": "@triggerBody()?['answer11_with_singular_value']",
+                            "Is hose properly installed on pins and and held by retaining device?": "@triggerBody()?['answer6_with_singular_value']",
+                            "Is it leaking?": "@triggerBody()?['answer9_with_singular_value']",
+                            "Is the general condition of the hose good? No leaks": "@triggerBody()?['answer12_with_singular_value']",
+                            "Is the nozzle obstructed?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Is water supplied to the valve": "@triggerBody()?['answer8_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer16']['n'])}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23CcVP99gEfQ4EjLalW8EVd')}/items/@{encodeURIComponent('012DAKHSO6MKKNSAI66JHKBGUOOYVNJHON')}/workbook/tables/@{encodeURIComponent('{77F65F07-018F-4DE1-9BDD-2A7A2701CED1}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_9": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Sintel"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_11": {
+            "actions": {
+                "Add_a_row_into_a_table_11": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSKTSFHHRQ4GCFCLULMDE2WVZDE6": "/EHS/Checklists/Weekly/Fire hose (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "All folds of hose are correctly placed over the pins,inside the hose rack_x002e_": "@triggerBody()?['answer4_with_singular_value']",
+                            "Be sure that nozzle clip is in place and nozzle correctly contained and mounted": "@triggerBody()?['answer5_with_singular_value']",
+                            "Damage to couplings, or hose section, or leakers": "@triggerBody()?['answer10_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Does there appear to be any damage to the nozzle?": "@triggerBody()?['answer15_with_singular_value']",
+                            "Have you tested the hose?": "@triggerBody()?['answer13_with_singular_value']",
+                            "Inspected by (Employee name)": "@triggerBody()?['answer2']",
+                            "Is hand wheel proper size and attached to the valve?": "@triggerBody()?['answer7_with_singular_value']",
+                            "Is hose connected to hose rack nipple? Check to see that the hose rack nipple is not blocked?": "@triggerBody()?['answer11_with_singular_value']",
+                            "Is hose properly installed on pins and and held by retaining device?": "@triggerBody()?['answer6_with_singular_value']",
+                            "Is it leaking?": "@triggerBody()?['answer9_with_singular_value']",
+                            "Is the general condition of the hose good? No leaks": "@triggerBody()?['answer12_with_singular_value']",
+                            "Is the nozzle obstructed?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Is water supplied to the valve": "@triggerBody()?['answer8_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer16']['n'])}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23SOjeg2ex3SKPV30tAC8Sq')}/items/@{encodeURIComponent('012DAKHSKTSFHHRQ4GCFCLULMDE2WVZDE6')}/workbook/tables/@{encodeURIComponent('{77F65F07-018F-4DE1-9BDD-2A7A2701CED1}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_10": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "TPSL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_12": {
+            "actions": {
+                "Add_a_row_into_a_table_12": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSORCAAQ7OTBAZCKOOEHK63ISKNX": "/EHS/Checklists/Weekly/Fire hose (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "All folds of hose are correctly placed over the pins,inside the hose rack_x002e_": "@triggerBody()?['answer4_with_singular_value']",
+                            "Be sure that nozzle clip is in place and nozzle correctly contained and mounted": "@triggerBody()?['answer5_with_singular_value']",
+                            "Damage to couplings, or hose section, or leakers": "@triggerBody()?['answer10_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Does there appear to be any damage to the nozzle?": "@triggerBody()?['answer15_with_singular_value']",
+                            "Have you tested the hose?": "@triggerBody()?['answer13_with_singular_value']",
+                            "Inspected by (Employee name)": "@triggerBody()?['answer2']",
+                            "Is hand wheel proper size and attached to the valve?": "@triggerBody()?['answer7_with_singular_value']",
+                            "Is hose connected to hose rack nipple? Check to see that the hose rack nipple is not blocked?": "@triggerBody()?['answer11_with_singular_value']",
+                            "Is hose properly installed on pins and and held by retaining device?": "@triggerBody()?['answer6_with_singular_value']",
+                            "Is it leaking?": "@triggerBody()?['answer9_with_singular_value']",
+                            "Is the general condition of the hose good? No leaks": "@triggerBody()?['answer12_with_singular_value']",
+                            "Is the nozzle obstructed?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Is water supplied to the valve": "@triggerBody()?['answer8_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer16']['n'])}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21OE4Lc5Sx1SZwFdBOFz34o')}/items/@{encodeURIComponent('012DAKHSORCAAQ7OTBAZCKOOEHK63ISKNX')}/workbook/tables/@{encodeURIComponent('{77F65F07-018F-4DE1-9BDD-2A7A2701CED1}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_11": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Wild Elegance"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_2": {
+            "actions": {
+                "Add_a_row_into_a_table_2": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSIAQZFK5LBVDRBY5JMYXQVIVGJT": "/EHS/Checklists/Weekly/Fire hose (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "All folds of hose are correctly placed over the pins,inside the hose rack_x002e_": "@triggerBody()?['answer4_with_singular_value']",
+                            "Be sure that nozzle clip is in place and nozzle correctly contained and mounted": "@triggerBody()?['answer5_with_singular_value']",
+                            "Damage to couplings, or hose section, or leakers": "@triggerBody()?['answer10_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Does there appear to be any damage to the nozzle?": "@triggerBody()?['answer15_with_singular_value']",
+                            "Have you tested the hose?": "@triggerBody()?['answer13_with_singular_value']",
+                            "Inspected by (Employee name)": "@triggerBody()?['answer2']",
+                            "Is hand wheel proper size and attached to the valve?": "@triggerBody()?['answer7_with_singular_value']",
+                            "Is hose connected to hose rack nipple? Check to see that the hose rack nipple is not blocked?": "@triggerBody()?['answer11_with_singular_value']",
+                            "Is hose properly installed on pins and and held by retaining device?": "@triggerBody()?['answer6_with_singular_value']",
+                            "Is it leaking?": "@triggerBody()?['answer9_with_singular_value']",
+                            "Is the general condition of the hose good? No leaks": "@triggerBody()?['answer12_with_singular_value']",
+                            "Is the nozzle obstructed?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Is water supplied to the valve": "@triggerBody()?['answer8_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer16']['n'])}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20_IPQJOQqtRrh4P5a0Fiel')}/items/@{encodeURIComponent('012DAKHSIAQZFK5LBVDRBY5JMYXQVIVGJT')}/workbook/tables/@{encodeURIComponent('{77F65F07-018F-4DE1-9BDD-2A7A2701CED1}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Flexowork"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_3": {
+            "actions": {
+                "Add_a_row_into_a_table_3": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI7FZ2FPAMFFVDIGCVTERJNRSRW": "/EHS/Checklists/Weekly/Fire hose (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "All folds of hose are correctly placed over the pins,inside the hose rack_x002e_": "@triggerBody()?['answer4_with_singular_value']",
+                            "Be sure that nozzle clip is in place and nozzle correctly contained and mounted": "@triggerBody()?['answer5_with_singular_value']",
+                            "Damage to couplings, or hose section, or leakers": "@triggerBody()?['answer10_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Does there appear to be any damage to the nozzle?": "@triggerBody()?['answer15_with_singular_value']",
+                            "Have you tested the hose?": "@triggerBody()?['answer13_with_singular_value']",
+                            "Inspected by (Employee name)": "@triggerBody()?['answer2']",
+                            "Is hand wheel proper size and attached to the valve?": "@triggerBody()?['answer7_with_singular_value']",
+                            "Is hose connected to hose rack nipple? Check to see that the hose rack nipple is not blocked?": "@triggerBody()?['answer11_with_singular_value']",
+                            "Is hose properly installed on pins and and held by retaining device?": "@triggerBody()?['answer6_with_singular_value']",
+                            "Is it leaking?": "@triggerBody()?['answer9_with_singular_value']",
+                            "Is the general condition of the hose good? No leaks": "@triggerBody()?['answer12_with_singular_value']",
+                            "Is the nozzle obstructed?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Is water supplied to the valve": "@triggerBody()?['answer8_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer16']['n'])}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20Ih8Qra-VNQ5WlPcEmbDcI')}/items/@{encodeURIComponent('012DAKHSI7FZ2FPAMFFVDIGCVTERJNRSRW')}/workbook/tables/@{encodeURIComponent('{77F65F07-018F-4DE1-9BDD-2A7A2701CED1}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_2": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "MarketPower"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_4": {
+            "actions": {
+                "Add_a_row_into_a_table_4": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSLNPXLLK7NYPNDZQ7HJBWEE2YDW": "/EHS/Checklists/Weekly/Fire hose (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "All folds of hose are correctly placed over the pins,inside the hose rack_x002e_": "@triggerBody()?['answer4_with_singular_value']",
+                            "Be sure that nozzle clip is in place and nozzle correctly contained and mounted": "@triggerBody()?['answer5_with_singular_value']",
+                            "Damage to couplings, or hose section, or leakers": "@triggerBody()?['answer10_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Does there appear to be any damage to the nozzle?": "@triggerBody()?['answer15_with_singular_value']",
+                            "Have you tested the hose?": "@triggerBody()?['answer13_with_singular_value']",
+                            "Inspected by (Employee name)": "@triggerBody()?['answer2']",
+                            "Is hand wheel proper size and attached to the valve?": "@triggerBody()?['answer7_with_singular_value']",
+                            "Is hose connected to hose rack nipple? Check to see that the hose rack nipple is not blocked?": "@triggerBody()?['answer11_with_singular_value']",
+                            "Is hose properly installed on pins and and held by retaining device?": "@triggerBody()?['answer6_with_singular_value']",
+                            "Is it leaking?": "@triggerBody()?['answer9_with_singular_value']",
+                            "Is the general condition of the hose good? No leaks": "@triggerBody()?['answer12_with_singular_value']",
+                            "Is the nozzle obstructed?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Is water supplied to the valve": "@triggerBody()?['answer8_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer16']['n'])}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22X5-_jdHAvQLoyxRsU7UeG')}/items/@{encodeURIComponent('012DAKHSLNPXLLK7NYPNDZQ7HJBWEE2YDW')}/workbook/tables/@{encodeURIComponent('{77F65F07-018F-4DE1-9BDD-2A7A2701CED1}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_3": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Panthera"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_5": {
+            "actions": {
+                "Add_a_row_into_a_table_5": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSL5QKJ264YK2NHZCDYFMFDSF5EN": "/EHS/Checklists/Weekly/Fire hose (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "All folds of hose are correctly placed over the pins,inside the hose rack_x002e_": "@triggerBody()?['answer4_with_singular_value']",
+                            "Be sure that nozzle clip is in place and nozzle correctly contained and mounted": "@triggerBody()?['answer5_with_singular_value']",
+                            "Damage to couplings, or hose section, or leakers": "@triggerBody()?['answer10_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Does there appear to be any damage to the nozzle?": "@triggerBody()?['answer15_with_singular_value']",
+                            "Have you tested the hose?": "@triggerBody()?['answer13_with_singular_value']",
+                            "Inspected by (Employee name)": "@triggerBody()?['answer2']",
+                            "Is hand wheel proper size and attached to the valve?": "@triggerBody()?['answer7_with_singular_value']",
+                            "Is hose connected to hose rack nipple? Check to see that the hose rack nipple is not blocked?": "@triggerBody()?['answer11_with_singular_value']",
+                            "Is hose properly installed on pins and and held by retaining device?": "@triggerBody()?['answer6_with_singular_value']",
+                            "Is it leaking?": "@triggerBody()?['answer9_with_singular_value']",
+                            "Is the general condition of the hose good? No leaks": "@triggerBody()?['answer12_with_singular_value']",
+                            "Is the nozzle obstructed?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Is water supplied to the valve": "@triggerBody()?['answer8_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer16']['n'])}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/items/@{encodeURIComponent('012DAKHSL5QKJ264YK2NHZCDYFMFDSF5EN')}/workbook/tables/@{encodeURIComponent('{77F65F07-018F-4DE1-9BDD-2A7A2701CED1}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_4": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Polythene"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_6": {
+            "actions": {
+                "Add_a_row_into_a_table_6": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSN4RWXWVHLXPNG2YCZ5YPMXYDWH": "/EHS/Checklists/Weekly/Fire hose (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "All folds of hose are correctly placed over the pins,inside the hose rack_x002e_": "@triggerBody()?['answer4_with_singular_value']",
+                            "Be sure that nozzle clip is in place and nozzle correctly contained and mounted": "@triggerBody()?['answer5_with_singular_value']",
+                            "Damage to couplings, or hose section, or leakers": "@triggerBody()?['answer10_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Does there appear to be any damage to the nozzle?": "@triggerBody()?['answer15_with_singular_value']",
+                            "Have you tested the hose?": "@triggerBody()?['answer13_with_singular_value']",
+                            "Inspected by (Employee name)": "@triggerBody()?['answer2']",
+                            "Is hand wheel proper size and attached to the valve?": "@triggerBody()?['answer7_with_singular_value']",
+                            "Is hose connected to hose rack nipple? Check to see that the hose rack nipple is not blocked?": "@triggerBody()?['answer11_with_singular_value']",
+                            "Is hose properly installed on pins and and held by retaining device?": "@triggerBody()?['answer6_with_singular_value']",
+                            "Is it leaking?": "@triggerBody()?['answer9_with_singular_value']",
+                            "Is the general condition of the hose good? No leaks": "@triggerBody()?['answer12_with_singular_value']",
+                            "Is the nozzle obstructed?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Is water supplied to the valve": "@triggerBody()?['answer8_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer16']['n'])}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22kk4tt4keDSZ_ZdgmrQkph')}/items/@{encodeURIComponent('012DAKHSN4RWXWVHLXPNG2YCZ5YPMXYDWH')}/workbook/tables/@{encodeURIComponent('{77F65F07-018F-4DE1-9BDD-2A7A2701CED1}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_5": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "PPL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_7": {
+            "actions": {
+                "Add_a_row_into_a_table_7": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOZG6KB7OLCGRAKVSRPVQGJ2L3X": "/EHS/Checklists/Weekly/Fire hose (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "All folds of hose are correctly placed over the pins,inside the hose rack_x002e_": "@triggerBody()?['answer4_with_singular_value']",
+                            "Be sure that nozzle clip is in place and nozzle correctly contained and mounted": "@triggerBody()?['answer5_with_singular_value']",
+                            "Damage to couplings, or hose section, or leakers": "@triggerBody()?['answer10_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Does there appear to be any damage to the nozzle?": "@triggerBody()?['answer15_with_singular_value']",
+                            "Have you tested the hose?": "@triggerBody()?['answer13_with_singular_value']",
+                            "Inspected by (Employee name)": "@triggerBody()?['answer2']",
+                            "Is hand wheel proper size and attached to the valve?": "@triggerBody()?['answer7_with_singular_value']",
+                            "Is hose connected to hose rack nipple? Check to see that the hose rack nipple is not blocked?": "@triggerBody()?['answer11_with_singular_value']",
+                            "Is hose properly installed on pins and and held by retaining device?": "@triggerBody()?['answer6_with_singular_value']",
+                            "Is it leaking?": "@triggerBody()?['answer9_with_singular_value']",
+                            "Is the general condition of the hose good? No leaks": "@triggerBody()?['answer12_with_singular_value']",
+                            "Is the nozzle obstructed?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Is water supplied to the valve": "@triggerBody()?['answer8_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer16']['n'])}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22UsYI9vqFGSazzeAY4Evkz')}/items/@{encodeURIComponent('012DAKHSOZG6KB7OLCGRAKVSRPVQGJ2L3X')}/workbook/tables/@{encodeURIComponent('{77F65F07-018F-4DE1-9BDD-2A7A2701CED1}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_6": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Pressmaster"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_8": {
+            "actions": {
+                "Add_a_row_into_a_table_8": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSLCS7PTEDNSYFCLQETEZZKGTD2O": "/EHS/Checklists/Weekly/Fire hose (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "host": {
+                            "body": {
+                                "All folds of hose are correctly placed over the pins,inside the hose rack_x002e_": "@triggerBody()?['answer4_with_singular_value']",
+                                "Be sure that nozzle clip is in place and nozzle correctly contained and mounted": "@triggerBody()?['answer5_with_singular_value']",
+                                "Damage to couplings, or hose section, or leakers": "@triggerBody()?['answer10_with_singular_value']",
+                                "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                                "Does there appear to be any damage to the nozzle?": "@triggerBody()?['answer15_with_singular_value']",
+                                "Have you tested the hose?": "@triggerBody()?['answer13_with_singular_value']",
+                                "Inspected by (Employee name)": "@triggerBody()?['answer2']",
+                                "Is hand wheel proper size and attached to the valve?": "@triggerBody()?['answer7_with_singular_value']",
+                                "Is hose connected to hose rack nipple? Check to see that the hose rack nipple is not blocked?": "@triggerBody()?['answer11_with_singular_value']",
+                                "Is hose properly installed on pins and and held by retaining device?": "@triggerBody()?['answer6_with_singular_value']",
+                                "Is it leaking?": "@triggerBody()?['answer9_with_singular_value']",
+                                "Is the general condition of the hose good? No leaks": "@triggerBody()?['answer12_with_singular_value']",
+                                "Is the nozzle obstructed?": "@triggerBody()?['answer14_with_singular_value']",
+                                "Is water supplied to the valve": "@triggerBody()?['answer8_with_singular_value']",
+                                "Location": "@{string(triggerBody()?['answer16']['n'])}"
+                            },
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21Zbz70lhgeRrEUj-vRcpoJ')}/items/@{encodeURIComponent('012DAKHSLCS7PTEDNSYFCLQETEZZKGTD2O')}/workbook/tables/@{encodeURIComponent('{77F65F07-018F-4DE1-9BDD-2A7A2701CED1}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_7": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit1"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_9": {
+            "actions": {
+                "Add_a_row_into_a_table_9": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSP2HDKFFBMA3FE3OYDQN2JO3AT5": "/EHS/Checklists/Weekly/Fire hose (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "All folds of hose are correctly placed over the pins,inside the hose rack_x002e_": "@triggerBody()?['answer4_with_singular_value']",
+                            "Be sure that nozzle clip is in place and nozzle correctly contained and mounted": "@triggerBody()?['answer5_with_singular_value']",
+                            "Damage to couplings, or hose section, or leakers": "@triggerBody()?['answer10_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Does there appear to be any damage to the nozzle?": "@triggerBody()?['answer15_with_singular_value']",
+                            "Have you tested the hose?": "@triggerBody()?['answer13_with_singular_value']",
+                            "Inspected by (Employee name)": "@triggerBody()?['answer2']",
+                            "Is hand wheel proper size and attached to the valve?": "@triggerBody()?['answer7_with_singular_value']",
+                            "Is hose connected to hose rack nipple? Check to see that the hose rack nipple is not blocked?": "@triggerBody()?['answer11_with_singular_value']",
+                            "Is hose properly installed on pins and and held by retaining device?": "@triggerBody()?['answer6_with_singular_value']",
+                            "Is it leaking?": "@triggerBody()?['answer9_with_singular_value']",
+                            "Is the general condition of the hose good? No leaks": "@triggerBody()?['answer12_with_singular_value']",
+                            "Is the nozzle obstructed?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Is water supplied to the valve": "@triggerBody()?['answer8_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer16']['n'])}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK224_MWHSLrlToHLAKKgheJk')}/items/@{encodeURIComponent('012DAKHSP2HDKFFBMA3FE3OYDQN2JO3AT5')}/workbook/tables/@{encodeURIComponent('{77F65F07-018F-4DE1-9BDD-2A7A2701CED1}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_8": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit2"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        }
+    },
+    "outputs": {}
+}

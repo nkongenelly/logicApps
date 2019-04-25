@@ -1,0 +1,123 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "manual": {
+            "type": "Request",
+            "kind": "Http",
+            "inputs": {
+                "schema": {
+                    "items": {
+                        "properties": {
+                            "IssueSubject": {
+                                "type": "string"
+                            },
+                            "Technician": {
+                                "type": "string"
+                            },
+                            "client": {
+                                "type": "string"
+                            },
+                            "jobcard_no": {
+                                "type": "string"
+                            },
+                            "phoneNumber": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "jobcard_no",
+                            "phoneNumber"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            }
+        }
+    },
+    "actions": {
+        "For_each": {
+            "foreach": "@triggerBody()",
+            "actions": {
+                "Send_action_on_a_group": {
+                    "runAfter": {},
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "actionBody": {
+                                "actionBody": {
+                                    "properties": [
+                                        {
+                                            "name": "customername",
+                                            "type": "Text",
+                                            "value": "ISSUE: @{items('For_each')?['IssueSubject']}"
+                                        },
+                                        {
+                                            "name": "ticketnumber",
+                                            "type": "Text",
+                                            "value": "JOBCARD#:@{items('For_each')['jobcard_no']}"
+                                        },
+                                        {
+                                            "name": "ticketstatus",
+                                            "type": "Text",
+                                            "value": "TECHNICIAN: @{items('For_each')?['Technician']}"
+                                        }
+                                    ]
+                                },
+                                "id": "com.ict.helpdesk.care"
+                            },
+                            "subscribers": "+@{items('For_each')['phoneNumber']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['kaizala']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/groups/@{encodeURIComponent('d2de99b4-7546-43d2-8587-0d728f6fa61b@2')}/actions",
+                        "queries": {
+                            "actionType": "Action Package",
+                            "sendToAll": "No"
+                        }
+                    }
+                },
+                "Send_action_on_a_group_2": {
+                    "runAfter": {
+                        "Send_action_on_a_group": [
+                            "Succeeded"
+                        ]
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "actionBody": {
+                                "Message": "ISSUE: @{items('For_each')?['IssueSubject']},\n\nCLIENT:  @{items('For_each')?['client']},\n\nJOBCARD#: @{items('For_each')['jobcard_no']},\n\nTECHNICIAN: @{items('For_each')?['Technician']}",
+                                "Title": "NEW JOB CREATED"
+                            }
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['kaizala']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/groups/@{encodeURIComponent('d2de99b4-7546-43d2-8587-0d728f6fa61b@2')}/actions",
+                        "queries": {
+                            "actionType": "announcement"
+                        }
+                    }
+                }
+            },
+            "runAfter": {},
+            "type": "Foreach"
+        }
+    },
+    "outputs": {}
+}

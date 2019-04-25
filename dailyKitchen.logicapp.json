@@ -1,0 +1,942 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "b7869c0c-ea12-4e75-96b6-532e1e2c2b00.3",
+                    "groupId": "94865b2a-c452-431c-848e-a7c37a437f3f@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Condition": {
+            "actions": {
+                "Add_a_row_into_a_table": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSP4PYYG6C63IJG3D522USOU7U72": "/EHS/Checklists/Daily/Staff kitchen daily checklist (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Bin/trash is empty and clean": "@triggerBody()?['answer17_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employe name": "@triggerBody()?['answer3']",
+                            "Floor is clean": "@triggerBody()?['answer5_with_singular_value']",
+                            "Food properly stored": "@triggerBody()?['answer32_with_singular_value']",
+                            "Fridge is clean and in working order": "@triggerBody()?['answer11_with_singular_value']",
+                            "Hot water tower/kettle is clean and in working order": "@triggerBody()?['answer14_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer36']['n'])}",
+                            "Microwaves are clean and in working order": "@triggerBody()?['answer8_with_singular_value']",
+                            "Pest control": "@triggerBody()?['answer29_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer7']}",
+                            "Photo11": "-@{triggerBody()?['answer22']}",
+                            "Photo13": "-@{triggerBody()?['answer25']}",
+                            "Photo15": "-@{triggerBody()?['answer28']}",
+                            "Photo17": "-@{triggerBody()?['answer31']}",
+                            "Photo19": "-@{triggerBody()?['answer34']}",
+                            "Photo3": "-@{triggerBody()?['answer10']}",
+                            "Photo5": "-@{triggerBody()?['answer13']}",
+                            "Photo7": "-@{triggerBody()?['answer16']}",
+                            "Photo9": "-@{triggerBody()?['answer19']}",
+                            "Storage cupboards are clean": "@triggerBody()?['answer26_with_singular_value']",
+                            "Suoervisor": "@triggerBody()?['answer4']",
+                            "Table and chairs are clean and undamaged": "@triggerBody()?['answer20_with_singular_value']",
+                            "Upload self image on location of inspection at time of inspection": "@triggerBody()?['answer35']",
+                            "Wash basins are clean": "@triggerBody()?['answer23_with_singular_value']",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain10": "-@{triggerBody()?['answer21']}",
+                            "You answered No, explain12": "-@{triggerBody()?['answer24']}",
+                            "You answered No, explain14": "-@{triggerBody()?['answer27']}",
+                            "You answered No, explain16": "-@{triggerBody()?['answer30']}",
+                            "You answered No, explain18": "-@{triggerBody()?['answer33']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer9']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer15']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer18']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSP4PYYG6C63IJG3D522USOU7U72')}/workbook/tables/@{encodeURIComponent('{6ADBDC9D-7AA7-4D8F-8BAD-D8A54CF8C9CE}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {},
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "\"ASL Pack"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_10": {
+            "actions": {
+                "Add_a_row_into_a_table_10": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOVH3LN7ZRFYBAJTYECZFSNXVHH": "/EHS/Checklists/Daily/Staff kitchen daily checklist (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Bin/trash is empty and clean": "@triggerBody()?['answer17_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employe name": "@triggerBody()?['answer3']",
+                            "Floor is clean": "@triggerBody()?['answer5_with_singular_value']",
+                            "Food properly stored": "@triggerBody()?['answer32_with_singular_value']",
+                            "Fridge is clean and in working order": "@triggerBody()?['answer11_with_singular_value']",
+                            "Hot water tower/kettle is clean and in working order": "@triggerBody()?['answer14_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer36']['n'])}",
+                            "Microwaves are clean and in working order": "@triggerBody()?['answer8_with_singular_value']",
+                            "Pest control": "@triggerBody()?['answer29_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer7']}",
+                            "Photo11": "-@{triggerBody()?['answer22']}",
+                            "Photo13": "-@{triggerBody()?['answer25']}",
+                            "Photo15": "-@{triggerBody()?['answer28']}",
+                            "Photo17": "-@{triggerBody()?['answer31']}",
+                            "Photo19": "-@{triggerBody()?['answer34']}",
+                            "Photo3": "-@{triggerBody()?['answer10']}",
+                            "Photo5": "-@{triggerBody()?['answer13']}",
+                            "Photo7": "-@{triggerBody()?['answer16']}",
+                            "Photo9": "-@{triggerBody()?['answer19']}",
+                            "Storage cupboards are clean": "@triggerBody()?['answer26_with_singular_value']",
+                            "Suoervisor": "@triggerBody()?['answer4']",
+                            "Table and chairs are clean and undamaged": "@triggerBody()?['answer20_with_singular_value']",
+                            "Upload self image on location of inspection at time of inspection": "@triggerBody()?['answer35']",
+                            "Wash basins are clean": "@triggerBody()?['answer23_with_singular_value']",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain10": "-@{triggerBody()?['answer21']}",
+                            "You answered No, explain12": "-@{triggerBody()?['answer24']}",
+                            "You answered No, explain14": "-@{triggerBody()?['answer27']}",
+                            "You answered No, explain16": "-@{triggerBody()?['answer30']}",
+                            "You answered No, explain18": "-@{triggerBody()?['answer33']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer9']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer15']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer18']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23CcVP99gEfQ4EjLalW8EVd')}/items/@{encodeURIComponent('012DAKHSOVH3LN7ZRFYBAJTYECZFSNXVHH')}/workbook/tables/@{encodeURIComponent('{6ADBDC9D-7AA7-4D8F-8BAD-D8A54CF8C9CE}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_9": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "\"Sintel"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_11": {
+            "actions": {
+                "Add_a_row_into_a_table_11": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOUQHDSEH773JGZ7BIOE76SAW6A": "/EHS/Checklists/Daily/Staff kitchen daily checklist (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Bin/trash is empty and clean": "@triggerBody()?['answer17_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employe name": "@triggerBody()?['answer3']",
+                            "Floor is clean": "@triggerBody()?['answer5_with_singular_value']",
+                            "Food properly stored": "@triggerBody()?['answer32_with_singular_value']",
+                            "Fridge is clean and in working order": "@triggerBody()?['answer11_with_singular_value']",
+                            "Hot water tower/kettle is clean and in working order": "@triggerBody()?['answer14_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer36']['n'])}",
+                            "Microwaves are clean and in working order": "@triggerBody()?['answer8_with_singular_value']",
+                            "Pest control": "@triggerBody()?['answer29_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer7']}",
+                            "Photo11": "-@{triggerBody()?['answer22']}",
+                            "Photo13": "-@{triggerBody()?['answer25']}",
+                            "Photo15": "-@{triggerBody()?['answer28']}",
+                            "Photo17": "-@{triggerBody()?['answer31']}",
+                            "Photo19": "-@{triggerBody()?['answer34']}",
+                            "Photo3": "-@{triggerBody()?['answer10']}",
+                            "Photo5": "-@{triggerBody()?['answer13']}",
+                            "Photo7": "-@{triggerBody()?['answer16']}",
+                            "Photo9": "-@{triggerBody()?['answer19']}",
+                            "Storage cupboards are clean": "@triggerBody()?['answer26_with_singular_value']",
+                            "Suoervisor": "@triggerBody()?['answer4']",
+                            "Table and chairs are clean and undamaged": "@triggerBody()?['answer20_with_singular_value']",
+                            "Upload self image on location of inspection at time of inspection": "@triggerBody()?['answer35']",
+                            "Wash basins are clean": "@triggerBody()?['answer23_with_singular_value']",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain10": "-@{triggerBody()?['answer21']}",
+                            "You answered No, explain12": "-@{triggerBody()?['answer24']}",
+                            "You answered No, explain14": "-@{triggerBody()?['answer27']}",
+                            "You answered No, explain16": "-@{triggerBody()?['answer30']}",
+                            "You answered No, explain18": "-@{triggerBody()?['answer33']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer9']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer15']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer18']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23SOjeg2ex3SKPV30tAC8Sq')}/items/@{encodeURIComponent('012DAKHSOUQHDSEH773JGZ7BIOE76SAW6A')}/workbook/tables/@{encodeURIComponent('{6ADBDC9D-7AA7-4D8F-8BAD-D8A54CF8C9CE}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_10": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "\"TPSL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_12": {
+            "actions": {
+                "Add_a_row_into_a_table_12": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSMGEKLN4JH7RFB3TIRIU3ZGBG7F": "/EHS/Checklists/Daily/Staff kitchen daily checklist (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Bin/trash is empty and clean": "@triggerBody()?['answer17_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employe name": "@triggerBody()?['answer3']",
+                            "Floor is clean": "@triggerBody()?['answer5_with_singular_value']",
+                            "Food properly stored": "@triggerBody()?['answer32_with_singular_value']",
+                            "Fridge is clean and in working order": "@triggerBody()?['answer11_with_singular_value']",
+                            "Hot water tower/kettle is clean and in working order": "@triggerBody()?['answer14_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer36']['n'])}",
+                            "Microwaves are clean and in working order": "@triggerBody()?['answer8_with_singular_value']",
+                            "Pest control": "@triggerBody()?['answer29_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer7']}",
+                            "Photo11": "-@{triggerBody()?['answer22']}",
+                            "Photo13": "-@{triggerBody()?['answer25']}",
+                            "Photo15": "-@{triggerBody()?['answer28']}",
+                            "Photo17": "-@{triggerBody()?['answer31']}",
+                            "Photo19": "-@{triggerBody()?['answer34']}",
+                            "Photo3": "-@{triggerBody()?['answer10']}",
+                            "Photo5": "-@{triggerBody()?['answer13']}",
+                            "Photo7": "-@{triggerBody()?['answer16']}",
+                            "Photo9": "-@{triggerBody()?['answer19']}",
+                            "Storage cupboards are clean": "@triggerBody()?['answer26_with_singular_value']",
+                            "Suoervisor": "@triggerBody()?['answer4']",
+                            "Table and chairs are clean and undamaged": "@triggerBody()?['answer20_with_singular_value']",
+                            "Upload self image on location of inspection at time of inspection": "@triggerBody()?['answer35']",
+                            "Wash basins are clean": "@triggerBody()?['answer23_with_singular_value']",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain10": "-@{triggerBody()?['answer21']}",
+                            "You answered No, explain12": "-@{triggerBody()?['answer24']}",
+                            "You answered No, explain14": "-@{triggerBody()?['answer27']}",
+                            "You answered No, explain16": "-@{triggerBody()?['answer30']}",
+                            "You answered No, explain18": "-@{triggerBody()?['answer33']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer9']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer15']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer18']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21OE4Lc5Sx1SZwFdBOFz34o')}/items/@{encodeURIComponent('012DAKHSMGEKLN4JH7RFB3TIRIU3ZGBG7F')}/workbook/tables/@{encodeURIComponent('{6ADBDC9D-7AA7-4D8F-8BAD-D8A54CF8C9CE}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_11": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "\"Wild Elegance"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_2": {
+            "actions": {
+                "Add_a_row_into_a_table_2": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSKTR3Q52JAK6BDZFTBPKPOGLAEI": "/EHS/Checklists/Daily/Staff kitchen daily checklist (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Bin/trash is empty and clean": "@triggerBody()?['answer17_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employe name": "@triggerBody()?['answer3']",
+                            "Floor is clean": "@triggerBody()?['answer5_with_singular_value']",
+                            "Food properly stored": "@triggerBody()?['answer32_with_singular_value']",
+                            "Fridge is clean and in working order": "@triggerBody()?['answer11_with_singular_value']",
+                            "Hot water tower/kettle is clean and in working order": "@triggerBody()?['answer14_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer36']['n'])}",
+                            "Microwaves are clean and in working order": "@triggerBody()?['answer8_with_singular_value']",
+                            "Pest control": "@triggerBody()?['answer29_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer7']}",
+                            "Photo11": "-@{triggerBody()?['answer22']}",
+                            "Photo13": "-@{triggerBody()?['answer25']}",
+                            "Photo15": "-@{triggerBody()?['answer28']}",
+                            "Photo17": "-@{triggerBody()?['answer31']}",
+                            "Photo19": "-@{triggerBody()?['answer34']}",
+                            "Photo3": "-@{triggerBody()?['answer10']}",
+                            "Photo5": "-@{triggerBody()?['answer13']}",
+                            "Photo7": "-@{triggerBody()?['answer16']}",
+                            "Photo9": "-@{triggerBody()?['answer19']}",
+                            "Storage cupboards are clean": "@triggerBody()?['answer26_with_singular_value']",
+                            "Suoervisor": "@triggerBody()?['answer4']",
+                            "Table and chairs are clean and undamaged": "@triggerBody()?['answer20_with_singular_value']",
+                            "Upload self image on location of inspection at time of inspection": "@triggerBody()?['answer35']",
+                            "Wash basins are clean": "@triggerBody()?['answer23_with_singular_value']",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain10": "-@{triggerBody()?['answer21']}",
+                            "You answered No, explain12": "-@{triggerBody()?['answer24']}",
+                            "You answered No, explain14": "-@{triggerBody()?['answer27']}",
+                            "You answered No, explain16": "-@{triggerBody()?['answer30']}",
+                            "You answered No, explain18": "-@{triggerBody()?['answer33']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer9']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer15']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer18']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20_IPQJOQqtRrh4P5a0Fiel')}/items/@{encodeURIComponent('012DAKHSKTR3Q52JAK6BDZFTBPKPOGLAEI')}/workbook/tables/@{encodeURIComponent('{6ADBDC9D-7AA7-4D8F-8BAD-D8A54CF8C9CE}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "\"Flexowork"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_3": {
+            "actions": {
+                "Add_a_row_into_a_table_3": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSMUMFKPTBAMWVEI436JE5B3XZBQ": "/EHS/Checklists/Daily/Staff kitchen daily checklist (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Bin/trash is empty and clean": "@triggerBody()?['answer17_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employe name": "@triggerBody()?['answer3']",
+                            "Floor is clean": "@triggerBody()?['answer5_with_singular_value']",
+                            "Food properly stored": "@triggerBody()?['answer32_with_singular_value']",
+                            "Fridge is clean and in working order": "@triggerBody()?['answer11_with_singular_value']",
+                            "Hot water tower/kettle is clean and in working order": "@triggerBody()?['answer14_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer36']['n'])}",
+                            "Microwaves are clean and in working order": "@triggerBody()?['answer8_with_singular_value']",
+                            "Pest control": "@triggerBody()?['answer29_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer7']}",
+                            "Photo11": "-@{triggerBody()?['answer22']}",
+                            "Photo13": "-@{triggerBody()?['answer25']}",
+                            "Photo15": "-@{triggerBody()?['answer28']}",
+                            "Photo17": "-@{triggerBody()?['answer31']}",
+                            "Photo19": "-@{triggerBody()?['answer34']}",
+                            "Photo3": "-@{triggerBody()?['answer10']}",
+                            "Photo5": "-@{triggerBody()?['answer13']}",
+                            "Photo7": "-@{triggerBody()?['answer16']}",
+                            "Photo9": "-@{triggerBody()?['answer19']}",
+                            "Storage cupboards are clean": "@triggerBody()?['answer26_with_singular_value']",
+                            "Suoervisor": "@triggerBody()?['answer4']",
+                            "Table and chairs are clean and undamaged": "@triggerBody()?['answer20_with_singular_value']",
+                            "Upload self image on location of inspection at time of inspection": "@triggerBody()?['answer35']",
+                            "Wash basins are clean": "@triggerBody()?['answer23_with_singular_value']",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain10": "-@{triggerBody()?['answer21']}",
+                            "You answered No, explain12": "-@{triggerBody()?['answer24']}",
+                            "You answered No, explain14": "-@{triggerBody()?['answer27']}",
+                            "You answered No, explain16": "-@{triggerBody()?['answer30']}",
+                            "You answered No, explain18": "-@{triggerBody()?['answer33']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer9']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer15']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer18']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20Ih8Qra-VNQ5WlPcEmbDcI')}/items/@{encodeURIComponent('012DAKHSMUMFKPTBAMWVEI436JE5B3XZBQ')}/workbook/tables/@{encodeURIComponent('{6ADBDC9D-7AA7-4D8F-8BAD-D8A54CF8C9CE}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_2": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "\"MarketPower"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_4": {
+            "actions": {
+                "Add_a_row_into_a_table_4": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJPJNDG4FHXURGJXMDPKNNAXENP": "/EHS/Checklists/Daily/Staff kitchen daily checklist (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Bin/trash is empty and clean": "@triggerBody()?['answer17_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employe name": "@triggerBody()?['answer3']",
+                            "Floor is clean": "@triggerBody()?['answer5_with_singular_value']",
+                            "Food properly stored": "@triggerBody()?['answer32_with_singular_value']",
+                            "Fridge is clean and in working order": "@triggerBody()?['answer11_with_singular_value']",
+                            "Hot water tower/kettle is clean and in working order": "@triggerBody()?['answer14_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer36']['n'])}",
+                            "Microwaves are clean and in working order": "@triggerBody()?['answer8_with_singular_value']",
+                            "Pest control": "@triggerBody()?['answer29_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer7']}",
+                            "Photo11": "-@{triggerBody()?['answer22']}",
+                            "Photo13": "-@{triggerBody()?['answer25']}",
+                            "Photo15": "-@{triggerBody()?['answer28']}",
+                            "Photo17": "-@{triggerBody()?['answer31']}",
+                            "Photo19": "-@{triggerBody()?['answer34']}",
+                            "Photo3": "-@{triggerBody()?['answer10']}",
+                            "Photo5": "-@{triggerBody()?['answer13']}",
+                            "Photo7": "-@{triggerBody()?['answer16']}",
+                            "Photo9": "-@{triggerBody()?['answer19']}",
+                            "Storage cupboards are clean": "@triggerBody()?['answer26_with_singular_value']",
+                            "Suoervisor": "@triggerBody()?['answer4']",
+                            "Table and chairs are clean and undamaged": "@triggerBody()?['answer20_with_singular_value']",
+                            "Upload self image on location of inspection at time of inspection": "@triggerBody()?['answer35']",
+                            "Wash basins are clean": "@triggerBody()?['answer23_with_singular_value']",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain10": "-@{triggerBody()?['answer21']}",
+                            "You answered No, explain12": "-@{triggerBody()?['answer24']}",
+                            "You answered No, explain14": "-@{triggerBody()?['answer27']}",
+                            "You answered No, explain16": "-@{triggerBody()?['answer30']}",
+                            "You answered No, explain18": "-@{triggerBody()?['answer33']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer9']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer15']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer18']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22X5-_jdHAvQLoyxRsU7UeG')}/items/@{encodeURIComponent('012DAKHSJPJNDG4FHXURGJXMDPKNNAXENP')}/workbook/tables/@{encodeURIComponent('{6ADBDC9D-7AA7-4D8F-8BAD-D8A54CF8C9CE}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_3": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "\"Panthera"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_5": {
+            "actions": {
+                "Add_a_row_into_a_table_5": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSKOXV6LBGRYFZB3CJPL27LIPVTR": "/EHS/Checklists/Daily/Staff kitchen daily checklist (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Bin/trash is empty and clean": "@triggerBody()?['answer17_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employe name": "@triggerBody()?['answer3']",
+                            "Floor is clean": "@triggerBody()?['answer5_with_singular_value']",
+                            "Food properly stored": "@triggerBody()?['answer32_with_singular_value']",
+                            "Fridge is clean and in working order": "@triggerBody()?['answer11_with_singular_value']",
+                            "Hot water tower/kettle is clean and in working order": "@triggerBody()?['answer14_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer36']['n'])}",
+                            "Microwaves are clean and in working order": "@triggerBody()?['answer8_with_singular_value']",
+                            "Pest control": "@triggerBody()?['answer29_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer7']}",
+                            "Photo11": "-@{triggerBody()?['answer22']}",
+                            "Photo13": "-@{triggerBody()?['answer25']}",
+                            "Photo15": "-@{triggerBody()?['answer28']}",
+                            "Photo17": "-@{triggerBody()?['answer31']}",
+                            "Photo19": "-@{triggerBody()?['answer34']}",
+                            "Photo3": "-@{triggerBody()?['answer10']}",
+                            "Photo5": "-@{triggerBody()?['answer13']}",
+                            "Photo7": "-@{triggerBody()?['answer16']}",
+                            "Photo9": "-@{triggerBody()?['answer19']}",
+                            "Storage cupboards are clean": "@triggerBody()?['answer26_with_singular_value']",
+                            "Suoervisor": "@triggerBody()?['answer4']",
+                            "Table and chairs are clean and undamaged": "@triggerBody()?['answer20_with_singular_value']",
+                            "Upload self image on location of inspection at time of inspection": "@triggerBody()?['answer35']",
+                            "Wash basins are clean": "@triggerBody()?['answer23_with_singular_value']",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain10": "-@{triggerBody()?['answer21']}",
+                            "You answered No, explain12": "-@{triggerBody()?['answer24']}",
+                            "You answered No, explain14": "-@{triggerBody()?['answer27']}",
+                            "You answered No, explain16": "-@{triggerBody()?['answer30']}",
+                            "You answered No, explain18": "-@{triggerBody()?['answer33']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer9']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer15']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer18']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/items/@{encodeURIComponent('012DAKHSKOXV6LBGRYFZB3CJPL27LIPVTR')}/workbook/tables/@{encodeURIComponent('{6ADBDC9D-7AA7-4D8F-8BAD-D8A54CF8C9CE}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_4": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "\"Polythene"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_6": {
+            "actions": {
+                "Add_a_row_into_a_table_6": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJ2ZAYGLUL4VVBLS2UUZPE76NV3": "/EHS/Checklists/Daily/Staff kitchen daily checklist (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Bin/trash is empty and clean": "@triggerBody()?['answer17_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employe name": "@triggerBody()?['answer3']",
+                            "Floor is clean": "@triggerBody()?['answer5_with_singular_value']",
+                            "Food properly stored": "@triggerBody()?['answer32_with_singular_value']",
+                            "Fridge is clean and in working order": "@triggerBody()?['answer11_with_singular_value']",
+                            "Hot water tower/kettle is clean and in working order": "@triggerBody()?['answer14_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer36']['n'])}",
+                            "Microwaves are clean and in working order": "@triggerBody()?['answer8_with_singular_value']",
+                            "Pest control": "@triggerBody()?['answer29_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer7']}",
+                            "Photo11": "-@{triggerBody()?['answer22']}",
+                            "Photo13": "-@{triggerBody()?['answer25']}",
+                            "Photo15": "-@{triggerBody()?['answer28']}",
+                            "Photo17": "-@{triggerBody()?['answer31']}",
+                            "Photo19": "-@{triggerBody()?['answer34']}",
+                            "Photo3": "-@{triggerBody()?['answer10']}",
+                            "Photo5": "-@{triggerBody()?['answer13']}",
+                            "Photo7": "-@{triggerBody()?['answer16']}",
+                            "Photo9": "-@{triggerBody()?['answer19']}",
+                            "Storage cupboards are clean": "@triggerBody()?['answer26_with_singular_value']",
+                            "Suoervisor": "@triggerBody()?['answer4']",
+                            "Table and chairs are clean and undamaged": "@triggerBody()?['answer20_with_singular_value']",
+                            "Upload self image on location of inspection at time of inspection": "@triggerBody()?['answer35']",
+                            "Wash basins are clean": "@triggerBody()?['answer23_with_singular_value']",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain10": "-@{triggerBody()?['answer21']}",
+                            "You answered No, explain12": "-@{triggerBody()?['answer24']}",
+                            "You answered No, explain14": "-@{triggerBody()?['answer27']}",
+                            "You answered No, explain16": "-@{triggerBody()?['answer30']}",
+                            "You answered No, explain18": "-@{triggerBody()?['answer33']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer9']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer15']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer18']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22kk4tt4keDSZ_ZdgmrQkph')}/items/@{encodeURIComponent('012DAKHSJ2ZAYGLUL4VVBLS2UUZPE76NV3')}/workbook/tables/@{encodeURIComponent('{6ADBDC9D-7AA7-4D8F-8BAD-D8A54CF8C9CE}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_5": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "PPL\""
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_7": {
+            "actions": {
+                "Add_a_row_into_a_table_7": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJALSSUCGOPY5DJDBUHBCJSTSMB": "/EHS/Checklists/Daily/Staff kitchen daily checklist (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Bin/trash is empty and clean": "@triggerBody()?['answer17_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employe name": "@triggerBody()?['answer3']",
+                            "Floor is clean": "@triggerBody()?['answer5_with_singular_value']",
+                            "Food properly stored": "@triggerBody()?['answer32_with_singular_value']",
+                            "Fridge is clean and in working order": "@triggerBody()?['answer11_with_singular_value']",
+                            "Hot water tower/kettle is clean and in working order": "@triggerBody()?['answer14_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer36']['n'])}",
+                            "Microwaves are clean and in working order": "@triggerBody()?['answer8_with_singular_value']",
+                            "Pest control": "@triggerBody()?['answer29_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer7']}",
+                            "Photo11": "-@{triggerBody()?['answer22']}",
+                            "Photo13": "-@{triggerBody()?['answer25']}",
+                            "Photo15": "-@{triggerBody()?['answer28']}",
+                            "Photo17": "-@{triggerBody()?['answer31']}",
+                            "Photo19": "-@{triggerBody()?['answer34']}",
+                            "Photo3": "-@{triggerBody()?['answer10']}",
+                            "Photo5": "-@{triggerBody()?['answer13']}",
+                            "Photo7": "-@{triggerBody()?['answer16']}",
+                            "Photo9": "-@{triggerBody()?['answer19']}",
+                            "Storage cupboards are clean": "@triggerBody()?['answer26_with_singular_value']",
+                            "Suoervisor": "@triggerBody()?['answer4']",
+                            "Table and chairs are clean and undamaged": "@triggerBody()?['answer20_with_singular_value']",
+                            "Upload self image on location of inspection at time of inspection": "@triggerBody()?['answer35']",
+                            "Wash basins are clean": "@triggerBody()?['answer23_with_singular_value']",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain10": "-@{triggerBody()?['answer21']}",
+                            "You answered No, explain12": "-@{triggerBody()?['answer24']}",
+                            "You answered No, explain14": "-@{triggerBody()?['answer27']}",
+                            "You answered No, explain16": "-@{triggerBody()?['answer30']}",
+                            "You answered No, explain18": "-@{triggerBody()?['answer33']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer9']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer15']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer18']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22UsYI9vqFGSazzeAY4Evkz')}/items/@{encodeURIComponent('012DAKHSJALSSUCGOPY5DJDBUHBCJSTSMB')}/workbook/tables/@{encodeURIComponent('{6ADBDC9D-7AA7-4D8F-8BAD-D8A54CF8C9CE}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_6": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "\"Pressmaster"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_8": {
+            "actions": {
+                "Add_a_row_into_a_table_8": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSLZJ4CFFEORZNF3ULWV34JZMABR": "/EHS/Checklists/Daily/Staff kitchen daily checklist (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Bin/trash is empty and clean": "@triggerBody()?['answer17_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employe name": "@triggerBody()?['answer3']",
+                            "Floor is clean": "@triggerBody()?['answer5_with_singular_value']",
+                            "Food properly stored": "@triggerBody()?['answer32_with_singular_value']",
+                            "Fridge is clean and in working order": "@triggerBody()?['answer11_with_singular_value']",
+                            "Hot water tower/kettle is clean and in working order": "@triggerBody()?['answer14_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer36']['n'])}",
+                            "Microwaves are clean and in working order": "@triggerBody()?['answer8_with_singular_value']",
+                            "Pest control": "@triggerBody()?['answer29_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer7']}",
+                            "Photo11": "-@{triggerBody()?['answer22']}",
+                            "Photo13": "-@{triggerBody()?['answer25']}",
+                            "Photo15": "-@{triggerBody()?['answer28']}",
+                            "Photo17": "-@{triggerBody()?['answer31']}",
+                            "Photo19": "-@{triggerBody()?['answer34']}",
+                            "Photo3": "-@{triggerBody()?['answer10']}",
+                            "Photo5": "-@{triggerBody()?['answer13']}",
+                            "Photo7": "-@{triggerBody()?['answer16']}",
+                            "Photo9": "-@{triggerBody()?['answer19']}",
+                            "Storage cupboards are clean": "@triggerBody()?['answer26_with_singular_value']",
+                            "Suoervisor": "@triggerBody()?['answer4']",
+                            "Table and chairs are clean and undamaged": "@triggerBody()?['answer20_with_singular_value']",
+                            "Upload self image on location of inspection at time of inspection": "@triggerBody()?['answer35']",
+                            "Wash basins are clean": "@triggerBody()?['answer23_with_singular_value']",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain10": "-@{triggerBody()?['answer21']}",
+                            "You answered No, explain12": "-@{triggerBody()?['answer24']}",
+                            "You answered No, explain14": "-@{triggerBody()?['answer27']}",
+                            "You answered No, explain16": "-@{triggerBody()?['answer30']}",
+                            "You answered No, explain18": "-@{triggerBody()?['answer33']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer9']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer15']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer18']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21Zbz70lhgeRrEUj-vRcpoJ')}/items/@{encodeURIComponent('012DAKHSLZJ4CFFEORZNF3ULWV34JZMABR')}/workbook/tables/@{encodeURIComponent('{6ADBDC9D-7AA7-4D8F-8BAD-D8A54CF8C9CE}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_7": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "\"RPWL Unit1"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_9": {
+            "actions": {
+                "Add_a_row_into_a_table_9": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSMUXMIZ74KRGBGIBJMPPDKMP7JH": "/EHS/Checklists/Daily/Staff kitchen daily checklist (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Bin/trash is empty and clean": "@triggerBody()?['answer17_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employe name": "@triggerBody()?['answer3']",
+                            "Floor is clean": "@triggerBody()?['answer5_with_singular_value']",
+                            "Food properly stored": "@triggerBody()?['answer32_with_singular_value']",
+                            "Fridge is clean and in working order": "@triggerBody()?['answer11_with_singular_value']",
+                            "Hot water tower/kettle is clean and in working order": "@triggerBody()?['answer14_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer36']['n'])}",
+                            "Microwaves are clean and in working order": "@triggerBody()?['answer8_with_singular_value']",
+                            "Pest control": "@triggerBody()?['answer29_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer7']}",
+                            "Photo11": "-@{triggerBody()?['answer22']}",
+                            "Photo13": "-@{triggerBody()?['answer25']}",
+                            "Photo15": "-@{triggerBody()?['answer28']}",
+                            "Photo17": "-@{triggerBody()?['answer31']}",
+                            "Photo19": "-@{triggerBody()?['answer34']}",
+                            "Photo3": "-@{triggerBody()?['answer10']}",
+                            "Photo5": "-@{triggerBody()?['answer13']}",
+                            "Photo7": "-@{triggerBody()?['answer16']}",
+                            "Photo9": "-@{triggerBody()?['answer19']}",
+                            "Storage cupboards are clean": "@triggerBody()?['answer26_with_singular_value']",
+                            "Suoervisor": "@triggerBody()?['answer4']",
+                            "Table and chairs are clean and undamaged": "@triggerBody()?['answer20_with_singular_value']",
+                            "Upload self image on location of inspection at time of inspection": "@triggerBody()?['answer35']",
+                            "Wash basins are clean": "@triggerBody()?['answer23_with_singular_value']",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain10": "-@{triggerBody()?['answer21']}",
+                            "You answered No, explain12": "-@{triggerBody()?['answer24']}",
+                            "You answered No, explain14": "-@{triggerBody()?['answer27']}",
+                            "You answered No, explain16": "-@{triggerBody()?['answer30']}",
+                            "You answered No, explain18": "-@{triggerBody()?['answer33']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer9']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer15']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer18']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK224_MWHSLrlToHLAKKgheJk')}/items/@{encodeURIComponent('012DAKHSMUXMIZ74KRGBGIBJMPPDKMP7JH')}/workbook/tables/@{encodeURIComponent('{6ADBDC9D-7AA7-4D8F-8BAD-D8A54CF8C9CE}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_8": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "\"RPWL Unit2"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        }
+    },
+    "outputs": {}
+}

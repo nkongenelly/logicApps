@@ -1,0 +1,654 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "3facc14b-d037-4b25-bb20-aeecc06b4ec6.2",
+                    "groupId": "c1a2ff37-1dfb-4b9b-aadd-c29525b100ba@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Condition": {
+            "actions": {
+                "Add_a_row_into_a_table": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO": "/EHS/EHS Reports/Injury Reports/Clinic Visit Sheet.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Approved_x002e_ H_x002e_O_x002e_D": "@triggerBody()?['answer6']",
+                            "Authorized_x002e_ Human Resource": "@triggerBody()?['answer7']",
+                            "Date": "@triggerBody()?['answer2']",
+                            "Doctor signature (Name)": "@triggerBody()?['answer12']",
+                            "Employee name": "@triggerBody()?['answer3']",
+                            "From": "@triggerBody()?['answer9']",
+                            "I wish to apply for permission to visit the clinic_x002e_ Reason_x003a_": "@triggerBody()?['answer5']",
+                            "Off duty as he/ she is suffering from;": "@triggerBody()?['answer11']",
+                            "Part _x002e_ I have examined the above named employee and I recommend ; Days": "@triggerBody()?['answer8']",
+                            "Payroll No_x002e_": "@triggerBody()?['answer4']",
+                            "To": "@triggerBody()?['answer10']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO')}/workbook/tables/@{encodeURIComponent('{4D9C0DFE-3943-49D3-873E-2738FA565E83}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {},
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "ASL Pack"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_10": {
+            "actions": {
+                "Add_a_row_into_a_table_10": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO": "/EHS/EHS Reports/Injury Reports/Clinic Visit Sheet.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Approved_x002e_ H_x002e_O_x002e_D": "@triggerBody()?['answer6']",
+                            "Authorized_x002e_ Human Resource": "@triggerBody()?['answer7']",
+                            "Date": "@triggerBody()?['answer2']",
+                            "Doctor signature (Name)": "@triggerBody()?['answer12']",
+                            "Employee name": "@triggerBody()?['answer3']",
+                            "From": "@triggerBody()?['answer9']",
+                            "I wish to apply for permission to visit the clinic_x002e_ Reason_x003a_": "@triggerBody()?['answer5']",
+                            "Off duty as he/ she is suffering from;": "@triggerBody()?['answer11']",
+                            "Part _x002e_ I have examined the above named employee and I recommend ; Days": "@triggerBody()?['answer8']",
+                            "Payroll No_x002e_": "@triggerBody()?['answer4']",
+                            "To": "@triggerBody()?['answer10']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO')}/workbook/tables/@{encodeURIComponent('{4D9C0DFE-3943-49D3-873E-2738FA565E83}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_9": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Sintel"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_11": {
+            "actions": {
+                "Add_a_row_into_a_table_11": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO": "/EHS/EHS Reports/Injury Reports/Clinic Visit Sheet.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Approved_x002e_ H_x002e_O_x002e_D": "@triggerBody()?['answer6']",
+                            "Authorized_x002e_ Human Resource": "@triggerBody()?['answer7']",
+                            "Date": "@triggerBody()?['answer2']",
+                            "Doctor signature (Name)": "@triggerBody()?['answer12']",
+                            "Employee name": "@triggerBody()?['answer3']",
+                            "From": "@triggerBody()?['answer9']",
+                            "I wish to apply for permission to visit the clinic_x002e_ Reason_x003a_": "@triggerBody()?['answer5']",
+                            "Off duty as he/ she is suffering from;": "@triggerBody()?['answer11']",
+                            "Part _x002e_ I have examined the above named employee and I recommend ; Days": "@triggerBody()?['answer8']",
+                            "Payroll No_x002e_": "@triggerBody()?['answer4']",
+                            "To": "@triggerBody()?['answer10']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO')}/workbook/tables/@{encodeURIComponent('{4D9C0DFE-3943-49D3-873E-2738FA565E83}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_10": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "TPSL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_12": {
+            "actions": {
+                "Add_a_row_into_a_table_12": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO": "/EHS/EHS Reports/Injury Reports/Clinic Visit Sheet.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Approved_x002e_ H_x002e_O_x002e_D": "@triggerBody()?['answer6']",
+                            "Authorized_x002e_ Human Resource": "@triggerBody()?['answer7']",
+                            "Date": "@triggerBody()?['answer2']",
+                            "Doctor signature (Name)": "@triggerBody()?['answer12']",
+                            "Employee name": "@triggerBody()?['answer3']",
+                            "From": "@triggerBody()?['answer9']",
+                            "I wish to apply for permission to visit the clinic_x002e_ Reason_x003a_": "@triggerBody()?['answer5']",
+                            "Off duty as he/ she is suffering from;": "@triggerBody()?['answer11']",
+                            "Part _x002e_ I have examined the above named employee and I recommend ; Days": "@triggerBody()?['answer8']",
+                            "Payroll No_x002e_": "@triggerBody()?['answer4']",
+                            "To": "@triggerBody()?['answer10']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO')}/workbook/tables/@{encodeURIComponent('{4D9C0DFE-3943-49D3-873E-2738FA565E83}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_11": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Wild Elegance"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_2": {
+            "actions": {
+                "Add_a_row_into_a_table_2": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO": "/EHS/EHS Reports/Injury Reports/Clinic Visit Sheet.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Approved_x002e_ H_x002e_O_x002e_D": "@triggerBody()?['answer6']",
+                            "Authorized_x002e_ Human Resource": "@triggerBody()?['answer7']",
+                            "Date": "@triggerBody()?['answer2']",
+                            "Doctor signature (Name)": "@triggerBody()?['answer12']",
+                            "Employee name": "@triggerBody()?['answer3']",
+                            "From": "@triggerBody()?['answer9']",
+                            "I wish to apply for permission to visit the clinic_x002e_ Reason_x003a_": "@triggerBody()?['answer5']",
+                            "Off duty as he/ she is suffering from;": "@triggerBody()?['answer11']",
+                            "Part _x002e_ I have examined the above named employee and I recommend ; Days": "@triggerBody()?['answer8']",
+                            "Payroll No_x002e_": "@triggerBody()?['answer4']",
+                            "To": "@triggerBody()?['answer10']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO')}/workbook/tables/@{encodeURIComponent('{4D9C0DFE-3943-49D3-873E-2738FA565E83}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Flexowork"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_3": {
+            "actions": {
+                "Add_a_row_into_a_table_3": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO": "/EHS/EHS Reports/Injury Reports/Clinic Visit Sheet.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Approved_x002e_ H_x002e_O_x002e_D": "@triggerBody()?['answer6']",
+                            "Authorized_x002e_ Human Resource": "@triggerBody()?['answer7']",
+                            "Date": "@triggerBody()?['answer2']",
+                            "Doctor signature (Name)": "@triggerBody()?['answer12']",
+                            "Employee name": "@triggerBody()?['answer3']",
+                            "From": "@triggerBody()?['answer9']",
+                            "I wish to apply for permission to visit the clinic_x002e_ Reason_x003a_": "@triggerBody()?['answer5']",
+                            "Off duty as he/ she is suffering from;": "@triggerBody()?['answer11']",
+                            "Part _x002e_ I have examined the above named employee and I recommend ; Days": "@triggerBody()?['answer8']",
+                            "Payroll No_x002e_": "@triggerBody()?['answer4']",
+                            "To": "@triggerBody()?['answer10']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO')}/workbook/tables/@{encodeURIComponent('{4D9C0DFE-3943-49D3-873E-2738FA565E83}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_2": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "MarketPower"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_4": {
+            "actions": {
+                "Add_a_row_into_a_table_4": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO": "/EHS/EHS Reports/Injury Reports/Clinic Visit Sheet.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Approved_x002e_ H_x002e_O_x002e_D": "@triggerBody()?['answer6']",
+                            "Authorized_x002e_ Human Resource": "@triggerBody()?['answer7']",
+                            "Date": "@triggerBody()?['answer2']",
+                            "Doctor signature (Name)": "@triggerBody()?['answer12']",
+                            "Employee name": "@triggerBody()?['answer3']",
+                            "From": "@triggerBody()?['answer9']",
+                            "I wish to apply for permission to visit the clinic_x002e_ Reason_x003a_": "@triggerBody()?['answer5']",
+                            "Off duty as he/ she is suffering from;": "@triggerBody()?['answer11']",
+                            "Part _x002e_ I have examined the above named employee and I recommend ; Days": "@triggerBody()?['answer8']",
+                            "Payroll No_x002e_": "@triggerBody()?['answer4']",
+                            "To": "@triggerBody()?['answer10']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO')}/workbook/tables/@{encodeURIComponent('{4D9C0DFE-3943-49D3-873E-2738FA565E83}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_3": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Panthera"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_5": {
+            "actions": {
+                "Add_a_row_into_a_table_5": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO": "/EHS/EHS Reports/Injury Reports/Clinic Visit Sheet.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Approved_x002e_ H_x002e_O_x002e_D": "@triggerBody()?['answer6']",
+                            "Authorized_x002e_ Human Resource": "@triggerBody()?['answer7']",
+                            "Date": "@triggerBody()?['answer2']",
+                            "Doctor signature (Name)": "@triggerBody()?['answer12']",
+                            "Employee name": "@triggerBody()?['answer3']",
+                            "From": "@triggerBody()?['answer9']",
+                            "I wish to apply for permission to visit the clinic_x002e_ Reason_x003a_": "@triggerBody()?['answer5']",
+                            "Off duty as he/ she is suffering from;": "@triggerBody()?['answer11']",
+                            "Part _x002e_ I have examined the above named employee and I recommend ; Days": "@triggerBody()?['answer8']",
+                            "Payroll No_x002e_": "@triggerBody()?['answer4']",
+                            "To": "@triggerBody()?['answer10']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO')}/workbook/tables/@{encodeURIComponent('{4D9C0DFE-3943-49D3-873E-2738FA565E83}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_4": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Polythene"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_6": {
+            "actions": {
+                "Add_a_row_into_a_table_6": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO": "/EHS/EHS Reports/Injury Reports/Clinic Visit Sheet.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Approved_x002e_ H_x002e_O_x002e_D": "@triggerBody()?['answer6']",
+                            "Authorized_x002e_ Human Resource": "@triggerBody()?['answer7']",
+                            "Date": "@triggerBody()?['answer2']",
+                            "Doctor signature (Name)": "@triggerBody()?['answer12']",
+                            "Employee name": "@triggerBody()?['answer3']",
+                            "From": "@triggerBody()?['answer9']",
+                            "I wish to apply for permission to visit the clinic_x002e_ Reason_x003a_": "@triggerBody()?['answer5']",
+                            "Off duty as he/ she is suffering from;": "@triggerBody()?['answer11']",
+                            "Part _x002e_ I have examined the above named employee and I recommend ; Days": "@triggerBody()?['answer8']",
+                            "Payroll No_x002e_": "@triggerBody()?['answer4']",
+                            "To": "@triggerBody()?['answer10']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO')}/workbook/tables/@{encodeURIComponent('{4D9C0DFE-3943-49D3-873E-2738FA565E83}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_5": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "PP;"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_7": {
+            "actions": {
+                "Add_a_row_into_a_table_7": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO": "/EHS/EHS Reports/Injury Reports/Clinic Visit Sheet.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Approved_x002e_ H_x002e_O_x002e_D": "@triggerBody()?['answer6']",
+                            "Authorized_x002e_ Human Resource": "@triggerBody()?['answer7']",
+                            "Date": "@triggerBody()?['answer2']",
+                            "Doctor signature (Name)": "@triggerBody()?['answer12']",
+                            "Employee name": "@triggerBody()?['answer3']",
+                            "From": "@triggerBody()?['answer9']",
+                            "I wish to apply for permission to visit the clinic_x002e_ Reason_x003a_": "@triggerBody()?['answer5']",
+                            "Off duty as he/ she is suffering from;": "@triggerBody()?['answer11']",
+                            "Part _x002e_ I have examined the above named employee and I recommend ; Days": "@triggerBody()?['answer8']",
+                            "Payroll No_x002e_": "@triggerBody()?['answer4']",
+                            "To": "@triggerBody()?['answer10']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO')}/workbook/tables/@{encodeURIComponent('{4D9C0DFE-3943-49D3-873E-2738FA565E83}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_6": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Pressmaster"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_8": {
+            "actions": {
+                "Add_a_row_into_a_table_8": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO": "/EHS/EHS Reports/Injury Reports/Clinic Visit Sheet.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Approved_x002e_ H_x002e_O_x002e_D": "@triggerBody()?['answer6']",
+                            "Authorized_x002e_ Human Resource": "@triggerBody()?['answer7']",
+                            "Date": "@triggerBody()?['answer2']",
+                            "Doctor signature (Name)": "@triggerBody()?['answer12']",
+                            "Employee name": "@triggerBody()?['answer3']",
+                            "From": "@triggerBody()?['answer9']",
+                            "I wish to apply for permission to visit the clinic_x002e_ Reason_x003a_": "@triggerBody()?['answer5']",
+                            "Off duty as he/ she is suffering from;": "@triggerBody()?['answer11']",
+                            "Part _x002e_ I have examined the above named employee and I recommend ; Days": "@triggerBody()?['answer8']",
+                            "Payroll No_x002e_": "@triggerBody()?['answer4']",
+                            "To": "@triggerBody()?['answer10']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO')}/workbook/tables/@{encodeURIComponent('{4D9C0DFE-3943-49D3-873E-2738FA565E83}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_7": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit1"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_9": {
+            "actions": {
+                "Add_a_row_into_a_table_9": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO": "/EHS/EHS Reports/Injury Reports/Clinic Visit Sheet.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Approved_x002e_ H_x002e_O_x002e_D": "@triggerBody()?['answer6']",
+                            "Authorized_x002e_ Human Resource": "@triggerBody()?['answer7']",
+                            "Date": "@triggerBody()?['answer2']",
+                            "Doctor signature (Name)": "@triggerBody()?['answer12']",
+                            "Employee name": "@triggerBody()?['answer3']",
+                            "From": "@triggerBody()?['answer9']",
+                            "I wish to apply for permission to visit the clinic_x002e_ Reason_x003a_": "@triggerBody()?['answer5']",
+                            "Off duty as he/ she is suffering from;": "@triggerBody()?['answer11']",
+                            "Part _x002e_ I have examined the above named employee and I recommend ; Days": "@triggerBody()?['answer8']",
+                            "Payroll No_x002e_": "@triggerBody()?['answer4']",
+                            "To": "@triggerBody()?['answer10']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSOMWFV4KFGFTNGYFHOKD2RUN6CO')}/workbook/tables/@{encodeURIComponent('{4D9C0DFE-3943-49D3-873E-2738FA565E83}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_8": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit2"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        }
+    },
+    "outputs": {}
+}

@@ -1,0 +1,372 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "6fb22512-394b-4404-8619-c122a7355b24.2",
+                    "groupId": "ece1cc5d-f9d7-459a-93c2-98e265985404",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Condition_2": {
+            "actions": {
+                "For_each": {
+                    "foreach": "@body('List_rows_present_in_a_table')?['value']",
+                    "actions": {
+                        "Condition": {
+                            "actions": {
+                                "Send_text_message_to_a_group_2": {
+                                    "runAfter": {
+                                        "Update_a_row": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "body": {
+                                            "Message": "@{triggerBody()?['fromUserName']}, your signout entry for @{formatDateTime(utcnow(),'yyyy-MM-dd')} is successful."
+                                        },
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['kaizala']['connectionId']"
+                                            }
+                                        },
+                                        "method": "post",
+                                        "path": "/v1/groups/@{encodeURIComponent('ece1cc5d-f9d7-459a-93c2-98e265985404')}/messages"
+                                    }
+                                },
+                                "Update_a_row": {
+                                    "runAfter": {},
+                                    "metadata": {
+                                        "01KXXHG6NU62RXTTZJD5G2RHDW3HZ6W6MS": "/ICTA Interns TimeSheets/Daily Signin Sheet.xlsx"
+                                    },
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "body": {
+                                            "LocationOut": "@{string(triggerBody()?['answer4']['n'])}",
+                                            "MatchOut": "1",
+                                            "SiteOut": "@{triggerBody()?['answer2_with_singular_value']}@{triggerBody()?['answer3']}",
+                                            "TimeOut": "@body('Convert_time_zone')"
+                                        },
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                            }
+                                        },
+                                        "method": "patch",
+                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDIl0s5y8z8JKn2i2Corkkn7emRWA4ba6Qq7fulyr6h3v')}/files/@{encodeURIComponent('01KXXHG6NU62RXTTZJD5G2RHDW3HZ6W6MS')}/tables/@{encodeURIComponent('{E7E0CDDB-4C92-4587-867F-70193D72DE29}')}/items/@{encodeURIComponent(encodeURIComponent(variables('Matched')))}",
+                                        "queries": {
+                                            "idColumn": "MatchIn",
+                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,9cb37489-cfbc-4ac2-9f68-b60a8ae4927e"
+                                        }
+                                    }
+                                }
+                            },
+                            "runAfter": {},
+                            "else": {
+                                "actions": {
+                                    "Condition_5": {
+                                        "actions": {
+                                            "Send_text_message_to_a_group_3": {
+                                                "runAfter": {},
+                                                "type": "ApiConnection",
+                                                "inputs": {
+                                                    "body": {
+                                                        "Message": "Unable to sign out. No matching sign In entry found.\nSign in first.",
+                                                        "subscribers": "@triggerBody()?['fromUser']"
+                                                    },
+                                                    "host": {
+                                                        "connection": {
+                                                            "name": "@parameters('$connections')['kaizala']['connectionId']"
+                                                        }
+                                                    },
+                                                    "method": "post",
+                                                    "path": "/v1/groups/@{encodeURIComponent('ece1cc5d-f9d7-459a-93c2-98e265985404')}/messages",
+                                                    "queries": {
+                                                        "sendToAll": "No"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "runAfter": {},
+                                        "expression": {
+                                            "and": [
+                                                {
+                                                    "equals": [
+                                                        "@concat(string(triggerBody()?['fromUserName']),formatDateTime(utcnow(),'yyyy-MM-dd'))",
+                                                        "@items('For_each')?['MatchIn']"
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        "type": "If"
+                                    }
+                                }
+                            },
+                            "expression": {
+                                "and": [
+                                    {
+                                        "equals": [
+                                            "@concat(string(triggerBody()?['fromUserName']),formatDateTime(utcnow(),'yyyy-MM-dd'))",
+                                            "@items('For_each')?['MatchOut']"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "type": "If"
+                        }
+                    },
+                    "runAfter": {
+                        "List_rows_present_in_a_table": [
+                            "Succeeded"
+                        ]
+                    },
+                    "type": "Foreach"
+                },
+                "For_each_3": {
+                    "foreach": "@body('List_rows_present_in_a_table')?['value']",
+                    "actions": {
+                        "HTTP": {
+                            "runAfter": {},
+                            "type": "Http",
+                            "inputs": {
+                                "body": {
+                                    "LocationOut": "@string(triggerBody()?['answer4']['n'])",
+                                    "MatchIn": "@items('For_each_3')?['MatchIn']",
+                                    "MatchOut": "@concat(string(triggerBody()?['fromUserName']),formatDateTime(utcnow(),'yyyy-MM-dd'))",
+                                    "SiteOut": "@concat(triggerBody()?['answer1_with_singular_value'],triggerBody()?['answer2'])",
+                                    "TimeOut": "@body('Convert_time_zone')"
+                                },
+                                "headers": {
+                                    "Content-type": "application/json"
+                                },
+                                "method": "POST",
+                                "uri": "http://ict-a.co.ke/kaizalaEndpoints/signOutTimesheet.php"
+                            }
+                        }
+                    },
+                    "runAfter": {
+                        "For_each": [
+                            "Succeeded"
+                        ]
+                    },
+                    "type": "Foreach"
+                },
+                "List_rows_present_in_a_table": {
+                    "runAfter": {},
+                    "metadata": {
+                        "01KXXHG6NU62RXTTZJD5G2RHDW3HZ6W6MS": "/ICTA Interns TimeSheets/Daily Signin Sheet.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "get",
+                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDIl0s5y8z8JKn2i2Corkkn7emRWA4ba6Qq7fulyr6h3v')}/files/@{encodeURIComponent('01KXXHG6NU62RXTTZJD5G2RHDW3HZ6W6MS')}/tables/@{encodeURIComponent('{E7E0CDDB-4C92-4587-867F-70193D72DE29}')}/items",
+                        "queries": {
+                            "$filter": "MatchIn eq '@{variables('Matched')}'",
+                            "$orderby": "Date",
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,9cb37489-cfbc-4ac2-9f68-b60a8ae4927e"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Convert_time_zone": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "ICT Africa"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_3": {
+            "actions": {
+                "For_each_2": {
+                    "foreach": "@body('List_rows_present_in_a_table_2')?['value']",
+                    "actions": {
+                        "Condition_4": {
+                            "actions": {
+                                "Send_text_message_to_a_group": {
+                                    "runAfter": {
+                                        "Update_a_row_2": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "body": {
+                                            "Message": "@{triggerBody()?['fromUserName']}, your signout entry for @{formatDateTime(utcnow(),'yyyy-MM-dd')} is successful.",
+                                            "subscribers": "@triggerBody()?['fromUser']"
+                                        },
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['kaizala']['connectionId']"
+                                            }
+                                        },
+                                        "method": "post",
+                                        "path": "/v1/groups/@{encodeURIComponent('ece1cc5d-f9d7-459a-93c2-98e265985404')}/messages",
+                                        "queries": {
+                                            "sendToAll": "No"
+                                        }
+                                    }
+                                },
+                                "Update_a_row_2": {
+                                    "runAfter": {},
+                                    "metadata": {
+                                        "01KXXHG6NRTTITKSSTG5FLBL36I5YDLWC5": "/RGoC IT Level1 Support Documents/polythene sigin.xlsx"
+                                    },
+                                    "type": "ApiConnection",
+                                    "inputs": {
+                                        "body": {
+                                            "LocationOut": "@{string(triggerBody()?['answer4']['n'])}",
+                                            "MatchOut": "1",
+                                            "TimeOut": "@body('Convert_time_zone')"
+                                        },
+                                        "host": {
+                                            "connection": {
+                                                "name": "@parameters('$connections')['excelonlinebusiness_1']['connectionId']"
+                                            }
+                                        },
+                                        "method": "patch",
+                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDIl0s5y8z8JKn2i2Corkkn7b_effjJErSJZZQQ5lnHJD')}/files/@{encodeURIComponent('01KXXHG6NRTTITKSSTG5FLBL36I5YDLWC5')}/tables/@{encodeURIComponent('{F7E90864-E55B-48F8-96E0-EFF463C0387B}')}/items/@{encodeURIComponent(encodeURIComponent(variables('Matched')))}",
+                                        "queries": {
+                                            "idColumn": "MatchIn",
+                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,9cb37489-cfbc-4ac2-9f68-b60a8ae4927e"
+                                        }
+                                    }
+                                }
+                            },
+                            "runAfter": {},
+                            "expression": {
+                                "and": [
+                                    {
+                                        "equals": [
+                                            "@concat(string(triggerBody()?['fromUserName']),formatDateTime(utcnow(),'yyyy-MM-dd'))",
+                                            "@items('For_each_2')?['MatchOut']"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "type": "If"
+                        }
+                    },
+                    "runAfter": {
+                        "List_rows_present_in_a_table_2": [
+                            "Succeeded"
+                        ]
+                    },
+                    "type": "Foreach"
+                },
+                "List_rows_present_in_a_table_2": {
+                    "runAfter": {},
+                    "metadata": {
+                        "01KXXHG6NRTTITKSSTG5FLBL36I5YDLWC5": "/RGoC IT Level1 Support Documents/polythene sigin.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_1']['connectionId']"
+                            }
+                        },
+                        "method": "get",
+                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDIl0s5y8z8JKn2i2Corkkn7b_effjJErSJZZQQ5lnHJD')}/files/@{encodeURIComponent('01KXXHG6NRTTITKSSTG5FLBL36I5YDLWC5')}/tables/@{encodeURIComponent('{F7E90864-E55B-48F8-96E0-EFF463C0387B}')}/items",
+                        "queries": {
+                            "$filter": "MatchIn eq '@{variables('Matched')}'",
+                            "$orderby": "Date",
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,9cb37489-cfbc-4ac2-9f68-b60a8ae4927e"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_2": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Polythene"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Convert_time_zone": {
+            "runAfter": {
+                "Current_time": [
+                    "Succeeded"
+                ]
+            },
+            "type": "Expression",
+            "kind": "ConvertTimeZone",
+            "inputs": {
+                "baseTime": "@body('Current_time')",
+                "destinationTimeZone": "E. Africa Standard Time",
+                "formatString": "t",
+                "sourceTimeZone": "UTC"
+            }
+        },
+        "Current_time": {
+            "runAfter": {
+                "Initialize_variable": [
+                    "Succeeded"
+                ]
+            },
+            "type": "Expression",
+            "kind": "CurrentTime",
+            "inputs": {}
+        },
+        "Initialize_variable": {
+            "runAfter": {},
+            "type": "InitializeVariable",
+            "inputs": {
+                "variables": [
+                    {
+                        "name": "Matched",
+                        "type": "String",
+                        "value": "@{concat(string(triggerBody()?['fromUserName']),formatDateTime(utcnow(),'yyyy-MM-dd'))}"
+                    }
+                ]
+            }
+        }
+    },
+    "outputs": {}
+}

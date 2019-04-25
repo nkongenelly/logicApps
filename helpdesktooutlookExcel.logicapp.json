@@ -1,0 +1,198 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "com.ict.helpdesk.9",
+                    "groupId": "d2de99b4-7546-43d2-8587-0d728f6fa61b@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Add_a_row_into_a_table": {
+            "runAfter": {
+                "Get_tables": [
+                    "Succeeded"
+                ]
+            },
+            "metadata": {
+                "01KXXHG6LJ5W4VBL7UQRDZPNRDC5M5TMBM": "/ICTA Interns TimeSheets/Help Desk/Book.xlsx"
+            },
+            "type": "ApiConnection",
+            "inputs": {
+                "body": {
+                    "Client": "@triggerBody()?['answer1']",
+                    "Company": "@triggerBody()?['answer2_with_singular_value']",
+                    "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                    "IssueDescription": "@triggerBody()?['answer6']",
+                    "IssueSubject": "@triggerBody()?['answer5']",
+                    "Priority": "@triggerBody()?['answer4_with_singular_value']",
+                    "ServiceIssue": "@triggerBody()?['answer3_with_singular_value']"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                    }
+                },
+                "method": "post",
+                "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDIl0s5y8z8JKn2i2Corkkn7emRWA4ba6Qq7fulyr6h3v')}/items/@{encodeURIComponent('01KXXHG6LJ5W4VBL7UQRDZPNRDC5M5TMBM')}/workbook/tables/@{encodeURIComponent('{11CEE551-C01A-428F-A7FF-9AE4A63DCAFA}')}/rows",
+                "queries": {
+                    "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,9cb37489-cfbc-4ac2-9f68-b60a8ae4927e"
+                }
+            }
+        },
+        "Convert_time_zone": {
+            "runAfter": {
+                "Current_time": [
+                    "Succeeded"
+                ]
+            },
+            "type": "Expression",
+            "kind": "ConvertTimeZone",
+            "inputs": {
+                "baseTime": "@body('Current_time')",
+                "destinationTimeZone": "E. Africa Standard Time",
+                "formatString": "f",
+                "sourceTimeZone": "UTC"
+            }
+        },
+        "Convert_time_zone_2": {
+            "runAfter": {
+                "Convert_time_zone": [
+                    "Succeeded"
+                ]
+            },
+            "type": "Expression",
+            "kind": "ConvertTimeZone",
+            "inputs": {
+                "baseTime": "@body('Current_time')",
+                "destinationTimeZone": "E. Africa Standard Time",
+                "formatString": "g",
+                "sourceTimeZone": "UTC"
+            }
+        },
+        "Current_time": {
+            "runAfter": {},
+            "type": "Expression",
+            "kind": "CurrentTime",
+            "inputs": {}
+        },
+        "Get_tables": {
+            "runAfter": {
+                "Send_text_message_to_a_group": [
+                    "Succeeded"
+                ]
+            },
+            "metadata": {
+                "01KXXHG6LJ5W4VBL7UQRDZPNRDC5M5TMBM": "/ICTA Interns TimeSheets/Help Desk/Book.xlsx"
+            },
+            "type": "ApiConnection",
+            "inputs": {
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                    }
+                },
+                "method": "get",
+                "path": "/codeless/v1.0/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDIl0s5y8z8JKn2i2Corkkn7emRWA4ba6Qq7fulyr6h3v')}/items/@{encodeURIComponent('01KXXHG6LJ5W4VBL7UQRDZPNRDC5M5TMBM')}/workbook/tables",
+                "queries": {
+                    "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,9cb37489-cfbc-4ac2-9f68-b60a8ae4927e"
+                }
+            }
+        },
+        "HTTP": {
+            "runAfter": {
+                "Send_an_email": [
+                    "Succeeded"
+                ]
+            },
+            "type": "Http",
+            "inputs": {
+                "body": {
+                    "Client": "@triggerBody()?['answer1']",
+                    "Company": "@triggerBody()?['answer2_with_singular_value']",
+                    "Date": "@body('Convert_time_zone_2')",
+                    "IssueDescription": "@triggerBody()?['answer6']",
+                    "IssueSubject": "@triggerBody()?['answer5']",
+                    "Priority": "@triggerBody()?['answer4_with_singular_value']",
+                    "ServiceIssue": "@triggerBody()?['answer3_with_singular_value']",
+                    "jobcard_no": "-",
+                    "phoneNumber": "@triggerBody()?['fromUser']"
+                },
+                "headers": {
+                    "Content-type": "application/json"
+                },
+                "method": "POST",
+                "uri": "http://ict-a.co.ke/kaizalaEndpoints/helpdeskToOutlook.php"
+            }
+        },
+        "Send_an_email": {
+            "runAfter": {
+                "Convert_time_zone_2": [
+                    "Succeeded"
+                ]
+            },
+            "type": "ApiConnection",
+            "inputs": {
+                "body": {
+                    "Body": "<html>\n<body>\n<h>@{body('Convert_time_zone')}</h2>\n\nQuestion 1.<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n <tr>\n  <td>\n @{triggerBody()?['question1']}\n  </td>\n </tr>\n <tr>\n  <td style=\"padding: 20px 0 30px 0;color: red;\">\n  @{triggerBody()?['answer1']}\n  </td>\n </tr>\n\n<br/>\nQuestion 2.<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n <tr>\n  <td>\n Company\n  </td>\n </tr>\n <tr>\n  <td style=\"padding: 20px 0 30px 0;color: red;\">\n  @{triggerBody()?['answer2_with_singular_value']}\n  </td>\n </tr>\n\n<br/>\n\nQuestion 3.<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n <tr>\n  <td>\n @{triggerBody()?['question3']}\n  </td>\n </tr>\n <tr>\n  <td style=\"padding: 20px 0 30px 0;color: red;\">\n  @{triggerBody()?['answer3_with_singular_value']}\n  </td>\n </tr>\n\n<br/>\nQuestion 4.<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n <tr>\n  <td>\n @{triggerBody()?['question4']}\n  </td>\n </tr>\n <tr>\n  <td style=\"padding: 20px 0 30px 0;color: red;\">\n  @{triggerBody()?['answer4_with_singular_value']}\n  </td>\n </tr>\n\n<br/>\nQuestion 5.<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n <tr>\n  <td>\n @{triggerBody()?['question5']}\n  </td>\n </tr>\n <tr>\n  <td style=\"padding: 20px 0 30px 0;color: red;\">\n  @{triggerBody()?['answer5']}\n  </td>\n </tr>\n\n<br/>\nQuestion 6.<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n <tr>\n  <td>\n @{triggerBody()?['question6']}\n  </td>\n </tr>\n <tr>\n  <td style=\"padding: 20px 0 30px 0;color: red;\">\n  @{triggerBody()?['answer6']}\n  </td>\n </tr>\n\n<br/>\n\n</table>\n\n</body>\n</html>",
+                    "IsHtml": true,
+                    "Subject": "NEW JOB CREATED BY @{triggerBody()?['answer1']}",
+                    "To": "kaizala@ict-a.com;helpdesk@ict-a.com"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['office365']['connectionId']"
+                    }
+                },
+                "method": "post",
+                "path": "/Mail"
+            }
+        },
+        "Send_text_message_to_a_group": {
+            "runAfter": {
+                "HTTP": [
+                    "Succeeded"
+                ]
+            },
+            "type": "ApiConnection",
+            "inputs": {
+                "body": {
+                    "Message": "Issue for client @{triggerBody()?['answer1']} has been submitted successfully. A job card no for the issue subject - @{triggerBody()?['answer5']}, will be sent to you here shortly with the name of the technician assigned.",
+                    "subscribers": "@triggerBody()?['fromUser']"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala']['connectionId']"
+                    }
+                },
+                "method": "post",
+                "path": "/v1/groups/@{encodeURIComponent('d2de99b4-7546-43d2-8587-0d728f6fa61b@2')}/messages",
+                "queries": {
+                    "sendToAll": "No"
+                }
+            }
+        }
+    },
+    "outputs": {}
+}
