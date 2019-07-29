@@ -1,0 +1,169 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_a_text_message_is_sent_on_a_group": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala_1']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook/Group/TextMessageCreated",
+                "queries": {
+                    "objectId": "d2de99b4-7546-43d2-8587-0d728f6fa61b@2"
+                }
+            },
+            "runtimeConfiguration": {
+                "concurrency": {
+                    "runs": 1
+                }
+            }
+        }
+    },
+    "actions": {
+        "Condition": {
+            "actions": {
+                "Send_action_on_a_group": {
+                    "runAfter": {},
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "actionBody": {
+                                "Message": "@triggerBody()?['fromUserName']",
+                                "Title": "@triggerBody()?['fromUser']"
+                            }
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['kaizala_1']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/groups/@{encodeURIComponent('d2de99b4-7546-43d2-8587-0d728f6fa61b@2')}/actions",
+                        "queries": {
+                            "actionType": "announcement"
+                        }
+                    }
+                }
+            },
+            "runAfter": {},
+            "else": {
+                "actions": {
+                    "Condition_2": {
+                        "actions": {
+                            "HTTP": {
+                                "runAfter": {
+                                    "Send_action_on_a_group_2": [
+                                        "Succeeded"
+                                    ]
+                                },
+                                "type": "Http",
+                                "inputs": {
+                                    "body": {
+                                        "feedback": "@{triggerBody()?['textMessage']}"
+                                    },
+                                    "headers": {
+                                        "Content-type": "application/json"
+                                    },
+                                    "method": "POST",
+                                    "uri": "http://ict-a.co.ke/kaizalaEndpoints/helpdeskFeedback.php"
+                                }
+                            },
+                            "Send_action_on_a_group_2": {
+                                "runAfter": {},
+                                "type": "ApiConnection",
+                                "inputs": {
+                                    "body": {
+                                        "actionBody": {
+                                            "Message": "Feedback for @{triggerBody()?['fromUserName']}",
+                                            "Title": "@triggerBody()?['fromUser']"
+                                        }
+                                    },
+                                    "host": {
+                                        "connection": {
+                                            "name": "@parameters('$connections')['kaizala_1']['connectionId']"
+                                        }
+                                    },
+                                    "method": "post",
+                                    "path": "/groups/@{encodeURIComponent('d2de99b4-7546-43d2-8587-0d728f6fa61b@2')}/actions",
+                                    "queries": {
+                                        "actionType": "announcement"
+                                    }
+                                }
+                            }
+                        },
+                        "runAfter": {},
+                        "expression": {
+                            "and": [
+                                {
+                                    "not": {
+                                        "equals": [
+                                            "@triggerBody()?['fromUser']",
+                                            "+254757138726"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "not": {
+                                        "equals": [
+                                            "@triggerBody()?['fromUser']",
+                                            "+254735398656"
+                                        ]
+                                    }
+                                },
+                                {
+                                    "startsWith": [
+                                        "@triggerBody()?['textMessage']",
+                                        "@"
+                                    ]
+                                }
+                            ]
+                        },
+                        "type": "If"
+                    }
+                }
+            },
+            "expression": {
+                "and": [
+                    {
+                        "not": {
+                            "equals": [
+                                "@triggerBody()?['fromUser']",
+                                "+254757138726"
+                            ]
+                        }
+                    },
+                    {
+                        "not": {
+                            "equals": [
+                                "@triggerBody()?['fromUser']",
+                                "+254735398656"
+                            ]
+                        }
+                    },
+                    {
+                        "not": {
+                            "startsWith": [
+                                "@triggerBody()?['textMessage']",
+                                "@"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "type": "If"
+        }
+    },
+    "outputs": {}
+}

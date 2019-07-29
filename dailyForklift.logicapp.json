@@ -1,0 +1,1754 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "47d520d4-28b6-408a-bc0d-aeef9c33867f.3",
+                    "groupId": "94865b2a-c452-431c-848e-a7c37a437f3f@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Condition": {
+            "actions": {
+                "Add_a_row_into_a_table": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSO3BYHDM46J3NF2QVB46KVQHRAZ": "/EHS/Checklists/Daily/Forklift (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Brake fluid level": "@triggerBody()?['answer31_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Engineer crank case oil level": "@triggerBody()?['answer6_with_singular_value']",
+                            "Fuel level": "@triggerBody()?['answer16_with_singular_value']",
+                            "Gearbox oil level": "@triggerBody()?['answer26_with_singular_value']",
+                            "Head and tail lights": "@triggerBody()?['answer36_with_singular_value']",
+                            "Horn": "@triggerBody()?['answer41_with_singular_value']",
+                            "Hour Meter Reading": "@triggerBody()?['answer5']",
+                            "Hour meter": "@triggerBody()?['answer81_with_singular_value']",
+                            "Hydralic controls": "@triggerBody()?['answer66_with_singular_value']",
+                            "Hydraulic sump tank oil level": "@triggerBody()?['answer21_with_singular_value']",
+                            "ID": "@{variables('ID')}",
+                            "Obvious damage and leaks": "@triggerBody()?['answer71_with_singular_value']",
+                            "Operator": "@triggerBody()?['answer4']",
+                            "Other gauges and instruments": "@triggerBody()?['answer86_with_singular_value']",
+                            "Parking break": "@triggerBody()?['answer56_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer8']}",
+                            "Photo10": "-@{triggerBody()?['answer20']}",
+                            "Photo12": "-@{triggerBody()?['answer23']}",
+                            "Photo14": "-@{triggerBody()?['answer25']}",
+                            "Photo16": "-@{triggerBody()?['answer28']}",
+                            "Photo18": "-@{triggerBody()?['answer30']}",
+                            "Photo2": "-@{triggerBody()?['answer10']}",
+                            "Photo20": "-@{triggerBody()?['answer33']}",
+                            "Photo22": "-@{triggerBody()?['answer35']}",
+                            "Photo24": "-@{triggerBody()?['answer38']}",
+                            "Photo26": "-@{triggerBody()?['answer40']}",
+                            "Photo28": "-@{triggerBody()?['answer43']}",
+                            "Photo3": "-@{triggerBody()?['answer90']}",
+                            "Photo30": "-@{triggerBody()?['answer45']}",
+                            "Photo32": "-@{triggerBody()?['answer48']}",
+                            "Photo34": "-@{triggerBody()?['answer50']}",
+                            "Photo36": "-@{triggerBody()?['answer53']}",
+                            "Photo38": "-@{triggerBody()?['answer55']}",
+                            "Photo4": "-@{triggerBody()?['answer13']}",
+                            "Photo40": "-@{triggerBody()?['answer58']}",
+                            "Photo42": "-@{triggerBody()?['answer60']}",
+                            "Photo44": "-@{triggerBody()?['answer63']}",
+                            "Photo46": "-@{triggerBody()?['answer65']}",
+                            "Photo48": "-@{triggerBody()?['answer68']}",
+                            "Photo50": "-@{triggerBody()?['answer70']}",
+                            "Photo52": "-@{triggerBody()?['answer73']}",
+                            "Photo54": "-@{triggerBody()?['answer75']}",
+                            "Photo56": "-@{triggerBody()?['answer78']}",
+                            "Photo58": "-@{triggerBody()?['answer80']}",
+                            "Photo6": "-@{triggerBody()?['answer15']}",
+                            "Photo60": "-@{triggerBody()?['answer83']}",
+                            "Photo62": "-@{triggerBody()?['answer85']}",
+                            "Photo64": "-@{triggerBody()?['answer88']}",
+                            "Photo8": "-@{triggerBody()?['answer18']}",
+                            "Radiator water level": "@triggerBody()?['answer11_with_singular_value']",
+                            "Service breaks": "@triggerBody()?['answer51_with_singular_value']",
+                            "Steering": "@triggerBody()?['answer46_with_singular_value']",
+                            "Tires": "@triggerBody()?['answer61_with_singular_value']",
+                            "Truck No": "@triggerBody()?['answer2']",
+                            "Warning lights": "@triggerBody()?['answer76_with_singular_value']",
+                            "You answered needs attention": "-@{triggerBody()?['answer7']}",
+                            "You answered needs attention11": "-@{triggerBody()?['answer22']}",
+                            "You answered needs attention15": "-@{triggerBody()?['answer27']}",
+                            "You answered needs attention19": "-@{triggerBody()?['answer32']}",
+                            "You answered needs attention23": "-@{triggerBody()?['answer37']}",
+                            "You answered needs attention27": "-@{triggerBody()?['answer42']}",
+                            "You answered needs attention3": "-@{triggerBody()?['answer12']}",
+                            "You answered needs attention31": "-@{triggerBody()?['answer47']}",
+                            "You answered needs attention35": "-@{triggerBody()?['answer52']}",
+                            "You answered needs attention39": "-@{triggerBody()?['answer57']}",
+                            "You answered needs attention43": "-@{triggerBody()?['answer62']}",
+                            "You answered needs attention47": "-@{triggerBody()?['answer67']}",
+                            "You answered needs attention51": "-@{triggerBody()?['answer72']}",
+                            "You answered needs attention55": "-@{triggerBody()?['answer77']}",
+                            "You answered needs attention59": "-@{triggerBody()?['answer82']}",
+                            "You answered needs attention61": "-@{triggerBody()?['answer84']}",
+                            "You answered needs attention63": "-@{triggerBody()?['answer87']}",
+                            "You answered needs attention7": "-@{triggerBody()?['answer17']}",
+                            "You answered repair": "-@{triggerBody()?['answer9']}",
+                            "You answered repair13": "-@{triggerBody()?['answer24']}",
+                            "You answered repair17": "-@{triggerBody()?['answer29']}",
+                            "You answered repair21": "-@{triggerBody()?['answer34']}",
+                            "You answered repair25": "-@{triggerBody()?['answer39']}",
+                            "You answered repair29": "-@{triggerBody()?['answer44']}",
+                            "You answered repair33": "-@{triggerBody()?['answer49']}",
+                            "You answered repair37": "-@{triggerBody()?['answer54']}",
+                            "You answered repair41": "-@{triggerBody()?['answer59']}",
+                            "You answered repair45": "-@{triggerBody()?['answer64']}",
+                            "You answered repair49": "-@{triggerBody()?['answer69']}",
+                            "You answered repair5": "-@{triggerBody()?['answer14']}",
+                            "You answered repair53": "-@{triggerBody()?['answer74']}",
+                            "You answered repair57": "-@{triggerBody()?['answer79']}",
+                            "You answered repair65": "-@{triggerBody()?['answer89']}",
+                            "You answered repair9": "-@{triggerBody()?['answer19']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSO3BYHDM46J3NF2QVB46KVQHRAZ')}/workbook/tables/@{encodeURIComponent('{219A9C81-C417-4E51-9BE5-390DF86F3853}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "HTTP": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "ASL Pack"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_10": {
+            "actions": {
+                "Add_a_row_into_a_table_10": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSLFML66DHCQHRBZL2SOH5X2HEKC": "/EHS/Checklists/Daily/Forklift (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Brake fluid level": "@triggerBody()?['answer31_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Engineer crank case oil level": "@triggerBody()?['answer6_with_singular_value']",
+                            "Fuel level": "@triggerBody()?['answer16_with_singular_value']",
+                            "Gearbox oil level": "@triggerBody()?['answer26_with_singular_value']",
+                            "Head and tail lights": "@triggerBody()?['answer36_with_singular_value']",
+                            "Horn": "@triggerBody()?['answer41_with_singular_value']",
+                            "Hour Meter Reading": "@triggerBody()?['answer5']",
+                            "Hour meter": "@triggerBody()?['answer81_with_singular_value']",
+                            "Hydralic controls": "@triggerBody()?['answer66_with_singular_value']",
+                            "Hydraulic sump tank oil level": "@triggerBody()?['answer21_with_singular_value']",
+                            "ID": "@{variables('ID')}",
+                            "Obvious damage and leaks": "@triggerBody()?['answer71_with_singular_value']",
+                            "Operator": "@triggerBody()?['answer4']",
+                            "Other gauges and instruments": "@triggerBody()?['answer86_with_singular_value']",
+                            "Parking break": "@triggerBody()?['answer56_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer8']}",
+                            "Photo10": "-@{triggerBody()?['answer20']}",
+                            "Photo12": "-@{triggerBody()?['answer23']}",
+                            "Photo14": "-@{triggerBody()?['answer25']}",
+                            "Photo16": "-@{triggerBody()?['answer28']}",
+                            "Photo18": "-@{triggerBody()?['answer30']}",
+                            "Photo2": "-@{triggerBody()?['answer10']}",
+                            "Photo20": "-@{triggerBody()?['answer33']}",
+                            "Photo22": "-@{triggerBody()?['answer35']}",
+                            "Photo24": "-@{triggerBody()?['answer38']}",
+                            "Photo26": "-@{triggerBody()?['answer40']}",
+                            "Photo28": "-@{triggerBody()?['answer43']}",
+                            "Photo3": "-@{triggerBody()?['answer90']}",
+                            "Photo30": "-@{triggerBody()?['answer45']}",
+                            "Photo32": "-@{triggerBody()?['answer48']}",
+                            "Photo34": "-@{triggerBody()?['answer50']}",
+                            "Photo36": "-@{triggerBody()?['answer53']}",
+                            "Photo38": "-@{triggerBody()?['answer55']}",
+                            "Photo4": "-@{triggerBody()?['answer13']}",
+                            "Photo40": "-@{triggerBody()?['answer58']}",
+                            "Photo42": "-@{triggerBody()?['answer60']}",
+                            "Photo44": "-@{triggerBody()?['answer63']}",
+                            "Photo46": "-@{triggerBody()?['answer65']}",
+                            "Photo48": "-@{triggerBody()?['answer68']}",
+                            "Photo50": "-@{triggerBody()?['answer70']}",
+                            "Photo52": "-@{triggerBody()?['answer73']}",
+                            "Photo54": "-@{triggerBody()?['answer75']}",
+                            "Photo56": "-@{triggerBody()?['answer78']}",
+                            "Photo58": "-@{triggerBody()?['answer80']}",
+                            "Photo6": "-@{triggerBody()?['answer15']}",
+                            "Photo60": "-@{triggerBody()?['answer83']}",
+                            "Photo62": "-@{triggerBody()?['answer85']}",
+                            "Photo64": "-@{triggerBody()?['answer88']}",
+                            "Photo8": "-@{triggerBody()?['answer18']}",
+                            "Radiator water level": "@triggerBody()?['answer11_with_singular_value']",
+                            "Service breaks": "@triggerBody()?['answer51_with_singular_value']",
+                            "Steering": "@triggerBody()?['answer46_with_singular_value']",
+                            "Tires": "@triggerBody()?['answer61_with_singular_value']",
+                            "Truck No": "@triggerBody()?['answer2']",
+                            "Warning lights": "@triggerBody()?['answer76_with_singular_value']",
+                            "You answered needs attention": "-@{triggerBody()?['answer7']}",
+                            "You answered needs attention11": "-@{triggerBody()?['answer22']}",
+                            "You answered needs attention15": "-@{triggerBody()?['answer27']}",
+                            "You answered needs attention19": "-@{triggerBody()?['answer32']}",
+                            "You answered needs attention23": "-@{triggerBody()?['answer37']}",
+                            "You answered needs attention27": "-@{triggerBody()?['answer42']}",
+                            "You answered needs attention3": "-@{triggerBody()?['answer12']}",
+                            "You answered needs attention31": "-@{triggerBody()?['answer47']}",
+                            "You answered needs attention35": "-@{triggerBody()?['answer52']}",
+                            "You answered needs attention39": "-@{triggerBody()?['answer57']}",
+                            "You answered needs attention43": "-@{triggerBody()?['answer62']}",
+                            "You answered needs attention47": "-@{triggerBody()?['answer67']}",
+                            "You answered needs attention51": "-@{triggerBody()?['answer72']}",
+                            "You answered needs attention55": "-@{triggerBody()?['answer77']}",
+                            "You answered needs attention59": "-@{triggerBody()?['answer82']}",
+                            "You answered needs attention61": "-@{triggerBody()?['answer84']}",
+                            "You answered needs attention63": "-@{triggerBody()?['answer87']}",
+                            "You answered needs attention7": "-@{triggerBody()?['answer17']}",
+                            "You answered repair": "-@{triggerBody()?['answer9']}",
+                            "You answered repair13": "-@{triggerBody()?['answer24']}",
+                            "You answered repair17": "-@{triggerBody()?['answer29']}",
+                            "You answered repair21": "-@{triggerBody()?['answer34']}",
+                            "You answered repair25": "-@{triggerBody()?['answer39']}",
+                            "You answered repair29": "-@{triggerBody()?['answer44']}",
+                            "You answered repair33": "-@{triggerBody()?['answer49']}",
+                            "You answered repair37": "-@{triggerBody()?['answer54']}",
+                            "You answered repair41": "-@{triggerBody()?['answer59']}",
+                            "You answered repair45": "-@{triggerBody()?['answer64']}",
+                            "You answered repair49": "-@{triggerBody()?['answer69']}",
+                            "You answered repair5": "-@{triggerBody()?['answer14']}",
+                            "You answered repair53": "-@{triggerBody()?['answer74']}",
+                            "You answered repair57": "-@{triggerBody()?['answer79']}",
+                            "You answered repair65": "-@{triggerBody()?['answer89']}",
+                            "You answered repair9": "-@{triggerBody()?['answer19']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23CcVP99gEfQ4EjLalW8EVd')}/items/@{encodeURIComponent('012DAKHSLFML66DHCQHRBZL2SOH5X2HEKC')}/workbook/tables/@{encodeURIComponent('{219A9C81-C417-4E51-9BE5-390DF86F3853}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_9": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Sintel"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_11": {
+            "actions": {
+                "Add_a_row_into_a_table_11": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSMDUFV5APVVSZDYYOWEL3P2BPNK": "/EHS/Checklists/Daily/Forklift (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Brake fluid level": "@triggerBody()?['answer31_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Engineer crank case oil level": "@triggerBody()?['answer6_with_singular_value']",
+                            "Fuel level": "@triggerBody()?['answer16_with_singular_value']",
+                            "Gearbox oil level": "@triggerBody()?['answer26_with_singular_value']",
+                            "Head and tail lights": "@triggerBody()?['answer36_with_singular_value']",
+                            "Horn": "@triggerBody()?['answer41_with_singular_value']",
+                            "Hour Meter Reading": "@triggerBody()?['answer5']",
+                            "Hour meter": "@triggerBody()?['answer81_with_singular_value']",
+                            "Hydralic controls": "@triggerBody()?['answer66_with_singular_value']",
+                            "Hydraulic sump tank oil level": "@triggerBody()?['answer21_with_singular_value']",
+                            "ID": "@{variables('ID')}",
+                            "Obvious damage and leaks": "@triggerBody()?['answer71_with_singular_value']",
+                            "Operator": "@triggerBody()?['answer4']",
+                            "Other gauges and instruments": "@triggerBody()?['answer86_with_singular_value']",
+                            "Parking break": "@triggerBody()?['answer56_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer8']}",
+                            "Photo10": "-@{triggerBody()?['answer20']}",
+                            "Photo12": "-@{triggerBody()?['answer23']}",
+                            "Photo14": "-@{triggerBody()?['answer25']}",
+                            "Photo16": "-@{triggerBody()?['answer28']}",
+                            "Photo18": "-@{triggerBody()?['answer30']}",
+                            "Photo2": "-@{triggerBody()?['answer10']}",
+                            "Photo20": "-@{triggerBody()?['answer33']}",
+                            "Photo22": "-@{triggerBody()?['answer35']}",
+                            "Photo24": "-@{triggerBody()?['answer38']}",
+                            "Photo26": "-@{triggerBody()?['answer40']}",
+                            "Photo28": "-@{triggerBody()?['answer43']}",
+                            "Photo3": "-@{triggerBody()?['answer90']}",
+                            "Photo30": "-@{triggerBody()?['answer45']}",
+                            "Photo32": "-@{triggerBody()?['answer48']}",
+                            "Photo34": "-@{triggerBody()?['answer50']}",
+                            "Photo36": "-@{triggerBody()?['answer53']}",
+                            "Photo38": "-@{triggerBody()?['answer55']}",
+                            "Photo4": "-@{triggerBody()?['answer13']}",
+                            "Photo40": "-@{triggerBody()?['answer58']}",
+                            "Photo42": "-@{triggerBody()?['answer60']}",
+                            "Photo44": "-@{triggerBody()?['answer63']}",
+                            "Photo46": "-@{triggerBody()?['answer65']}",
+                            "Photo48": "-@{triggerBody()?['answer68']}",
+                            "Photo50": "-@{triggerBody()?['answer70']}",
+                            "Photo52": "-@{triggerBody()?['answer73']}",
+                            "Photo54": "-@{triggerBody()?['answer75']}",
+                            "Photo56": "-@{triggerBody()?['answer78']}",
+                            "Photo58": "-@{triggerBody()?['answer80']}",
+                            "Photo6": "-@{triggerBody()?['answer15']}",
+                            "Photo60": "-@{triggerBody()?['answer83']}",
+                            "Photo62": "-@{triggerBody()?['answer85']}",
+                            "Photo64": "-@{triggerBody()?['answer88']}",
+                            "Photo8": "-@{triggerBody()?['answer18']}",
+                            "Radiator water level": "@triggerBody()?['answer11_with_singular_value']",
+                            "Service breaks": "@triggerBody()?['answer51_with_singular_value']",
+                            "Steering": "@triggerBody()?['answer46_with_singular_value']",
+                            "Tires": "@triggerBody()?['answer61_with_singular_value']",
+                            "Truck No": "@triggerBody()?['answer2']",
+                            "Warning lights": "@triggerBody()?['answer76_with_singular_value']",
+                            "You answered needs attention": "-@{triggerBody()?['answer7']}",
+                            "You answered needs attention11": "-@{triggerBody()?['answer22']}",
+                            "You answered needs attention15": "-@{triggerBody()?['answer27']}",
+                            "You answered needs attention19": "-@{triggerBody()?['answer32']}",
+                            "You answered needs attention23": "-@{triggerBody()?['answer37']}",
+                            "You answered needs attention27": "-@{triggerBody()?['answer42']}",
+                            "You answered needs attention3": "-@{triggerBody()?['answer12']}",
+                            "You answered needs attention31": "-@{triggerBody()?['answer47']}",
+                            "You answered needs attention35": "-@{triggerBody()?['answer52']}",
+                            "You answered needs attention39": "-@{triggerBody()?['answer57']}",
+                            "You answered needs attention43": "-@{triggerBody()?['answer62']}",
+                            "You answered needs attention47": "-@{triggerBody()?['answer67']}",
+                            "You answered needs attention51": "-@{triggerBody()?['answer72']}",
+                            "You answered needs attention55": "-@{triggerBody()?['answer77']}",
+                            "You answered needs attention59": "-@{triggerBody()?['answer82']}",
+                            "You answered needs attention61": "-@{triggerBody()?['answer84']}",
+                            "You answered needs attention63": "-@{triggerBody()?['answer87']}",
+                            "You answered needs attention7": "-@{triggerBody()?['answer17']}",
+                            "You answered repair": "-@{triggerBody()?['answer9']}",
+                            "You answered repair13": "-@{triggerBody()?['answer24']}",
+                            "You answered repair17": "-@{triggerBody()?['answer29']}",
+                            "You answered repair21": "-@{triggerBody()?['answer34']}",
+                            "You answered repair25": "-@{triggerBody()?['answer39']}",
+                            "You answered repair29": "-@{triggerBody()?['answer44']}",
+                            "You answered repair33": "-@{triggerBody()?['answer49']}",
+                            "You answered repair37": "-@{triggerBody()?['answer54']}",
+                            "You answered repair41": "-@{triggerBody()?['answer59']}",
+                            "You answered repair45": "-@{triggerBody()?['answer64']}",
+                            "You answered repair49": "-@{triggerBody()?['answer69']}",
+                            "You answered repair5": "-@{triggerBody()?['answer14']}",
+                            "You answered repair53": "-@{triggerBody()?['answer74']}",
+                            "You answered repair57": "-@{triggerBody()?['answer79']}",
+                            "You answered repair65": "-@{triggerBody()?['answer89']}",
+                            "You answered repair9": "-@{triggerBody()?['answer19']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23SOjeg2ex3SKPV30tAC8Sq')}/items/@{encodeURIComponent('012DAKHSMDUFV5APVVSZDYYOWEL3P2BPNK')}/workbook/tables/@{encodeURIComponent('{219A9C81-C417-4E51-9BE5-390DF86F3853}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_10": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "TPSL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_12": {
+            "actions": {
+                "Add_a_row_into_a_table_12": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSKJFWLRGXDPEBHJETV3QVEFS24P": "/EHS/Checklists/Daily/Forklift (1).xlsx",
+                        "012DAKHSMDUFV5APVVSZDYYOWEL3P2BPNK": "/EHS/Checklists/Daily/Forklift (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Brake fluid level": "@triggerBody()?['answer31_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Engineer crank case oil level": "@triggerBody()?['answer6_with_singular_value']",
+                            "Fuel level": "@triggerBody()?['answer16_with_singular_value']",
+                            "Gearbox oil level": "@triggerBody()?['answer26_with_singular_value']",
+                            "Head and tail lights": "@triggerBody()?['answer36_with_singular_value']",
+                            "Horn": "@triggerBody()?['answer41_with_singular_value']",
+                            "Hour Meter Reading": "@triggerBody()?['answer5']",
+                            "Hour meter": "@triggerBody()?['answer81_with_singular_value']",
+                            "Hydralic controls": "@triggerBody()?['answer66_with_singular_value']",
+                            "Hydraulic sump tank oil level": "@triggerBody()?['answer21_with_singular_value']",
+                            "ID": "@{variables('ID')}",
+                            "Obvious damage and leaks": "@triggerBody()?['answer71_with_singular_value']",
+                            "Operator": "@triggerBody()?['answer4']",
+                            "Other gauges and instruments": "@triggerBody()?['answer86_with_singular_value']",
+                            "Parking break": "@triggerBody()?['answer56_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer8']}",
+                            "Photo10": "-@{triggerBody()?['answer20']}",
+                            "Photo12": "-@{triggerBody()?['answer23']}",
+                            "Photo14": "-@{triggerBody()?['answer25']}",
+                            "Photo16": "-@{triggerBody()?['answer28']}",
+                            "Photo18": "-@{triggerBody()?['answer30']}",
+                            "Photo2": "-@{triggerBody()?['answer10']}",
+                            "Photo20": "-@{triggerBody()?['answer33']}",
+                            "Photo22": "-@{triggerBody()?['answer35']}",
+                            "Photo24": "-@{triggerBody()?['answer38']}",
+                            "Photo26": "-@{triggerBody()?['answer40']}",
+                            "Photo28": "-@{triggerBody()?['answer43']}",
+                            "Photo3": "-@{triggerBody()?['answer90']}",
+                            "Photo30": "-@{triggerBody()?['answer45']}",
+                            "Photo32": "-@{triggerBody()?['answer48']}",
+                            "Photo34": "-@{triggerBody()?['answer50']}",
+                            "Photo36": "-@{triggerBody()?['answer53']}",
+                            "Photo38": "-@{triggerBody()?['answer55']}",
+                            "Photo4": "-@{triggerBody()?['answer13']}",
+                            "Photo40": "-@{triggerBody()?['answer58']}",
+                            "Photo42": "-@{triggerBody()?['answer60']}",
+                            "Photo44": "-@{triggerBody()?['answer63']}",
+                            "Photo46": "-@{triggerBody()?['answer65']}",
+                            "Photo48": "-@{triggerBody()?['answer68']}",
+                            "Photo50": "-@{triggerBody()?['answer70']}",
+                            "Photo52": "-@{triggerBody()?['answer73']}",
+                            "Photo54": "-@{triggerBody()?['answer75']}",
+                            "Photo56": "-@{triggerBody()?['answer78']}",
+                            "Photo58": "-@{triggerBody()?['answer80']}",
+                            "Photo6": "-@{triggerBody()?['answer15']}",
+                            "Photo60": "-@{triggerBody()?['answer83']}",
+                            "Photo62": "-@{triggerBody()?['answer85']}",
+                            "Photo64": "-@{triggerBody()?['answer88']}",
+                            "Photo8": "-@{triggerBody()?['answer18']}",
+                            "Radiator water level": "@triggerBody()?['answer11_with_singular_value']",
+                            "Service breaks": "@triggerBody()?['answer51_with_singular_value']",
+                            "Steering": "@triggerBody()?['answer46_with_singular_value']",
+                            "Tires": "@triggerBody()?['answer61_with_singular_value']",
+                            "Truck No": "@triggerBody()?['answer2']",
+                            "Warning lights": "@triggerBody()?['answer76_with_singular_value']",
+                            "You answered needs attention": "-@{triggerBody()?['answer7']}",
+                            "You answered needs attention11": "-@{triggerBody()?['answer22']}",
+                            "You answered needs attention15": "-@{triggerBody()?['answer27']}",
+                            "You answered needs attention19": "-@{triggerBody()?['answer32']}",
+                            "You answered needs attention23": "-@{triggerBody()?['answer37']}",
+                            "You answered needs attention27": "-@{triggerBody()?['answer42']}",
+                            "You answered needs attention3": "-@{triggerBody()?['answer12']}",
+                            "You answered needs attention31": "-@{triggerBody()?['answer47']}",
+                            "You answered needs attention35": "-@{triggerBody()?['answer52']}",
+                            "You answered needs attention39": "-@{triggerBody()?['answer57']}",
+                            "You answered needs attention43": "-@{triggerBody()?['answer62']}",
+                            "You answered needs attention47": "-@{triggerBody()?['answer67']}",
+                            "You answered needs attention51": "-@{triggerBody()?['answer72']}",
+                            "You answered needs attention55": "-@{triggerBody()?['answer77']}",
+                            "You answered needs attention59": "-@{triggerBody()?['answer82']}",
+                            "You answered needs attention61": "-@{triggerBody()?['answer84']}",
+                            "You answered needs attention63": "-@{triggerBody()?['answer87']}",
+                            "You answered needs attention7": "-@{triggerBody()?['answer17']}",
+                            "You answered repair": "-@{triggerBody()?['answer9']}",
+                            "You answered repair13": "-@{triggerBody()?['answer24']}",
+                            "You answered repair17": "-@{triggerBody()?['answer29']}",
+                            "You answered repair21": "-@{triggerBody()?['answer34']}",
+                            "You answered repair25": "-@{triggerBody()?['answer39']}",
+                            "You answered repair29": "-@{triggerBody()?['answer44']}",
+                            "You answered repair33": "-@{triggerBody()?['answer49']}",
+                            "You answered repair37": "-@{triggerBody()?['answer54']}",
+                            "You answered repair41": "-@{triggerBody()?['answer59']}",
+                            "You answered repair45": "-@{triggerBody()?['answer64']}",
+                            "You answered repair49": "-@{triggerBody()?['answer69']}",
+                            "You answered repair5": "-@{triggerBody()?['answer14']}",
+                            "You answered repair53": "-@{triggerBody()?['answer74']}",
+                            "You answered repair57": "-@{triggerBody()?['answer79']}",
+                            "You answered repair65": "-@{triggerBody()?['answer89']}",
+                            "You answered repair9": "-@{triggerBody()?['answer19']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21OE4Lc5Sx1SZwFdBOFz34o')}/items/@{encodeURIComponent('012DAKHSKJFWLRGXDPEBHJETV3QVEFS24P')}/workbook/tables/@{encodeURIComponent('{219A9C81-C417-4E51-9BE5-390DF86F3853}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_11": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Wild Elegance"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_2": {
+            "actions": {
+                "Add_a_row_into_a_table_2": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSK66EBFRUDIRFCY4UQRKF3U3SR2": "/EHS/Checklists/Daily/Forklift (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Brake fluid level": "@triggerBody()?['answer31_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Engineer crank case oil level": "@triggerBody()?['answer6_with_singular_value']",
+                            "Fuel level": "@triggerBody()?['answer16_with_singular_value']",
+                            "Gearbox oil level": "@triggerBody()?['answer26_with_singular_value']",
+                            "Head and tail lights": "@triggerBody()?['answer36_with_singular_value']",
+                            "Horn": "@triggerBody()?['answer41_with_singular_value']",
+                            "Hour Meter Reading": "@triggerBody()?['answer5']",
+                            "Hour meter": "@triggerBody()?['answer81_with_singular_value']",
+                            "Hydralic controls": "@triggerBody()?['answer66_with_singular_value']",
+                            "Hydraulic sump tank oil level": "@triggerBody()?['answer21_with_singular_value']",
+                            "ID": "@{variables('ID')}",
+                            "Obvious damage and leaks": "@triggerBody()?['answer71_with_singular_value']",
+                            "Operator": "@triggerBody()?['answer4']",
+                            "Other gauges and instruments": "@triggerBody()?['answer86_with_singular_value']",
+                            "Parking break": "@triggerBody()?['answer56_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer8']}",
+                            "Photo10": "-@{triggerBody()?['answer20']}",
+                            "Photo12": "-@{triggerBody()?['answer23']}",
+                            "Photo14": "-@{triggerBody()?['answer25']}",
+                            "Photo16": "-@{triggerBody()?['answer28']}",
+                            "Photo18": "-@{triggerBody()?['answer30']}",
+                            "Photo2": "-@{triggerBody()?['answer10']}",
+                            "Photo20": "-@{triggerBody()?['answer33']}",
+                            "Photo22": "-@{triggerBody()?['answer35']}",
+                            "Photo24": "-@{triggerBody()?['answer38']}",
+                            "Photo26": "-@{triggerBody()?['answer40']}",
+                            "Photo28": "-@{triggerBody()?['answer43']}",
+                            "Photo3": "-@{triggerBody()?['answer90']}",
+                            "Photo30": "-@{triggerBody()?['answer45']}",
+                            "Photo32": "-@{triggerBody()?['answer48']}",
+                            "Photo34": "-@{triggerBody()?['answer50']}",
+                            "Photo36": "-@{triggerBody()?['answer53']}",
+                            "Photo38": "-@{triggerBody()?['answer55']}",
+                            "Photo4": "-@{triggerBody()?['answer13']}",
+                            "Photo40": "-@{triggerBody()?['answer58']}",
+                            "Photo42": "-@{triggerBody()?['answer60']}",
+                            "Photo44": "-@{triggerBody()?['answer63']}",
+                            "Photo46": "-@{triggerBody()?['answer65']}",
+                            "Photo48": "-@{triggerBody()?['answer68']}",
+                            "Photo50": "-@{triggerBody()?['answer70']}",
+                            "Photo52": "-@{triggerBody()?['answer73']}",
+                            "Photo54": "-@{triggerBody()?['answer75']}",
+                            "Photo56": "-@{triggerBody()?['answer78']}",
+                            "Photo58": "-@{triggerBody()?['answer80']}",
+                            "Photo6": "-@{triggerBody()?['answer15']}",
+                            "Photo60": "-@{triggerBody()?['answer83']}",
+                            "Photo62": "-@{triggerBody()?['answer85']}",
+                            "Photo64": "-@{triggerBody()?['answer88']}",
+                            "Photo8": "-@{triggerBody()?['answer18']}",
+                            "Radiator water level": "@triggerBody()?['answer11_with_singular_value']",
+                            "Service breaks": "@triggerBody()?['answer51_with_singular_value']",
+                            "Steering": "@triggerBody()?['answer46_with_singular_value']",
+                            "Tires": "@triggerBody()?['answer61_with_singular_value']",
+                            "Truck No": "@triggerBody()?['answer2']",
+                            "Warning lights": "@triggerBody()?['answer76_with_singular_value']",
+                            "You answered needs attention": "-@{triggerBody()?['answer7']}",
+                            "You answered needs attention11": "-@{triggerBody()?['answer22']}",
+                            "You answered needs attention15": "-@{triggerBody()?['answer27']}",
+                            "You answered needs attention19": "-@{triggerBody()?['answer32']}",
+                            "You answered needs attention23": "-@{triggerBody()?['answer37']}",
+                            "You answered needs attention27": "-@{triggerBody()?['answer42']}",
+                            "You answered needs attention3": "-@{triggerBody()?['answer12']}",
+                            "You answered needs attention31": "-@{triggerBody()?['answer47']}",
+                            "You answered needs attention35": "-@{triggerBody()?['answer52']}",
+                            "You answered needs attention39": "-@{triggerBody()?['answer57']}",
+                            "You answered needs attention43": "-@{triggerBody()?['answer62']}",
+                            "You answered needs attention47": "-@{triggerBody()?['answer67']}",
+                            "You answered needs attention51": "-@{triggerBody()?['answer72']}",
+                            "You answered needs attention55": "-@{triggerBody()?['answer77']}",
+                            "You answered needs attention59": "-@{triggerBody()?['answer82']}",
+                            "You answered needs attention61": "-@{triggerBody()?['answer84']}",
+                            "You answered needs attention63": "-@{triggerBody()?['answer87']}",
+                            "You answered needs attention7": "-@{triggerBody()?['answer17']}",
+                            "You answered repair": "-@{triggerBody()?['answer9']}",
+                            "You answered repair13": "-@{triggerBody()?['answer24']}",
+                            "You answered repair17": "-@{triggerBody()?['answer29']}",
+                            "You answered repair21": "-@{triggerBody()?['answer34']}",
+                            "You answered repair25": "-@{triggerBody()?['answer39']}",
+                            "You answered repair29": "-@{triggerBody()?['answer44']}",
+                            "You answered repair33": "-@{triggerBody()?['answer49']}",
+                            "You answered repair37": "-@{triggerBody()?['answer54']}",
+                            "You answered repair41": "-@{triggerBody()?['answer59']}",
+                            "You answered repair45": "-@{triggerBody()?['answer64']}",
+                            "You answered repair49": "-@{triggerBody()?['answer69']}",
+                            "You answered repair5": "-@{triggerBody()?['answer14']}",
+                            "You answered repair53": "-@{triggerBody()?['answer74']}",
+                            "You answered repair57": "-@{triggerBody()?['answer79']}",
+                            "You answered repair65": "-@{triggerBody()?['answer89']}",
+                            "You answered repair9": "-@{triggerBody()?['answer19']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20_IPQJOQqtRrh4P5a0Fiel')}/items/@{encodeURIComponent('012DAKHSK66EBFRUDIRFCY4UQRKF3U3SR2')}/workbook/tables/@{encodeURIComponent('{219A9C81-C417-4E51-9BE5-390DF86F3853}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Flexowork"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_3": {
+            "actions": {
+                "Add_a_row_into_a_table_3": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSPX64OY4TTEPVDI5P3RKIAD3DP7": "/EHS/Checklists/Daily/Forklift (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Brake fluid level": "@triggerBody()?['answer31_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Engineer crank case oil level": "@triggerBody()?['answer6_with_singular_value']",
+                            "Fuel level": "@triggerBody()?['answer16_with_singular_value']",
+                            "Gearbox oil level": "@triggerBody()?['answer26_with_singular_value']",
+                            "Head and tail lights": "@triggerBody()?['answer36_with_singular_value']",
+                            "Horn": "@triggerBody()?['answer41_with_singular_value']",
+                            "Hour Meter Reading": "@triggerBody()?['answer5']",
+                            "Hour meter": "@triggerBody()?['answer81_with_singular_value']",
+                            "Hydralic controls": "@triggerBody()?['answer66_with_singular_value']",
+                            "Hydraulic sump tank oil level": "@triggerBody()?['answer21_with_singular_value']",
+                            "ID": "@{variables('ID')}",
+                            "Obvious damage and leaks": "@triggerBody()?['answer71_with_singular_value']",
+                            "Operator": "@triggerBody()?['answer4']",
+                            "Other gauges and instruments": "@triggerBody()?['answer86_with_singular_value']",
+                            "Parking break": "@triggerBody()?['answer56_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer8']}",
+                            "Photo10": "-@{triggerBody()?['answer20']}",
+                            "Photo12": "-@{triggerBody()?['answer23']}",
+                            "Photo14": "-@{triggerBody()?['answer25']}",
+                            "Photo16": "-@{triggerBody()?['answer28']}",
+                            "Photo18": "-@{triggerBody()?['answer30']}",
+                            "Photo2": "-@{triggerBody()?['answer10']}",
+                            "Photo20": "-@{triggerBody()?['answer33']}",
+                            "Photo22": "-@{triggerBody()?['answer35']}",
+                            "Photo24": "-@{triggerBody()?['answer38']}",
+                            "Photo26": "-@{triggerBody()?['answer40']}",
+                            "Photo28": "-@{triggerBody()?['answer43']}",
+                            "Photo3": "-@{triggerBody()?['answer90']}",
+                            "Photo30": "-@{triggerBody()?['answer45']}",
+                            "Photo32": "-@{triggerBody()?['answer48']}",
+                            "Photo34": "-@{triggerBody()?['answer50']}",
+                            "Photo36": "-@{triggerBody()?['answer53']}",
+                            "Photo38": "-@{triggerBody()?['answer55']}",
+                            "Photo4": "-@{triggerBody()?['answer13']}",
+                            "Photo40": "-@{triggerBody()?['answer58']}",
+                            "Photo42": "-@{triggerBody()?['answer60']}",
+                            "Photo44": "-@{triggerBody()?['answer63']}",
+                            "Photo46": "-@{triggerBody()?['answer65']}",
+                            "Photo48": "-@{triggerBody()?['answer68']}",
+                            "Photo50": "-@{triggerBody()?['answer70']}",
+                            "Photo52": "-@{triggerBody()?['answer73']}",
+                            "Photo54": "-@{triggerBody()?['answer75']}",
+                            "Photo56": "-@{triggerBody()?['answer78']}",
+                            "Photo58": "-@{triggerBody()?['answer80']}",
+                            "Photo6": "-@{triggerBody()?['answer15']}",
+                            "Photo60": "-@{triggerBody()?['answer83']}",
+                            "Photo62": "-@{triggerBody()?['answer85']}",
+                            "Photo64": "-@{triggerBody()?['answer88']}",
+                            "Photo8": "-@{triggerBody()?['answer18']}",
+                            "Radiator water level": "@triggerBody()?['answer11_with_singular_value']",
+                            "Service breaks": "@triggerBody()?['answer51_with_singular_value']",
+                            "Steering": "@triggerBody()?['answer46_with_singular_value']",
+                            "Tires": "@triggerBody()?['answer61_with_singular_value']",
+                            "Truck No": "@triggerBody()?['answer2']",
+                            "Warning lights": "@triggerBody()?['answer76_with_singular_value']",
+                            "You answered needs attention": "-@{triggerBody()?['answer7']}",
+                            "You answered needs attention11": "-@{triggerBody()?['answer22']}",
+                            "You answered needs attention15": "-@{triggerBody()?['answer27']}",
+                            "You answered needs attention19": "-@{triggerBody()?['answer32']}",
+                            "You answered needs attention23": "-@{triggerBody()?['answer37']}",
+                            "You answered needs attention27": "-@{triggerBody()?['answer42']}",
+                            "You answered needs attention3": "-@{triggerBody()?['answer12']}",
+                            "You answered needs attention31": "-@{triggerBody()?['answer47']}",
+                            "You answered needs attention35": "-@{triggerBody()?['answer52']}",
+                            "You answered needs attention39": "-@{triggerBody()?['answer57']}",
+                            "You answered needs attention43": "-@{triggerBody()?['answer62']}",
+                            "You answered needs attention47": "-@{triggerBody()?['answer67']}",
+                            "You answered needs attention51": "-@{triggerBody()?['answer72']}",
+                            "You answered needs attention55": "-@{triggerBody()?['answer77']}",
+                            "You answered needs attention59": "-@{triggerBody()?['answer82']}",
+                            "You answered needs attention61": "-@{triggerBody()?['answer84']}",
+                            "You answered needs attention63": "-@{triggerBody()?['answer87']}",
+                            "You answered needs attention7": "-@{triggerBody()?['answer17']}",
+                            "You answered repair": "-@{triggerBody()?['answer9']}",
+                            "You answered repair13": "-@{triggerBody()?['answer24']}",
+                            "You answered repair17": "-@{triggerBody()?['answer29']}",
+                            "You answered repair21": "-@{triggerBody()?['answer34']}",
+                            "You answered repair25": "-@{triggerBody()?['answer39']}",
+                            "You answered repair29": "-@{triggerBody()?['answer44']}",
+                            "You answered repair33": "-@{triggerBody()?['answer49']}",
+                            "You answered repair37": "-@{triggerBody()?['answer54']}",
+                            "You answered repair41": "-@{triggerBody()?['answer59']}",
+                            "You answered repair45": "-@{triggerBody()?['answer64']}",
+                            "You answered repair49": "-@{triggerBody()?['answer69']}",
+                            "You answered repair5": "-@{triggerBody()?['answer14']}",
+                            "You answered repair53": "-@{triggerBody()?['answer74']}",
+                            "You answered repair57": "-@{triggerBody()?['answer79']}",
+                            "You answered repair65": "-@{triggerBody()?['answer89']}",
+                            "You answered repair9": "-@{triggerBody()?['answer19']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20Ih8Qra-VNQ5WlPcEmbDcI')}/items/@{encodeURIComponent('012DAKHSPX64OY4TTEPVDI5P3RKIAD3DP7')}/workbook/tables/@{encodeURIComponent('{219A9C81-C417-4E51-9BE5-390DF86F3853}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_2": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "MarketPower"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_4": {
+            "actions": {
+                "Add_a_row_into_a_table_4": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSKPLEUGUQAI6ZEKBQWDHRGU34ZC": "/EHS/Checklists/Daily/Forklift (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Brake fluid level": "@triggerBody()?['answer31_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Engineer crank case oil level": "@triggerBody()?['answer6_with_singular_value']",
+                            "Fuel level": "@triggerBody()?['answer16_with_singular_value']",
+                            "Gearbox oil level": "@triggerBody()?['answer26_with_singular_value']",
+                            "Head and tail lights": "@triggerBody()?['answer36_with_singular_value']",
+                            "Horn": "@triggerBody()?['answer41_with_singular_value']",
+                            "Hour Meter Reading": "@triggerBody()?['answer5']",
+                            "Hour meter": "@triggerBody()?['answer81_with_singular_value']",
+                            "Hydralic controls": "@triggerBody()?['answer66_with_singular_value']",
+                            "Hydraulic sump tank oil level": "@triggerBody()?['answer21_with_singular_value']",
+                            "ID": "@{variables('ID')}",
+                            "Obvious damage and leaks": "@triggerBody()?['answer71_with_singular_value']",
+                            "Operator": "@triggerBody()?['answer4']",
+                            "Other gauges and instruments": "@triggerBody()?['answer86_with_singular_value']",
+                            "Parking break": "@triggerBody()?['answer56_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer8']}",
+                            "Photo10": "-@{triggerBody()?['answer20']}",
+                            "Photo12": "-@{triggerBody()?['answer23']}",
+                            "Photo14": "-@{triggerBody()?['answer25']}",
+                            "Photo16": "-@{triggerBody()?['answer28']}",
+                            "Photo18": "-@{triggerBody()?['answer30']}",
+                            "Photo2": "-@{triggerBody()?['answer10']}",
+                            "Photo20": "-@{triggerBody()?['answer33']}",
+                            "Photo22": "-@{triggerBody()?['answer35']}",
+                            "Photo24": "-@{triggerBody()?['answer38']}",
+                            "Photo26": "-@{triggerBody()?['answer40']}",
+                            "Photo28": "-@{triggerBody()?['answer43']}",
+                            "Photo3": "-@{triggerBody()?['answer90']}",
+                            "Photo30": "-@{triggerBody()?['answer45']}",
+                            "Photo32": "-@{triggerBody()?['answer48']}",
+                            "Photo34": "-@{triggerBody()?['answer50']}",
+                            "Photo36": "-@{triggerBody()?['answer53']}",
+                            "Photo38": "-@{triggerBody()?['answer55']}",
+                            "Photo4": "-@{triggerBody()?['answer13']}",
+                            "Photo40": "-@{triggerBody()?['answer58']}",
+                            "Photo42": "-@{triggerBody()?['answer60']}",
+                            "Photo44": "-@{triggerBody()?['answer63']}",
+                            "Photo46": "-@{triggerBody()?['answer65']}",
+                            "Photo48": "-@{triggerBody()?['answer68']}",
+                            "Photo50": "-@{triggerBody()?['answer70']}",
+                            "Photo52": "-@{triggerBody()?['answer73']}",
+                            "Photo54": "-@{triggerBody()?['answer75']}",
+                            "Photo56": "-@{triggerBody()?['answer78']}",
+                            "Photo58": "-@{triggerBody()?['answer80']}",
+                            "Photo6": "-@{triggerBody()?['answer15']}",
+                            "Photo60": "-@{triggerBody()?['answer83']}",
+                            "Photo62": "-@{triggerBody()?['answer85']}",
+                            "Photo64": "-@{triggerBody()?['answer88']}",
+                            "Photo8": "-@{triggerBody()?['answer18']}",
+                            "Radiator water level": "@triggerBody()?['answer11_with_singular_value']",
+                            "Service breaks": "@triggerBody()?['answer51_with_singular_value']",
+                            "Steering": "@triggerBody()?['answer46_with_singular_value']",
+                            "Tires": "@triggerBody()?['answer61_with_singular_value']",
+                            "Truck No": "@triggerBody()?['answer2']",
+                            "Warning lights": "@triggerBody()?['answer76_with_singular_value']",
+                            "You answered needs attention": "-@{triggerBody()?['answer7']}",
+                            "You answered needs attention11": "-@{triggerBody()?['answer22']}",
+                            "You answered needs attention15": "-@{triggerBody()?['answer27']}",
+                            "You answered needs attention19": "-@{triggerBody()?['answer32']}",
+                            "You answered needs attention23": "-@{triggerBody()?['answer37']}",
+                            "You answered needs attention27": "-@{triggerBody()?['answer42']}",
+                            "You answered needs attention3": "-@{triggerBody()?['answer12']}",
+                            "You answered needs attention31": "-@{triggerBody()?['answer47']}",
+                            "You answered needs attention35": "-@{triggerBody()?['answer52']}",
+                            "You answered needs attention39": "-@{triggerBody()?['answer57']}",
+                            "You answered needs attention43": "-@{triggerBody()?['answer62']}",
+                            "You answered needs attention47": "-@{triggerBody()?['answer67']}",
+                            "You answered needs attention51": "-@{triggerBody()?['answer72']}",
+                            "You answered needs attention55": "-@{triggerBody()?['answer77']}",
+                            "You answered needs attention59": "-@{triggerBody()?['answer82']}",
+                            "You answered needs attention61": "-@{triggerBody()?['answer84']}",
+                            "You answered needs attention63": "-@{triggerBody()?['answer87']}",
+                            "You answered needs attention7": "-@{triggerBody()?['answer17']}",
+                            "You answered repair": "-@{triggerBody()?['answer9']}",
+                            "You answered repair13": "-@{triggerBody()?['answer24']}",
+                            "You answered repair17": "-@{triggerBody()?['answer29']}",
+                            "You answered repair21": "-@{triggerBody()?['answer34']}",
+                            "You answered repair25": "-@{triggerBody()?['answer39']}",
+                            "You answered repair29": "-@{triggerBody()?['answer44']}",
+                            "You answered repair33": "-@{triggerBody()?['answer49']}",
+                            "You answered repair37": "-@{triggerBody()?['answer54']}",
+                            "You answered repair41": "-@{triggerBody()?['answer59']}",
+                            "You answered repair45": "-@{triggerBody()?['answer64']}",
+                            "You answered repair49": "-@{triggerBody()?['answer69']}",
+                            "You answered repair5": "-@{triggerBody()?['answer14']}",
+                            "You answered repair53": "-@{triggerBody()?['answer74']}",
+                            "You answered repair57": "-@{triggerBody()?['answer79']}",
+                            "You answered repair65": "-@{triggerBody()?['answer89']}",
+                            "You answered repair9": "-@{triggerBody()?['answer19']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22X5-_jdHAvQLoyxRsU7UeG')}/items/@{encodeURIComponent('012DAKHSKPLEUGUQAI6ZEKBQWDHRGU34ZC')}/workbook/tables/@{encodeURIComponent('{219A9C81-C417-4E51-9BE5-390DF86F3853}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_3": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Panthera"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_5": {
+            "actions": {
+                "Add_a_row_into_a_table_5": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSPKU4JNNZ6RBJBLFHDJ7WUBCOME": "/EHS/Checklists/Daily/Forklift (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Brake fluid level": "@triggerBody()?['answer31_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Engineer crank case oil level": "@triggerBody()?['answer6_with_singular_value']",
+                            "Fuel level": "@triggerBody()?['answer16_with_singular_value']",
+                            "Gearbox oil level": "@triggerBody()?['answer26_with_singular_value']",
+                            "Head and tail lights": "@triggerBody()?['answer36_with_singular_value']",
+                            "Horn": "@triggerBody()?['answer41_with_singular_value']",
+                            "Hour Meter Reading": "@triggerBody()?['answer5']",
+                            "Hour meter": "@triggerBody()?['answer81_with_singular_value']",
+                            "Hydralic controls": "@triggerBody()?['answer66_with_singular_value']",
+                            "Hydraulic sump tank oil level": "@triggerBody()?['answer21_with_singular_value']",
+                            "ID": "@{variables('ID')}",
+                            "Obvious damage and leaks": "@triggerBody()?['answer71_with_singular_value']",
+                            "Operator": "@triggerBody()?['answer4']",
+                            "Other gauges and instruments": "@triggerBody()?['answer86_with_singular_value']",
+                            "Parking break": "@triggerBody()?['answer56_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer8']}",
+                            "Photo10": "-@{triggerBody()?['answer20']}",
+                            "Photo12": "-@{triggerBody()?['answer23']}",
+                            "Photo14": "-@{triggerBody()?['answer25']}",
+                            "Photo16": "-@{triggerBody()?['answer28']}",
+                            "Photo18": "-@{triggerBody()?['answer30']}",
+                            "Photo2": "-@{triggerBody()?['answer10']}",
+                            "Photo20": "-@{triggerBody()?['answer33']}",
+                            "Photo22": "-@{triggerBody()?['answer35']}",
+                            "Photo24": "-@{triggerBody()?['answer38']}",
+                            "Photo26": "-@{triggerBody()?['answer40']}",
+                            "Photo28": "-@{triggerBody()?['answer43']}",
+                            "Photo3": "-@{triggerBody()?['answer90']}",
+                            "Photo30": "-@{triggerBody()?['answer45']}",
+                            "Photo32": "-@{triggerBody()?['answer48']}",
+                            "Photo34": "-@{triggerBody()?['answer50']}",
+                            "Photo36": "-@{triggerBody()?['answer53']}",
+                            "Photo38": "-@{triggerBody()?['answer55']}",
+                            "Photo4": "-@{triggerBody()?['answer13']}",
+                            "Photo40": "-@{triggerBody()?['answer58']}",
+                            "Photo42": "-@{triggerBody()?['answer60']}",
+                            "Photo44": "-@{triggerBody()?['answer63']}",
+                            "Photo46": "-@{triggerBody()?['answer65']}",
+                            "Photo48": "-@{triggerBody()?['answer68']}",
+                            "Photo50": "-@{triggerBody()?['answer70']}",
+                            "Photo52": "-@{triggerBody()?['answer73']}",
+                            "Photo54": "-@{triggerBody()?['answer75']}",
+                            "Photo56": "-@{triggerBody()?['answer78']}",
+                            "Photo58": "-@{triggerBody()?['answer80']}",
+                            "Photo6": "-@{triggerBody()?['answer15']}",
+                            "Photo60": "-@{triggerBody()?['answer83']}",
+                            "Photo62": "-@{triggerBody()?['answer85']}",
+                            "Photo64": "-@{triggerBody()?['answer88']}",
+                            "Photo8": "-@{triggerBody()?['answer18']}",
+                            "Radiator water level": "@triggerBody()?['answer11_with_singular_value']",
+                            "Service breaks": "@triggerBody()?['answer51_with_singular_value']",
+                            "Steering": "@triggerBody()?['answer46_with_singular_value']",
+                            "Tires": "@triggerBody()?['answer61_with_singular_value']",
+                            "Truck No": "@triggerBody()?['answer2']",
+                            "Warning lights": "@triggerBody()?['answer76_with_singular_value']",
+                            "You answered needs attention": "-@{triggerBody()?['answer7']}",
+                            "You answered needs attention11": "-@{triggerBody()?['answer22']}",
+                            "You answered needs attention15": "-@{triggerBody()?['answer27']}",
+                            "You answered needs attention19": "-@{triggerBody()?['answer32']}",
+                            "You answered needs attention23": "-@{triggerBody()?['answer37']}",
+                            "You answered needs attention27": "-@{triggerBody()?['answer42']}",
+                            "You answered needs attention3": "-@{triggerBody()?['answer12']}",
+                            "You answered needs attention31": "-@{triggerBody()?['answer47']}",
+                            "You answered needs attention35": "-@{triggerBody()?['answer52']}",
+                            "You answered needs attention39": "-@{triggerBody()?['answer57']}",
+                            "You answered needs attention43": "-@{triggerBody()?['answer62']}",
+                            "You answered needs attention47": "-@{triggerBody()?['answer67']}",
+                            "You answered needs attention51": "-@{triggerBody()?['answer72']}",
+                            "You answered needs attention55": "-@{triggerBody()?['answer77']}",
+                            "You answered needs attention59": "-@{triggerBody()?['answer82']}",
+                            "You answered needs attention61": "-@{triggerBody()?['answer84']}",
+                            "You answered needs attention63": "-@{triggerBody()?['answer87']}",
+                            "You answered needs attention7": "-@{triggerBody()?['answer17']}",
+                            "You answered repair": "-@{triggerBody()?['answer9']}",
+                            "You answered repair13": "-@{triggerBody()?['answer24']}",
+                            "You answered repair17": "-@{triggerBody()?['answer29']}",
+                            "You answered repair21": "-@{triggerBody()?['answer34']}",
+                            "You answered repair25": "-@{triggerBody()?['answer39']}",
+                            "You answered repair29": "-@{triggerBody()?['answer44']}",
+                            "You answered repair33": "-@{triggerBody()?['answer49']}",
+                            "You answered repair37": "-@{triggerBody()?['answer54']}",
+                            "You answered repair41": "-@{triggerBody()?['answer59']}",
+                            "You answered repair45": "-@{triggerBody()?['answer64']}",
+                            "You answered repair49": "-@{triggerBody()?['answer69']}",
+                            "You answered repair5": "-@{triggerBody()?['answer14']}",
+                            "You answered repair53": "-@{triggerBody()?['answer74']}",
+                            "You answered repair57": "-@{triggerBody()?['answer79']}",
+                            "You answered repair65": "-@{triggerBody()?['answer89']}",
+                            "You answered repair9": "-@{triggerBody()?['answer19']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/items/@{encodeURIComponent('012DAKHSPKU4JNNZ6RBJBLFHDJ7WUBCOME')}/workbook/tables/@{encodeURIComponent('{219A9C81-C417-4E51-9BE5-390DF86F3853}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_4": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Polythene"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_6": {
+            "actions": {
+                "Add_a_row_into_a_table_6": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSNI4ITXFS2PT5AYZ7MNWHQRKOQV": "/EHS/Checklists/Daily/Forklift (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Brake fluid level": "@triggerBody()?['answer31_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Engineer crank case oil level": "@triggerBody()?['answer6_with_singular_value']",
+                            "Fuel level": "@triggerBody()?['answer16_with_singular_value']",
+                            "Gearbox oil level": "@triggerBody()?['answer26_with_singular_value']",
+                            "Head and tail lights": "@triggerBody()?['answer36_with_singular_value']",
+                            "Horn": "@triggerBody()?['answer41_with_singular_value']",
+                            "Hour Meter Reading": "@triggerBody()?['answer5']",
+                            "Hour meter": "@triggerBody()?['answer81_with_singular_value']",
+                            "Hydralic controls": "@triggerBody()?['answer66_with_singular_value']",
+                            "Hydraulic sump tank oil level": "@triggerBody()?['answer21_with_singular_value']",
+                            "ID": "@{variables('ID')}",
+                            "Obvious damage and leaks": "@triggerBody()?['answer71_with_singular_value']",
+                            "Operator": "@triggerBody()?['answer4']",
+                            "Other gauges and instruments": "@triggerBody()?['answer86_with_singular_value']",
+                            "Parking break": "@triggerBody()?['answer56_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer8']}",
+                            "Photo10": "-@{triggerBody()?['answer20']}",
+                            "Photo12": "-@{triggerBody()?['answer23']}",
+                            "Photo14": "-@{triggerBody()?['answer25']}",
+                            "Photo16": "-@{triggerBody()?['answer28']}",
+                            "Photo18": "-@{triggerBody()?['answer30']}",
+                            "Photo2": "-@{triggerBody()?['answer10']}",
+                            "Photo20": "-@{triggerBody()?['answer33']}",
+                            "Photo22": "-@{triggerBody()?['answer35']}",
+                            "Photo24": "-@{triggerBody()?['answer38']}",
+                            "Photo26": "-@{triggerBody()?['answer40']}",
+                            "Photo28": "-@{triggerBody()?['answer43']}",
+                            "Photo3": "-@{triggerBody()?['answer90']}",
+                            "Photo30": "-@{triggerBody()?['answer45']}",
+                            "Photo32": "-@{triggerBody()?['answer48']}",
+                            "Photo34": "-@{triggerBody()?['answer50']}",
+                            "Photo36": "-@{triggerBody()?['answer53']}",
+                            "Photo38": "-@{triggerBody()?['answer55']}",
+                            "Photo4": "-@{triggerBody()?['answer13']}",
+                            "Photo40": "-@{triggerBody()?['answer58']}",
+                            "Photo42": "-@{triggerBody()?['answer60']}",
+                            "Photo44": "-@{triggerBody()?['answer63']}",
+                            "Photo46": "-@{triggerBody()?['answer65']}",
+                            "Photo48": "-@{triggerBody()?['answer68']}",
+                            "Photo50": "-@{triggerBody()?['answer70']}",
+                            "Photo52": "-@{triggerBody()?['answer73']}",
+                            "Photo54": "-@{triggerBody()?['answer75']}",
+                            "Photo56": "-@{triggerBody()?['answer78']}",
+                            "Photo58": "-@{triggerBody()?['answer80']}",
+                            "Photo6": "-@{triggerBody()?['answer15']}",
+                            "Photo60": "-@{triggerBody()?['answer83']}",
+                            "Photo62": "-@{triggerBody()?['answer85']}",
+                            "Photo64": "-@{triggerBody()?['answer88']}",
+                            "Photo8": "-@{triggerBody()?['answer18']}",
+                            "Radiator water level": "@triggerBody()?['answer11_with_singular_value']",
+                            "Service breaks": "@triggerBody()?['answer51_with_singular_value']",
+                            "Steering": "@triggerBody()?['answer46_with_singular_value']",
+                            "Tires": "@triggerBody()?['answer61_with_singular_value']",
+                            "Truck No": "@triggerBody()?['answer2']",
+                            "Warning lights": "@triggerBody()?['answer76_with_singular_value']",
+                            "You answered needs attention": "-@{triggerBody()?['answer7']}",
+                            "You answered needs attention11": "-@{triggerBody()?['answer22']}",
+                            "You answered needs attention15": "-@{triggerBody()?['answer27']}",
+                            "You answered needs attention19": "-@{triggerBody()?['answer32']}",
+                            "You answered needs attention23": "-@{triggerBody()?['answer37']}",
+                            "You answered needs attention27": "-@{triggerBody()?['answer42']}",
+                            "You answered needs attention3": "-@{triggerBody()?['answer12']}",
+                            "You answered needs attention31": "-@{triggerBody()?['answer47']}",
+                            "You answered needs attention35": "-@{triggerBody()?['answer52']}",
+                            "You answered needs attention39": "-@{triggerBody()?['answer57']}",
+                            "You answered needs attention43": "-@{triggerBody()?['answer62']}",
+                            "You answered needs attention47": "-@{triggerBody()?['answer67']}",
+                            "You answered needs attention51": "-@{triggerBody()?['answer72']}",
+                            "You answered needs attention55": "-@{triggerBody()?['answer77']}",
+                            "You answered needs attention59": "-@{triggerBody()?['answer82']}",
+                            "You answered needs attention61": "-@{triggerBody()?['answer84']}",
+                            "You answered needs attention63": "-@{triggerBody()?['answer87']}",
+                            "You answered needs attention7": "-@{triggerBody()?['answer17']}",
+                            "You answered repair": "-@{triggerBody()?['answer9']}",
+                            "You answered repair13": "-@{triggerBody()?['answer24']}",
+                            "You answered repair17": "-@{triggerBody()?['answer29']}",
+                            "You answered repair21": "-@{triggerBody()?['answer34']}",
+                            "You answered repair25": "-@{triggerBody()?['answer39']}",
+                            "You answered repair29": "-@{triggerBody()?['answer44']}",
+                            "You answered repair33": "-@{triggerBody()?['answer49']}",
+                            "You answered repair37": "-@{triggerBody()?['answer54']}",
+                            "You answered repair41": "-@{triggerBody()?['answer59']}",
+                            "You answered repair45": "-@{triggerBody()?['answer64']}",
+                            "You answered repair49": "-@{triggerBody()?['answer69']}",
+                            "You answered repair5": "-@{triggerBody()?['answer14']}",
+                            "You answered repair53": "-@{triggerBody()?['answer74']}",
+                            "You answered repair57": "-@{triggerBody()?['answer79']}",
+                            "You answered repair65": "-@{triggerBody()?['answer89']}",
+                            "You answered repair9": "-@{triggerBody()?['answer19']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22kk4tt4keDSZ_ZdgmrQkph')}/items/@{encodeURIComponent('012DAKHSNI4ITXFS2PT5AYZ7MNWHQRKOQV')}/workbook/tables/@{encodeURIComponent('{219A9C81-C417-4E51-9BE5-390DF86F3853}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_5": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "PPL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_7": {
+            "actions": {
+                "Add_a_row_into_a_table_7": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSNOZKJKQ3EAWVD3G6O3RV56HXNN": "/EHS/Checklists/Daily/Forklift (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Brake fluid level": "@triggerBody()?['answer31_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Engineer crank case oil level": "@triggerBody()?['answer6_with_singular_value']",
+                            "Fuel level": "@triggerBody()?['answer16_with_singular_value']",
+                            "Gearbox oil level": "@triggerBody()?['answer26_with_singular_value']",
+                            "Head and tail lights": "@triggerBody()?['answer36_with_singular_value']",
+                            "Horn": "@triggerBody()?['answer41_with_singular_value']",
+                            "Hour Meter Reading": "@triggerBody()?['answer5']",
+                            "Hour meter": "@triggerBody()?['answer81_with_singular_value']",
+                            "Hydralic controls": "@triggerBody()?['answer66_with_singular_value']",
+                            "Hydraulic sump tank oil level": "@triggerBody()?['answer21_with_singular_value']",
+                            "ID": "@{variables('ID')}",
+                            "Obvious damage and leaks": "@triggerBody()?['answer71_with_singular_value']",
+                            "Operator": "@triggerBody()?['answer4']",
+                            "Other gauges and instruments": "@triggerBody()?['answer86_with_singular_value']",
+                            "Parking break": "@triggerBody()?['answer56_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer8']}",
+                            "Photo10": "-@{triggerBody()?['answer20']}",
+                            "Photo12": "-@{triggerBody()?['answer23']}",
+                            "Photo14": "-@{triggerBody()?['answer25']}",
+                            "Photo16": "-@{triggerBody()?['answer28']}",
+                            "Photo18": "-@{triggerBody()?['answer30']}",
+                            "Photo2": "-@{triggerBody()?['answer10']}",
+                            "Photo20": "-@{triggerBody()?['answer33']}",
+                            "Photo22": "-@{triggerBody()?['answer35']}",
+                            "Photo24": "-@{triggerBody()?['answer38']}",
+                            "Photo26": "-@{triggerBody()?['answer40']}",
+                            "Photo28": "-@{triggerBody()?['answer43']}",
+                            "Photo3": "-@{triggerBody()?['answer90']}",
+                            "Photo30": "-@{triggerBody()?['answer45']}",
+                            "Photo32": "-@{triggerBody()?['answer48']}",
+                            "Photo34": "-@{triggerBody()?['answer50']}",
+                            "Photo36": "-@{triggerBody()?['answer53']}",
+                            "Photo38": "-@{triggerBody()?['answer55']}",
+                            "Photo4": "-@{triggerBody()?['answer13']}",
+                            "Photo40": "-@{triggerBody()?['answer58']}",
+                            "Photo42": "-@{triggerBody()?['answer60']}",
+                            "Photo44": "-@{triggerBody()?['answer63']}",
+                            "Photo46": "-@{triggerBody()?['answer65']}",
+                            "Photo48": "-@{triggerBody()?['answer68']}",
+                            "Photo50": "-@{triggerBody()?['answer70']}",
+                            "Photo52": "-@{triggerBody()?['answer73']}",
+                            "Photo54": "-@{triggerBody()?['answer75']}",
+                            "Photo56": "-@{triggerBody()?['answer78']}",
+                            "Photo58": "-@{triggerBody()?['answer80']}",
+                            "Photo6": "-@{triggerBody()?['answer15']}",
+                            "Photo60": "-@{triggerBody()?['answer83']}",
+                            "Photo62": "-@{triggerBody()?['answer85']}",
+                            "Photo64": "-@{triggerBody()?['answer88']}",
+                            "Photo8": "-@{triggerBody()?['answer18']}",
+                            "Radiator water level": "@triggerBody()?['answer11_with_singular_value']",
+                            "Service breaks": "@triggerBody()?['answer51_with_singular_value']",
+                            "Steering": "@triggerBody()?['answer46_with_singular_value']",
+                            "Tires": "@triggerBody()?['answer61_with_singular_value']",
+                            "Truck No": "@triggerBody()?['answer2']",
+                            "Warning lights": "@triggerBody()?['answer76_with_singular_value']",
+                            "You answered needs attention": "-@{triggerBody()?['answer7']}",
+                            "You answered needs attention11": "-@{triggerBody()?['answer22']}",
+                            "You answered needs attention15": "-@{triggerBody()?['answer27']}",
+                            "You answered needs attention19": "-@{triggerBody()?['answer32']}",
+                            "You answered needs attention23": "-@{triggerBody()?['answer37']}",
+                            "You answered needs attention27": "-@{triggerBody()?['answer42']}",
+                            "You answered needs attention3": "-@{triggerBody()?['answer12']}",
+                            "You answered needs attention31": "-@{triggerBody()?['answer47']}",
+                            "You answered needs attention35": "-@{triggerBody()?['answer52']}",
+                            "You answered needs attention39": "-@{triggerBody()?['answer57']}",
+                            "You answered needs attention43": "-@{triggerBody()?['answer62']}",
+                            "You answered needs attention47": "-@{triggerBody()?['answer67']}",
+                            "You answered needs attention51": "-@{triggerBody()?['answer72']}",
+                            "You answered needs attention55": "-@{triggerBody()?['answer77']}",
+                            "You answered needs attention59": "-@{triggerBody()?['answer82']}",
+                            "You answered needs attention61": "-@{triggerBody()?['answer84']}",
+                            "You answered needs attention63": "-@{triggerBody()?['answer87']}",
+                            "You answered needs attention7": "-@{triggerBody()?['answer17']}",
+                            "You answered repair": "-@{triggerBody()?['answer9']}",
+                            "You answered repair13": "-@{triggerBody()?['answer24']}",
+                            "You answered repair17": "-@{triggerBody()?['answer29']}",
+                            "You answered repair21": "-@{triggerBody()?['answer34']}",
+                            "You answered repair25": "-@{triggerBody()?['answer39']}",
+                            "You answered repair29": "-@{triggerBody()?['answer44']}",
+                            "You answered repair33": "-@{triggerBody()?['answer49']}",
+                            "You answered repair37": "-@{triggerBody()?['answer54']}",
+                            "You answered repair41": "-@{triggerBody()?['answer59']}",
+                            "You answered repair45": "-@{triggerBody()?['answer64']}",
+                            "You answered repair49": "-@{triggerBody()?['answer69']}",
+                            "You answered repair5": "-@{triggerBody()?['answer14']}",
+                            "You answered repair53": "-@{triggerBody()?['answer74']}",
+                            "You answered repair57": "-@{triggerBody()?['answer79']}",
+                            "You answered repair65": "-@{triggerBody()?['answer89']}",
+                            "You answered repair9": "-@{triggerBody()?['answer19']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22UsYI9vqFGSazzeAY4Evkz')}/items/@{encodeURIComponent('012DAKHSNOZKJKQ3EAWVD3G6O3RV56HXNN')}/workbook/tables/@{encodeURIComponent('{219A9C81-C417-4E51-9BE5-390DF86F3853}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_6": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Pressmaster"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_8": {
+            "actions": {
+                "Add_a_row_into_a_table_8": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSP2ORQIQVA7FBDJ7CXNHGKCCSO3": "/EHS/Checklists/Daily/Forklift (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Brake fluid level": "@triggerBody()?['answer31_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Engineer crank case oil level": "@triggerBody()?['answer6_with_singular_value']",
+                            "Fuel level": "@triggerBody()?['answer16_with_singular_value']",
+                            "Gearbox oil level": "@triggerBody()?['answer26_with_singular_value']",
+                            "Head and tail lights": "@triggerBody()?['answer36_with_singular_value']",
+                            "Horn": "@triggerBody()?['answer41_with_singular_value']",
+                            "Hour Meter Reading": "@triggerBody()?['answer5']",
+                            "Hour meter": "@triggerBody()?['answer81_with_singular_value']",
+                            "Hydralic controls": "@triggerBody()?['answer66_with_singular_value']",
+                            "Hydraulic sump tank oil level": "@triggerBody()?['answer21_with_singular_value']",
+                            "ID": "@{variables('ID')}",
+                            "Obvious damage and leaks": "@triggerBody()?['answer71_with_singular_value']",
+                            "Operator": "@triggerBody()?['answer4']",
+                            "Other gauges and instruments": "@triggerBody()?['answer86_with_singular_value']",
+                            "Parking break": "@triggerBody()?['answer56_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer8']}",
+                            "Photo10": "-@{triggerBody()?['answer20']}",
+                            "Photo12": "-@{triggerBody()?['answer23']}",
+                            "Photo14": "-@{triggerBody()?['answer25']}",
+                            "Photo16": "-@{triggerBody()?['answer28']}",
+                            "Photo18": "-@{triggerBody()?['answer30']}",
+                            "Photo2": "-@{triggerBody()?['answer10']}",
+                            "Photo20": "-@{triggerBody()?['answer33']}",
+                            "Photo22": "-@{triggerBody()?['answer35']}",
+                            "Photo24": "-@{triggerBody()?['answer38']}",
+                            "Photo26": "-@{triggerBody()?['answer40']}",
+                            "Photo28": "-@{triggerBody()?['answer43']}",
+                            "Photo3": "-@{triggerBody()?['answer90']}",
+                            "Photo30": "-@{triggerBody()?['answer45']}",
+                            "Photo32": "-@{triggerBody()?['answer48']}",
+                            "Photo34": "-@{triggerBody()?['answer50']}",
+                            "Photo36": "-@{triggerBody()?['answer53']}",
+                            "Photo38": "-@{triggerBody()?['answer55']}",
+                            "Photo4": "-@{triggerBody()?['answer13']}",
+                            "Photo40": "-@{triggerBody()?['answer58']}",
+                            "Photo42": "-@{triggerBody()?['answer60']}",
+                            "Photo44": "-@{triggerBody()?['answer63']}",
+                            "Photo46": "-@{triggerBody()?['answer65']}",
+                            "Photo48": "-@{triggerBody()?['answer68']}",
+                            "Photo50": "-@{triggerBody()?['answer70']}",
+                            "Photo52": "-@{triggerBody()?['answer73']}",
+                            "Photo54": "-@{triggerBody()?['answer75']}",
+                            "Photo56": "-@{triggerBody()?['answer78']}",
+                            "Photo58": "-@{triggerBody()?['answer80']}",
+                            "Photo6": "-@{triggerBody()?['answer15']}",
+                            "Photo60": "-@{triggerBody()?['answer83']}",
+                            "Photo62": "-@{triggerBody()?['answer85']}",
+                            "Photo64": "-@{triggerBody()?['answer88']}",
+                            "Photo8": "-@{triggerBody()?['answer18']}",
+                            "Radiator water level": "@triggerBody()?['answer11_with_singular_value']",
+                            "Service breaks": "@triggerBody()?['answer51_with_singular_value']",
+                            "Steering": "@triggerBody()?['answer46_with_singular_value']",
+                            "Tires": "@triggerBody()?['answer61_with_singular_value']",
+                            "Truck No": "@triggerBody()?['answer2']",
+                            "Warning lights": "@triggerBody()?['answer76_with_singular_value']",
+                            "You answered needs attention": "-@{triggerBody()?['answer7']}",
+                            "You answered needs attention11": "-@{triggerBody()?['answer22']}",
+                            "You answered needs attention15": "-@{triggerBody()?['answer27']}",
+                            "You answered needs attention19": "-@{triggerBody()?['answer32']}",
+                            "You answered needs attention23": "-@{triggerBody()?['answer37']}",
+                            "You answered needs attention27": "-@{triggerBody()?['answer42']}",
+                            "You answered needs attention3": "-@{triggerBody()?['answer12']}",
+                            "You answered needs attention31": "-@{triggerBody()?['answer47']}",
+                            "You answered needs attention35": "-@{triggerBody()?['answer52']}",
+                            "You answered needs attention39": "-@{triggerBody()?['answer57']}",
+                            "You answered needs attention43": "-@{triggerBody()?['answer62']}",
+                            "You answered needs attention47": "-@{triggerBody()?['answer67']}",
+                            "You answered needs attention51": "-@{triggerBody()?['answer72']}",
+                            "You answered needs attention55": "-@{triggerBody()?['answer77']}",
+                            "You answered needs attention59": "-@{triggerBody()?['answer82']}",
+                            "You answered needs attention61": "-@{triggerBody()?['answer84']}",
+                            "You answered needs attention63": "-@{triggerBody()?['answer87']}",
+                            "You answered needs attention7": "-@{triggerBody()?['answer17']}",
+                            "You answered repair": "-@{triggerBody()?['answer9']}",
+                            "You answered repair13": "-@{triggerBody()?['answer24']}",
+                            "You answered repair17": "-@{triggerBody()?['answer29']}",
+                            "You answered repair21": "-@{triggerBody()?['answer34']}",
+                            "You answered repair25": "-@{triggerBody()?['answer39']}",
+                            "You answered repair29": "-@{triggerBody()?['answer44']}",
+                            "You answered repair33": "-@{triggerBody()?['answer49']}",
+                            "You answered repair37": "-@{triggerBody()?['answer54']}",
+                            "You answered repair41": "-@{triggerBody()?['answer59']}",
+                            "You answered repair45": "-@{triggerBody()?['answer64']}",
+                            "You answered repair49": "-@{triggerBody()?['answer69']}",
+                            "You answered repair5": "-@{triggerBody()?['answer14']}",
+                            "You answered repair53": "-@{triggerBody()?['answer74']}",
+                            "You answered repair57": "-@{triggerBody()?['answer79']}",
+                            "You answered repair65": "-@{triggerBody()?['answer89']}",
+                            "You answered repair9": "-@{triggerBody()?['answer19']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21Zbz70lhgeRrEUj-vRcpoJ')}/items/@{encodeURIComponent('012DAKHSP2ORQIQVA7FBDJ7CXNHGKCCSO3')}/workbook/tables/@{encodeURIComponent('{219A9C81-C417-4E51-9BE5-390DF86F3853}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_7": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit1"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_9": {
+            "actions": {
+                "Add_a_row_into_a_table_9": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSLQTCE3E5DAKZEK4MDYIZNIHZA2": "/EHS/Checklists/Daily/Forklift (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Brake fluid level": "@triggerBody()?['answer31_with_singular_value']",
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Engineer crank case oil level": "@triggerBody()?['answer6_with_singular_value']",
+                            "Fuel level": "@triggerBody()?['answer16_with_singular_value']",
+                            "Gearbox oil level": "@triggerBody()?['answer26_with_singular_value']",
+                            "Head and tail lights": "@triggerBody()?['answer36_with_singular_value']",
+                            "Horn": "@triggerBody()?['answer41_with_singular_value']",
+                            "Hour Meter Reading": "@triggerBody()?['answer5']",
+                            "Hour meter": "@triggerBody()?['answer81_with_singular_value']",
+                            "Hydralic controls": "@triggerBody()?['answer66_with_singular_value']",
+                            "Hydraulic sump tank oil level": "@triggerBody()?['answer21_with_singular_value']",
+                            "ID": "@{variables('ID')}",
+                            "Obvious damage and leaks": "@triggerBody()?['answer71_with_singular_value']",
+                            "Operator": "@triggerBody()?['answer4']",
+                            "Other gauges and instruments": "@triggerBody()?['answer86_with_singular_value']",
+                            "Parking break": "@triggerBody()?['answer56_with_singular_value']",
+                            "Photo": "-@{triggerBody()?['answer8']}",
+                            "Photo10": "-@{triggerBody()?['answer20']}",
+                            "Photo12": "-@{triggerBody()?['answer23']}",
+                            "Photo14": "-@{triggerBody()?['answer25']}",
+                            "Photo16": "-@{triggerBody()?['answer28']}",
+                            "Photo18": "-@{triggerBody()?['answer30']}",
+                            "Photo2": "-@{triggerBody()?['answer10']}",
+                            "Photo20": "-@{triggerBody()?['answer33']}",
+                            "Photo22": "-@{triggerBody()?['answer35']}",
+                            "Photo24": "-@{triggerBody()?['answer38']}",
+                            "Photo26": "-@{triggerBody()?['answer40']}",
+                            "Photo28": "-@{triggerBody()?['answer43']}",
+                            "Photo3": "-@{triggerBody()?['answer90']}",
+                            "Photo30": "-@{triggerBody()?['answer45']}",
+                            "Photo32": "-@{triggerBody()?['answer48']}",
+                            "Photo34": "-@{triggerBody()?['answer50']}",
+                            "Photo36": "-@{triggerBody()?['answer53']}",
+                            "Photo38": "-@{triggerBody()?['answer55']}",
+                            "Photo4": "-@{triggerBody()?['answer13']}",
+                            "Photo40": "-@{triggerBody()?['answer58']}",
+                            "Photo42": "-@{triggerBody()?['answer60']}",
+                            "Photo44": "-@{triggerBody()?['answer63']}",
+                            "Photo46": "-@{triggerBody()?['answer65']}",
+                            "Photo48": "-@{triggerBody()?['answer68']}",
+                            "Photo50": "-@{triggerBody()?['answer70']}",
+                            "Photo52": "-@{triggerBody()?['answer73']}",
+                            "Photo54": "-@{triggerBody()?['answer75']}",
+                            "Photo56": "-@{triggerBody()?['answer78']}",
+                            "Photo58": "-@{triggerBody()?['answer80']}",
+                            "Photo6": "-@{triggerBody()?['answer15']}",
+                            "Photo60": "-@{triggerBody()?['answer83']}",
+                            "Photo62": "-@{triggerBody()?['answer85']}",
+                            "Photo64": "-@{triggerBody()?['answer88']}",
+                            "Photo8": "-@{triggerBody()?['answer18']}",
+                            "Radiator water level": "@triggerBody()?['answer11_with_singular_value']",
+                            "Service breaks": "@triggerBody()?['answer51_with_singular_value']",
+                            "Steering": "@triggerBody()?['answer46_with_singular_value']",
+                            "Tires": "@triggerBody()?['answer61_with_singular_value']",
+                            "Truck No": "@triggerBody()?['answer2']",
+                            "Warning lights": "@triggerBody()?['answer76_with_singular_value']",
+                            "You answered needs attention": "-@{triggerBody()?['answer7']}",
+                            "You answered needs attention11": "-@{triggerBody()?['answer22']}",
+                            "You answered needs attention15": "-@{triggerBody()?['answer27']}",
+                            "You answered needs attention19": "-@{triggerBody()?['answer32']}",
+                            "You answered needs attention23": "-@{triggerBody()?['answer37']}",
+                            "You answered needs attention27": "-@{triggerBody()?['answer42']}",
+                            "You answered needs attention3": "-@{triggerBody()?['answer12']}",
+                            "You answered needs attention31": "-@{triggerBody()?['answer47']}",
+                            "You answered needs attention35": "-@{triggerBody()?['answer52']}",
+                            "You answered needs attention39": "-@{triggerBody()?['answer57']}",
+                            "You answered needs attention43": "-@{triggerBody()?['answer62']}",
+                            "You answered needs attention47": "-@{triggerBody()?['answer67']}",
+                            "You answered needs attention51": "-@{triggerBody()?['answer72']}",
+                            "You answered needs attention55": "-@{triggerBody()?['answer77']}",
+                            "You answered needs attention59": "-@{triggerBody()?['answer82']}",
+                            "You answered needs attention61": "-@{triggerBody()?['answer84']}",
+                            "You answered needs attention63": "-@{triggerBody()?['answer87']}",
+                            "You answered needs attention7": "-@{triggerBody()?['answer17']}",
+                            "You answered repair": "-@{triggerBody()?['answer9']}",
+                            "You answered repair13": "-@{triggerBody()?['answer24']}",
+                            "You answered repair17": "-@{triggerBody()?['answer29']}",
+                            "You answered repair21": "-@{triggerBody()?['answer34']}",
+                            "You answered repair25": "-@{triggerBody()?['answer39']}",
+                            "You answered repair29": "-@{triggerBody()?['answer44']}",
+                            "You answered repair33": "-@{triggerBody()?['answer49']}",
+                            "You answered repair37": "-@{triggerBody()?['answer54']}",
+                            "You answered repair41": "-@{triggerBody()?['answer59']}",
+                            "You answered repair45": "-@{triggerBody()?['answer64']}",
+                            "You answered repair49": "-@{triggerBody()?['answer69']}",
+                            "You answered repair5": "-@{triggerBody()?['answer14']}",
+                            "You answered repair53": "-@{triggerBody()?['answer74']}",
+                            "You answered repair57": "-@{triggerBody()?['answer79']}",
+                            "You answered repair65": "-@{triggerBody()?['answer89']}",
+                            "You answered repair9": "-@{triggerBody()?['answer19']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK224_MWHSLrlToHLAKKgheJk')}/items/@{encodeURIComponent('012DAKHSLQTCE3E5DAKZEK4MDYIZNIHZA2')}/workbook/tables/@{encodeURIComponent('{219A9C81-C417-4E51-9BE5-390DF86F3853}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_8": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit2"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Convert_time_zone": {
+            "runAfter": {
+                "Current_time": [
+                    "Succeeded"
+                ]
+            },
+            "type": "Expression",
+            "kind": "ConvertTimeZone",
+            "inputs": {
+                "baseTime": "@body('Current_time')",
+                "destinationTimeZone": "E. Africa Standard Time",
+                "formatString": "G",
+                "sourceTimeZone": "UTC"
+            }
+        },
+        "Current_time": {
+            "runAfter": {},
+            "type": "Expression",
+            "kind": "CurrentTime",
+            "inputs": {}
+        },
+        "HTTP": {
+            "runAfter": {
+                "Initialize_variable": [
+                    "Succeeded"
+                ]
+            },
+            "type": "Http",
+            "inputs": {
+                "body": {
+                    "ID": "@variables('ID')",
+                    "answer1": "@triggerBody()?['answer6_with_singular_value']",
+                    "answer10": "@triggerBody()?['answer51_with_singular_value']",
+                    "answer11": "@triggerBody()?['answer56_with_singular_value']",
+                    "answer12": "@triggerBody()?['answer61_with_singular_value']",
+                    "answer13": "@triggerBody()?['answer66_with_singular_value']",
+                    "answer14": "@triggerBody()?['answer71_with_singular_value']",
+                    "answer15": "@triggerBody()?['answer76_with_singular_value']",
+                    "answer16": "@triggerBody()?['answer81_with_singular_value']",
+                    "answer17": "@triggerBody()?['answer86_with_singular_value']",
+                    "answer2": "@triggerBody()?['answer11_with_singular_value']",
+                    "answer3": "@triggerBody()?['answer16_with_singular_value']",
+                    "answer4": "@triggerBody()?['answer21_with_singular_value']",
+                    "answer5": "@triggerBody()?['answer26_with_singular_value']",
+                    "answer6": "@triggerBody()?['answer31_with_singular_value']",
+                    "answer7": "@triggerBody()?['answer36_with_singular_value']",
+                    "answer8": "@triggerBody()?['answer41_with_singular_value']",
+                    "answer9": "@triggerBody()?['answer46_with_singular_value']",
+                    "company": "@triggerBody()?['answer1_with_singular_value']",
+                    "date": "@triggerBody()?['answer3']",
+                    "describe1": "@triggerBody()?['answer7']",
+                    "describe10": "@triggerBody()?['answer52']",
+                    "describe101": "@triggerBody()?['answer9']",
+                    "describe102": "@triggerBody()?['answer14']",
+                    "describe103": "@triggerBody()?['answer19']",
+                    "describe104": "@triggerBody()?['answer24']",
+                    "describe105": "@triggerBody()?['answer29']",
+                    "describe106": "@triggerBody()?['answer34']",
+                    "describe107": "@triggerBody()?['answer39']",
+                    "describe108": "@triggerBody()?['answer44']",
+                    "describe109": "@triggerBody()?['answer49']",
+                    "describe11": "@triggerBody()?['answer57']",
+                    "describe110": "@triggerBody()?['answer54']",
+                    "describe111": "@triggerBody()?['answer59']",
+                    "describe112": "@triggerBody()?['answer64']",
+                    "describe113": "@triggerBody()?['answer69']",
+                    "describe114": "@triggerBody()?['answer74']",
+                    "describe115": "@triggerBody()?['answer79']",
+                    "describe116": "@triggerBody()?['answer84']",
+                    "describe117": "@triggerBody()?['answer89']",
+                    "describe12": "@triggerBody()?['answer62']",
+                    "describe13": "@triggerBody()?['answer67']",
+                    "describe14": "@triggerBody()?['answer72']",
+                    "describe15": "@triggerBody()?['answer77']",
+                    "describe16": "@triggerBody()?['answer82']",
+                    "describe17": "@triggerBody()?['answer87']",
+                    "describe2": "@triggerBody()?['answer12']",
+                    "describe3": "@triggerBody()?['answer17']",
+                    "describe4": "@triggerBody()?['answer22']",
+                    "describe5": "@triggerBody()?['answer27']",
+                    "describe6": "@triggerBody()?['answer32']",
+                    "describe7": "@triggerBody()?['answer37']",
+                    "describe8": "@triggerBody()?['answer42']",
+                    "describe9": "@triggerBody()?['answer47']",
+                    "eight": "@triggerBody()?['answer43']",
+                    "eight8": "@triggerBody()?['answer45']",
+                    "elleven": "@triggerBody()?['answer58']",
+                    "elleven11": "@triggerBody()?['answer60']",
+                    "fifteen": "@triggerBody()?['answer78']",
+                    "fifteen15": "@triggerBody()?['answer80']",
+                    "five": "@triggerBody()?['answer28']",
+                    "five5": "@triggerBody()?['answer30']",
+                    "four": "@triggerBody()?['answer23']",
+                    "four4": "@triggerBody()?['answer25']",
+                    "fourteen": "@triggerBody()?['answer73']",
+                    "fourteen14": "@triggerBody()?['answer75']",
+                    "location": "@triggerBody()?['answer91']",
+                    "meter": "@triggerBody()?['answer5']",
+                    "nine": "@triggerBody()?['answer48']",
+                    "nine9": "@triggerBody()?['answer50']",
+                    "one": "@triggerBody()?['answer8']",
+                    "one1": "@triggerBody()?['answer10']",
+                    "operator": "@triggerBody()?['answer4']",
+                    "seven": "@triggerBody()?['answer38']",
+                    "seven7": "@triggerBody()?['answer40']",
+                    "seventeen": "@triggerBody()?['answer88']",
+                    "seventeen17": "@triggerBody()?['answer90']",
+                    "six": "@triggerBody()?['answer33']",
+                    "six6": "@triggerBody()?['answer35']",
+                    "sixteen": "@triggerBody()?['answer83']",
+                    "sixteen16": "@triggerBody()?['answer85']",
+                    "ten": "@triggerBody()?['answer53']",
+                    "ten10": "@triggerBody()?['answer55']",
+                    "thirteen": "@triggerBody()?['answer68']",
+                    "thirteen13": "@triggerBody()?['answer70']",
+                    "three": "@triggerBody()?['answer18']",
+                    "three3": "@triggerBody()?['answer20']",
+                    "truck": "@triggerBody()?['answer2']",
+                    "twelve": "@triggerBody()?['answer63']",
+                    "twelve12": "@triggerBody()?['answer65']",
+                    "two": "@triggerBody()?['answer13']",
+                    "two2": "@triggerBody()?['answer15']"
+                },
+                "headers": {
+                    "Content-type": "application/json"
+                },
+                "method": "POST",
+                "uri": "http://ict-a.co.ke/kaizalaEndpoints/allChecklists/EHS/Daily/Forklift/forklift.php"
+            }
+        },
+        "Initialize_variable": {
+            "runAfter": {
+                "Convert_time_zone": [
+                    "Succeeded"
+                ]
+            },
+            "type": "InitializeVariable",
+            "inputs": {
+                "variables": [
+                    {
+                        "name": "ID",
+                        "type": "String",
+                        "value": "@{utcNow()}"
+                    }
+                ]
+            }
+        }
+    },
+    "outputs": {}
+}

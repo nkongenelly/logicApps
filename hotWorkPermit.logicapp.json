@@ -1,0 +1,1354 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "c51c936e-e99c-4972-926b-2613a507bb95.11",
+                    "groupId": "90948578-5472-4f09-ba4a-645c2dd4fdc8@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Condition": {
+            "actions": {
+                "Add_a_row_into_a_table": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI3STE6BDOLENDJK5MLAXNZORI5": "/EHS/Registers/Work Permits/Hot work permit.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Basic causes (what personal factors or fundamental job factors caused the event) Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer36']",
+                            "By whom": "@triggerBody()?['answer46']",
+                            "Comment on A": "-@{triggerBody()?['question40']}",
+                            "Comment on B": "-@{triggerBody()?['answer41']}",
+                            "Comment on C": "-@{triggerBody()?['answer42']}",
+                            "Comment on D": "-@{triggerBody()?['answer43']}",
+                            "Contact with": "@triggerBody()?['answer32']",
+                            "Cost estimates": "@triggerBody()?['answer25']",
+                            "Date (UTC)": "@triggerBody()?['answer12']",
+                            "Date (UTC)11": "@triggerBody()?['answer61']",
+                            "Date (UTC)4": "@triggerBody()?['answer53']",
+                            "Date (UTC)7": "@triggerBody()?['answer57']",
+                            "Date and time work completed (UTC)": "@triggerBody()?['answer15']",
+                            "Department Manager's comments": "@triggerBody()?['question58']",
+                            "Employee's comments": "@triggerBody()?['answer50']",
+                            "Employee's name": "@triggerBody()?['answer51']",
+                            "Evaluation of loss potential if not corrected_x003a_ Loss severity potential": "@triggerBody()?['answer29_with_singular_value']",
+                            "Fire watch/ Hot work area monitoring": "@triggerBody()?['answer22']",
+                            "Hot work done by": "@triggerBody()?['answer3_with_singular_value']",
+                            "Hot work of enclosed spaces (i_x002e_e inside)": "@triggerBody()?['question20']",
+                            "Hot work on enclosed equipment (i_x002e_e, welding on the outside)_x002e_": "@triggerBody()?['answer19']",
+                            "Hot work performer Name": "@triggerBody()?['answer8']",
+                            "Hot work/ Fire safety notifications": "@triggerBody()?['answer21']",
+                            "Hot worker supervisor approval_x002e_ Name": "@triggerBody()?['answer10']",
+                            "Immediate causes (what sub-standard actions &amp; conditions caused the event)_x003a_ Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer33']",
+                            "Job factors": "@triggerBody()?['answer38_with_singular_value']",
+                            "Lack of control_x003a_ Inadequacies in the safety management standards or compliance within standards_x003a_ Please comment on all applicable below": "@triggerBody()?['answer44']",
+                            "Location/ building and floor": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer55']",
+                            "Name9": "@triggerBody()?['answer59']",
+                            "Object/ equipment/ substance related": "@triggerBody()?['answer26']",
+                            "Occupation": "@triggerBody()?['answer28']",
+                            "Other PPE required": "@triggerBody()?['answer7']",
+                            "Other incident or property damage_x003a_ Describe nature of damage": "@triggerBody()?['answer24']",
+                            "Other precautions/ special instructions": "@triggerBody()?['answer23']",
+                            "Others": "@triggerBody()?['answer39']",
+                            "PPE required": "@triggerBody()?['answer6']",
+                            "Permit dates_x002e_ Permit activated (UTC)": "@triggerBody()?['answer13']",
+                            "Permit expires (UTC)": "@triggerBody()?['answer14']",
+                            "Permit number": "@triggerBody()?['answer2']",
+                            "Person with most control of item_x002e_Name": "@triggerBody()?['answer27']",
+                            "Personal factors": "@triggerBody()?['answer37']",
+                            "Probability of occurence": "@triggerBody()?['answer30_with_singular_value']",
+                            "Reason for job": "@triggerBody()?['answer5']",
+                            "Remedial action to prevent reoccurence": "@triggerBody()?['answer45']",
+                            "Required precautions checklist": "@triggerBody()?['answer17']",
+                            "Requirements within 35 ft_x002e_ of hot work": "@triggerBody()?['answer18']",
+                            "SUBSTANDARD ACTIONS": "@triggerBody()?['answer34']",
+                            "SUBSTANDARD CONDITIONS": "@triggerBody()?['answer35']",
+                            "Sign when completed (full names)": "@triggerBody()?['answer49']",
+                            "Signature (full name)": "@triggerBody()?['answer9']",
+                            "Signature (full name)10": "@triggerBody()?['answer60']",
+                            "Signature (full name)2": "@triggerBody()?['answer11']",
+                            "Signature (full name)3": "@triggerBody()?['answer52']",
+                            "Signature (full name)6": "@triggerBody()?['answer56']",
+                            "Site safety Officer Signature_x002e_ (Full name)": "@triggerBody()?['answer16']",
+                            "Supervisor's comments": "@triggerBody()?['answer54']",
+                            "Type of contact": "@triggerBody()?['answer31']",
+                            "When": "@triggerBody()?['answer48']",
+                            "When (UTC)": "@triggerBody()?['answer47']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSI3STE6BDOLENDJK5MLAXNZORI5')}/workbook/tables/@{encodeURIComponent('{3BF80975-023E-47E2-84DE-40E2F6B87DDA}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {},
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "ASL Pack"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_10": {
+            "actions": {
+                "Add_a_row_into_a_table_10": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI3STE6BDOLENDJK5MLAXNZORI5": "/EHS/Registers/Work Permits/Hot work permit.xlsx",
+                        "012DAKHSPRGOVLUEX5MREYSKPWIUCG3I3G": "/EHS/Registers/Work Permits/Hot work permit (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Basic causes (what personal factors or fundamental job factors caused the event) Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer36']",
+                            "By whom": "@triggerBody()?['answer46']",
+                            "Comment on A": "-@{triggerBody()?['question40']}",
+                            "Comment on B": "-@{triggerBody()?['answer41']}",
+                            "Comment on C": "-@{triggerBody()?['answer42']}",
+                            "Comment on D": "-@{triggerBody()?['answer43']}",
+                            "Contact with": "@triggerBody()?['answer32']",
+                            "Cost estimates": "@triggerBody()?['answer25']",
+                            "Date (UTC)": "@triggerBody()?['answer12']",
+                            "Date (UTC)11": "@triggerBody()?['answer61']",
+                            "Date (UTC)4": "@triggerBody()?['answer53']",
+                            "Date (UTC)7": "@triggerBody()?['answer57']",
+                            "Date and time work completed (UTC)": "@triggerBody()?['answer15']",
+                            "Department Manager's comments": "@triggerBody()?['question58']",
+                            "Employee's comments": "@triggerBody()?['answer50']",
+                            "Employee's name": "@triggerBody()?['answer51']",
+                            "Evaluation of loss potential if not corrected_x003a_ Loss severity potential": "@triggerBody()?['answer29_with_singular_value']",
+                            "Fire watch/ Hot work area monitoring": "@triggerBody()?['answer22']",
+                            "Hot work done by": "@triggerBody()?['answer3_with_singular_value']",
+                            "Hot work of enclosed spaces (i_x002e_e inside)": "@triggerBody()?['question20']",
+                            "Hot work on enclosed equipment (i_x002e_e, welding on the outside)_x002e_": "@triggerBody()?['answer19']",
+                            "Hot work performer Name": "@triggerBody()?['answer8']",
+                            "Hot work/ Fire safety notifications": "@triggerBody()?['answer21']",
+                            "Hot worker supervisor approval_x002e_ Name": "@triggerBody()?['answer10']",
+                            "Immediate causes (what sub-standard actions &amp; conditions caused the event)_x003a_ Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer33']",
+                            "Job factors": "@triggerBody()?['answer38_with_singular_value']",
+                            "Lack of control_x003a_ Inadequacies in the safety management standards or compliance within standards_x003a_ Please comment on all applicable below": "@triggerBody()?['answer44']",
+                            "Location/ building and floor": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer55']",
+                            "Name9": "@triggerBody()?['answer59']",
+                            "Object/ equipment/ substance related": "@triggerBody()?['answer26']",
+                            "Occupation": "@triggerBody()?['answer28']",
+                            "Other PPE required": "@triggerBody()?['answer7']",
+                            "Other incident or property damage_x003a_ Describe nature of damage": "@triggerBody()?['answer24']",
+                            "Other precautions/ special instructions": "@triggerBody()?['answer23']",
+                            "Others": "@triggerBody()?['answer39']",
+                            "PPE required": "@triggerBody()?['answer6']",
+                            "Permit dates_x002e_ Permit activated (UTC)": "@triggerBody()?['answer13']",
+                            "Permit expires (UTC)": "@triggerBody()?['answer14']",
+                            "Permit number": "@triggerBody()?['answer2']",
+                            "Person with most control of item_x002e_Name": "@triggerBody()?['answer27']",
+                            "Personal factors": "@triggerBody()?['answer37']",
+                            "Probability of occurence": "@triggerBody()?['answer30_with_singular_value']",
+                            "Reason for job": "@triggerBody()?['answer5']",
+                            "Remedial action to prevent reoccurence": "@triggerBody()?['answer45']",
+                            "Required precautions checklist": "@triggerBody()?['answer17']",
+                            "Requirements within 35 ft_x002e_ of hot work": "@triggerBody()?['answer18']",
+                            "SUBSTANDARD ACTIONS": "@triggerBody()?['answer34']",
+                            "SUBSTANDARD CONDITIONS": "@triggerBody()?['answer35']",
+                            "Sign when completed (full names)": "@triggerBody()?['answer49']",
+                            "Signature (full name)": "@triggerBody()?['answer9']",
+                            "Signature (full name)10": "@triggerBody()?['answer60']",
+                            "Signature (full name)2": "@triggerBody()?['answer11']",
+                            "Signature (full name)3": "@triggerBody()?['answer52']",
+                            "Signature (full name)6": "@triggerBody()?['answer56']",
+                            "Site safety Officer Signature_x002e_ (Full name)": "@triggerBody()?['answer16']",
+                            "Supervisor's comments": "@triggerBody()?['answer54']",
+                            "Type of contact": "@triggerBody()?['answer31']",
+                            "When": "@triggerBody()?['answer48']",
+                            "When (UTC)": "@triggerBody()?['answer47']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK224_MWHSLrlToHLAKKgheJk')}/items/@{encodeURIComponent('012DAKHSPRGOVLUEX5MREYSKPWIUCG3I3G')}/workbook/tables/@{encodeURIComponent('{3BF80975-023E-47E2-84DE-40E2F6B87DDA}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_9": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit2"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_11": {
+            "actions": {
+                "Add_a_row_into_a_table_11": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI3STE6BDOLENDJK5MLAXNZORI5": "/EHS/Registers/Work Permits/Hot work permit.xlsx",
+                        "012DAKHSLV3QPFDRQAHBB23JMYIOGIA2N6": "/EHS/Registers/Work Permits/Hot work permit (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Basic causes (what personal factors or fundamental job factors caused the event) Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer36']",
+                            "By whom": "@triggerBody()?['answer46']",
+                            "Comment on A": "-@{triggerBody()?['question40']}",
+                            "Comment on B": "-@{triggerBody()?['answer41']}",
+                            "Comment on C": "-@{triggerBody()?['answer42']}",
+                            "Comment on D": "-@{triggerBody()?['answer43']}",
+                            "Contact with": "@triggerBody()?['answer32']",
+                            "Cost estimates": "@triggerBody()?['answer25']",
+                            "Date (UTC)": "@triggerBody()?['answer12']",
+                            "Date (UTC)11": "@triggerBody()?['answer61']",
+                            "Date (UTC)4": "@triggerBody()?['answer53']",
+                            "Date (UTC)7": "@triggerBody()?['answer57']",
+                            "Date and time work completed (UTC)": "@triggerBody()?['answer15']",
+                            "Department Manager's comments": "@triggerBody()?['question58']",
+                            "Employee's comments": "@triggerBody()?['answer50']",
+                            "Employee's name": "@triggerBody()?['answer51']",
+                            "Evaluation of loss potential if not corrected_x003a_ Loss severity potential": "@triggerBody()?['answer29_with_singular_value']",
+                            "Fire watch/ Hot work area monitoring": "@triggerBody()?['answer22']",
+                            "Hot work done by": "@triggerBody()?['answer3_with_singular_value']",
+                            "Hot work of enclosed spaces (i_x002e_e inside)": "@triggerBody()?['question20']",
+                            "Hot work on enclosed equipment (i_x002e_e, welding on the outside)_x002e_": "@triggerBody()?['answer19']",
+                            "Hot work performer Name": "@triggerBody()?['answer8']",
+                            "Hot work/ Fire safety notifications": "@triggerBody()?['answer21']",
+                            "Hot worker supervisor approval_x002e_ Name": "@triggerBody()?['answer10']",
+                            "Immediate causes (what sub-standard actions &amp; conditions caused the event)_x003a_ Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer33']",
+                            "Job factors": "@triggerBody()?['answer38_with_singular_value']",
+                            "Lack of control_x003a_ Inadequacies in the safety management standards or compliance within standards_x003a_ Please comment on all applicable below": "@triggerBody()?['answer44']",
+                            "Location/ building and floor": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer55']",
+                            "Name9": "@triggerBody()?['answer59']",
+                            "Object/ equipment/ substance related": "@triggerBody()?['answer26']",
+                            "Occupation": "@triggerBody()?['answer28']",
+                            "Other PPE required": "@triggerBody()?['answer7']",
+                            "Other incident or property damage_x003a_ Describe nature of damage": "@triggerBody()?['answer24']",
+                            "Other precautions/ special instructions": "@triggerBody()?['answer23']",
+                            "Others": "@triggerBody()?['answer39']",
+                            "PPE required": "@triggerBody()?['answer6']",
+                            "Permit dates_x002e_ Permit activated (UTC)": "@triggerBody()?['answer13']",
+                            "Permit expires (UTC)": "@triggerBody()?['answer14']",
+                            "Permit number": "@triggerBody()?['answer2']",
+                            "Person with most control of item_x002e_Name": "@triggerBody()?['answer27']",
+                            "Personal factors": "@triggerBody()?['answer37']",
+                            "Probability of occurence": "@triggerBody()?['answer30_with_singular_value']",
+                            "Reason for job": "@triggerBody()?['answer5']",
+                            "Remedial action to prevent reoccurence": "@triggerBody()?['answer45']",
+                            "Required precautions checklist": "@triggerBody()?['answer17']",
+                            "Requirements within 35 ft_x002e_ of hot work": "@triggerBody()?['answer18']",
+                            "SUBSTANDARD ACTIONS": "@triggerBody()?['answer34']",
+                            "SUBSTANDARD CONDITIONS": "@triggerBody()?['answer35']",
+                            "Sign when completed (full names)": "@triggerBody()?['answer49']",
+                            "Signature (full name)": "@triggerBody()?['answer9']",
+                            "Signature (full name)10": "@triggerBody()?['answer60']",
+                            "Signature (full name)2": "@triggerBody()?['answer11']",
+                            "Signature (full name)3": "@triggerBody()?['answer52']",
+                            "Signature (full name)6": "@triggerBody()?['answer56']",
+                            "Site safety Officer Signature_x002e_ (Full name)": "@triggerBody()?['answer16']",
+                            "Supervisor's comments": "@triggerBody()?['answer54']",
+                            "Type of contact": "@triggerBody()?['answer31']",
+                            "When": "@triggerBody()?['answer48']",
+                            "When (UTC)": "@triggerBody()?['answer47']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23CcVP99gEfQ4EjLalW8EVd')}/items/@{encodeURIComponent('012DAKHSLV3QPFDRQAHBB23JMYIOGIA2N6')}/workbook/tables/@{encodeURIComponent('{3BF80975-023E-47E2-84DE-40E2F6B87DDA}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_10": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Sintel"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_12": {
+            "actions": {
+                "Add_a_row_into_a_table_12": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI3STE6BDOLENDJK5MLAXNZORI5": "/EHS/Registers/Work Permits/Hot work permit.xlsx",
+                        "012DAKHSMAF74R52G7ENH276B55DUU24SP": "/EHS/Registers/Work Permits/Hot work permit (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Basic causes (what personal factors or fundamental job factors caused the event) Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer36']",
+                            "By whom": "@triggerBody()?['answer46']",
+                            "Comment on A": "-@{triggerBody()?['question40']}",
+                            "Comment on B": "-@{triggerBody()?['answer41']}",
+                            "Comment on C": "-@{triggerBody()?['answer42']}",
+                            "Comment on D": "-@{triggerBody()?['answer43']}",
+                            "Contact with": "@triggerBody()?['answer32']",
+                            "Cost estimates": "@triggerBody()?['answer25']",
+                            "Date (UTC)": "@triggerBody()?['answer12']",
+                            "Date (UTC)11": "@triggerBody()?['answer61']",
+                            "Date (UTC)4": "@triggerBody()?['answer53']",
+                            "Date (UTC)7": "@triggerBody()?['answer57']",
+                            "Date and time work completed (UTC)": "@triggerBody()?['answer15']",
+                            "Department Manager's comments": "@triggerBody()?['question58']",
+                            "Employee's comments": "@triggerBody()?['answer50']",
+                            "Employee's name": "@triggerBody()?['answer51']",
+                            "Evaluation of loss potential if not corrected_x003a_ Loss severity potential": "@triggerBody()?['answer29_with_singular_value']",
+                            "Fire watch/ Hot work area monitoring": "@triggerBody()?['answer22']",
+                            "Hot work done by": "@triggerBody()?['answer3_with_singular_value']",
+                            "Hot work of enclosed spaces (i_x002e_e inside)": "@triggerBody()?['question20']",
+                            "Hot work on enclosed equipment (i_x002e_e, welding on the outside)_x002e_": "@triggerBody()?['answer19']",
+                            "Hot work performer Name": "@triggerBody()?['answer8']",
+                            "Hot work/ Fire safety notifications": "@triggerBody()?['answer21']",
+                            "Hot worker supervisor approval_x002e_ Name": "@triggerBody()?['answer10']",
+                            "Immediate causes (what sub-standard actions &amp; conditions caused the event)_x003a_ Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer33']",
+                            "Job factors": "@triggerBody()?['answer38_with_singular_value']",
+                            "Lack of control_x003a_ Inadequacies in the safety management standards or compliance within standards_x003a_ Please comment on all applicable below": "@triggerBody()?['answer44']",
+                            "Location/ building and floor": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer55']",
+                            "Name9": "@triggerBody()?['answer59']",
+                            "Object/ equipment/ substance related": "@triggerBody()?['answer26']",
+                            "Occupation": "@triggerBody()?['answer28']",
+                            "Other PPE required": "@triggerBody()?['answer7']",
+                            "Other incident or property damage_x003a_ Describe nature of damage": "@triggerBody()?['answer24']",
+                            "Other precautions/ special instructions": "@triggerBody()?['answer23']",
+                            "Others": "@triggerBody()?['answer39']",
+                            "PPE required": "@triggerBody()?['answer6']",
+                            "Permit dates_x002e_ Permit activated (UTC)": "@triggerBody()?['answer13']",
+                            "Permit expires (UTC)": "@triggerBody()?['answer14']",
+                            "Permit number": "@triggerBody()?['answer2']",
+                            "Person with most control of item_x002e_Name": "@triggerBody()?['answer27']",
+                            "Personal factors": "@triggerBody()?['answer37']",
+                            "Probability of occurence": "@triggerBody()?['answer30_with_singular_value']",
+                            "Reason for job": "@triggerBody()?['answer5']",
+                            "Remedial action to prevent reoccurence": "@triggerBody()?['answer45']",
+                            "Required precautions checklist": "@triggerBody()?['answer17']",
+                            "Requirements within 35 ft_x002e_ of hot work": "@triggerBody()?['answer18']",
+                            "SUBSTANDARD ACTIONS": "@triggerBody()?['answer34']",
+                            "SUBSTANDARD CONDITIONS": "@triggerBody()?['answer35']",
+                            "Sign when completed (full names)": "@triggerBody()?['answer49']",
+                            "Signature (full name)": "@triggerBody()?['answer9']",
+                            "Signature (full name)10": "@triggerBody()?['answer60']",
+                            "Signature (full name)2": "@triggerBody()?['answer11']",
+                            "Signature (full name)3": "@triggerBody()?['answer52']",
+                            "Signature (full name)6": "@triggerBody()?['answer56']",
+                            "Site safety Officer Signature_x002e_ (Full name)": "@triggerBody()?['answer16']",
+                            "Supervisor's comments": "@triggerBody()?['answer54']",
+                            "Type of contact": "@triggerBody()?['answer31']",
+                            "When": "@triggerBody()?['answer48']",
+                            "When (UTC)": "@triggerBody()?['answer47']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23SOjeg2ex3SKPV30tAC8Sq')}/items/@{encodeURIComponent('012DAKHSMAF74R52G7ENH276B55DUU24SP')}/workbook/tables/@{encodeURIComponent('{3BF80975-023E-47E2-84DE-40E2F6B87DDA}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_11": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "TPSL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_13": {
+            "actions": {
+                "Add_a_row_into_a_table_13": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI3STE6BDOLENDJK5MLAXNZORI5": "/EHS/Registers/Work Permits/Hot work permit.xlsx",
+                        "012DAKHSNSEDKV4ALETVA3ZLF6U2GNKGWJ": "/EHS/Registers/Work Permits/Hot work permit (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Basic causes (what personal factors or fundamental job factors caused the event) Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer36']",
+                            "By whom": "@triggerBody()?['answer46']",
+                            "Comment on A": "-@{triggerBody()?['question40']}",
+                            "Comment on B": "-@{triggerBody()?['answer41']}",
+                            "Comment on C": "-@{triggerBody()?['answer42']}",
+                            "Comment on D": "-@{triggerBody()?['answer43']}",
+                            "Contact with": "@triggerBody()?['answer32']",
+                            "Cost estimates": "@triggerBody()?['answer25']",
+                            "Date (UTC)": "@triggerBody()?['answer12']",
+                            "Date (UTC)11": "@triggerBody()?['answer61']",
+                            "Date (UTC)4": "@triggerBody()?['answer53']",
+                            "Date (UTC)7": "@triggerBody()?['answer57']",
+                            "Date and time work completed (UTC)": "@triggerBody()?['answer15']",
+                            "Department Manager's comments": "@triggerBody()?['question58']",
+                            "Employee's comments": "@triggerBody()?['answer50']",
+                            "Employee's name": "@triggerBody()?['answer51']",
+                            "Evaluation of loss potential if not corrected_x003a_ Loss severity potential": "@triggerBody()?['answer29_with_singular_value']",
+                            "Fire watch/ Hot work area monitoring": "@triggerBody()?['answer22']",
+                            "Hot work done by": "@triggerBody()?['answer3_with_singular_value']",
+                            "Hot work of enclosed spaces (i_x002e_e inside)": "@triggerBody()?['question20']",
+                            "Hot work on enclosed equipment (i_x002e_e, welding on the outside)_x002e_": "@triggerBody()?['answer19']",
+                            "Hot work performer Name": "@triggerBody()?['answer8']",
+                            "Hot work/ Fire safety notifications": "@triggerBody()?['answer21']",
+                            "Hot worker supervisor approval_x002e_ Name": "@triggerBody()?['answer10']",
+                            "Immediate causes (what sub-standard actions &amp; conditions caused the event)_x003a_ Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer33']",
+                            "Job factors": "@triggerBody()?['answer38_with_singular_value']",
+                            "Lack of control_x003a_ Inadequacies in the safety management standards or compliance within standards_x003a_ Please comment on all applicable below": "@triggerBody()?['answer44']",
+                            "Location/ building and floor": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer55']",
+                            "Name9": "@triggerBody()?['answer59']",
+                            "Object/ equipment/ substance related": "@triggerBody()?['answer26']",
+                            "Occupation": "@triggerBody()?['answer28']",
+                            "Other PPE required": "@triggerBody()?['answer7']",
+                            "Other incident or property damage_x003a_ Describe nature of damage": "@triggerBody()?['answer24']",
+                            "Other precautions/ special instructions": "@triggerBody()?['answer23']",
+                            "Others": "@triggerBody()?['answer39']",
+                            "PPE required": "@triggerBody()?['answer6']",
+                            "Permit dates_x002e_ Permit activated (UTC)": "@triggerBody()?['answer13']",
+                            "Permit expires (UTC)": "@triggerBody()?['answer14']",
+                            "Permit number": "@triggerBody()?['answer2']",
+                            "Person with most control of item_x002e_Name": "@triggerBody()?['answer27']",
+                            "Personal factors": "@triggerBody()?['answer37']",
+                            "Probability of occurence": "@triggerBody()?['answer30_with_singular_value']",
+                            "Reason for job": "@triggerBody()?['answer5']",
+                            "Remedial action to prevent reoccurence": "@triggerBody()?['answer45']",
+                            "Required precautions checklist": "@triggerBody()?['answer17']",
+                            "Requirements within 35 ft_x002e_ of hot work": "@triggerBody()?['answer18']",
+                            "SUBSTANDARD ACTIONS": "@triggerBody()?['answer34']",
+                            "SUBSTANDARD CONDITIONS": "@triggerBody()?['answer35']",
+                            "Sign when completed (full names)": "@triggerBody()?['answer49']",
+                            "Signature (full name)": "@triggerBody()?['answer9']",
+                            "Signature (full name)10": "@triggerBody()?['answer60']",
+                            "Signature (full name)2": "@triggerBody()?['answer11']",
+                            "Signature (full name)3": "@triggerBody()?['answer52']",
+                            "Signature (full name)6": "@triggerBody()?['answer56']",
+                            "Site safety Officer Signature_x002e_ (Full name)": "@triggerBody()?['answer16']",
+                            "Supervisor's comments": "@triggerBody()?['answer54']",
+                            "Type of contact": "@triggerBody()?['answer31']",
+                            "When": "@triggerBody()?['answer48']",
+                            "When (UTC)": "@triggerBody()?['answer47']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21OE4Lc5Sx1SZwFdBOFz34o')}/items/@{encodeURIComponent('012DAKHSNSEDKV4ALETVA3ZLF6U2GNKGWJ')}/workbook/tables/@{encodeURIComponent('{3BF80975-023E-47E2-84DE-40E2F6B87DDA}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_12": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Wild Elegance"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_2": {
+            "actions": {
+                "Add_a_row_into_a_table_2": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSMLRIQF6HEX75GI4TTVXXEGCE2U": "/EHS/Registers/Work Permits/Hot work permit.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Basic causes (what personal factors or fundamental job factors caused the event) Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer36']",
+                            "By whom": "@triggerBody()?['answer46']",
+                            "Comment on A": "-@{triggerBody()?['question40']}",
+                            "Comment on B": "-@{triggerBody()?['answer41']}",
+                            "Comment on C": "-@{triggerBody()?['answer42']}",
+                            "Comment on D": "-@{triggerBody()?['answer43']}",
+                            "Contact with": "@triggerBody()?['answer32']",
+                            "Cost estimates": "@triggerBody()?['answer25']",
+                            "Date (UTC)": "@triggerBody()?['answer12']",
+                            "Date (UTC)11": "@triggerBody()?['answer61']",
+                            "Date (UTC)4": "@triggerBody()?['answer53']",
+                            "Date (UTC)7": "@triggerBody()?['answer57']",
+                            "Date and time work completed (UTC)": "@triggerBody()?['answer15']",
+                            "Department Manager's comments": "@triggerBody()?['question58']",
+                            "Employee's comments": "@triggerBody()?['answer50']",
+                            "Employee's name": "@triggerBody()?['answer51']",
+                            "Evaluation of loss potential if not corrected_x003a_ Loss severity potential": "@triggerBody()?['answer29_with_singular_value']",
+                            "Fire watch/ Hot work area monitoring": "@triggerBody()?['answer22']",
+                            "Hot work done by": "@triggerBody()?['answer3_with_singular_value']",
+                            "Hot work of enclosed spaces (i_x002e_e inside)": "@triggerBody()?['question20']",
+                            "Hot work on enclosed equipment (i_x002e_e, welding on the outside)_x002e_": "@triggerBody()?['answer19']",
+                            "Hot work performer Name": "@triggerBody()?['answer8']",
+                            "Hot work/ Fire safety notifications": "@triggerBody()?['answer21']",
+                            "Hot worker supervisor approval_x002e_ Name": "@triggerBody()?['answer10']",
+                            "Immediate causes (what sub-standard actions &amp; conditions caused the event)_x003a_ Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer33']",
+                            "Job factors": "@triggerBody()?['answer38_with_singular_value']",
+                            "Lack of control_x003a_ Inadequacies in the safety management standards or compliance within standards_x003a_ Please comment on all applicable below": "@triggerBody()?['answer44']",
+                            "Location/ building and floor": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer55']",
+                            "Name9": "@triggerBody()?['answer59']",
+                            "Object/ equipment/ substance related": "@triggerBody()?['answer26']",
+                            "Occupation": "@triggerBody()?['answer28']",
+                            "Other PPE required": "@triggerBody()?['answer7']",
+                            "Other incident or property damage_x003a_ Describe nature of damage": "@triggerBody()?['answer24']",
+                            "Other precautions/ special instructions": "@triggerBody()?['answer23']",
+                            "Others": "@triggerBody()?['answer39']",
+                            "PPE required": "@triggerBody()?['answer6']",
+                            "Permit dates_x002e_ Permit activated (UTC)": "@triggerBody()?['answer13']",
+                            "Permit expires (UTC)": "@triggerBody()?['answer14']",
+                            "Permit number": "@triggerBody()?['answer2']",
+                            "Person with most control of item_x002e_Name": "@triggerBody()?['answer27']",
+                            "Personal factors": "@triggerBody()?['answer37']",
+                            "Probability of occurence": "@triggerBody()?['answer30_with_singular_value']",
+                            "Reason for job": "@triggerBody()?['answer5']",
+                            "Remedial action to prevent reoccurence": "@triggerBody()?['answer45']",
+                            "Required precautions checklist": "@triggerBody()?['answer17']",
+                            "Requirements within 35 ft_x002e_ of hot work": "@triggerBody()?['answer18']",
+                            "SUBSTANDARD ACTIONS": "@triggerBody()?['answer34']",
+                            "SUBSTANDARD CONDITIONS": "@triggerBody()?['answer35']",
+                            "Sign when completed (full names)": "@triggerBody()?['answer49']",
+                            "Signature (full name)": "@triggerBody()?['answer9']",
+                            "Signature (full name)10": "@triggerBody()?['answer60']",
+                            "Signature (full name)2": "@triggerBody()?['answer11']",
+                            "Signature (full name)3": "@triggerBody()?['answer52']",
+                            "Signature (full name)6": "@triggerBody()?['answer56']",
+                            "Site safety Officer Signature_x002e_ (Full name)": "@triggerBody()?['answer16']",
+                            "Supervisor's comments": "@triggerBody()?['answer54']",
+                            "Type of contact": "@triggerBody()?['answer31']",
+                            "When": "@triggerBody()?['answer48']",
+                            "When (UTC)": "@triggerBody()?['answer47']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20_IPQJOQqtRrh4P5a0Fiel')}/items/@{encodeURIComponent('012DAKHSMLRIQF6HEX75GI4TTVXXEGCE2U')}/workbook/tables/@{encodeURIComponent('{3BF80975-023E-47E2-84DE-40E2F6B87DDA}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Flexowork"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_3": {
+            "actions": {
+                "Add_a_row_into_a_table_3": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI3STE6BDOLENDJK5MLAXNZORI5": "/EHS/Registers/Work Permits/Hot work permit.xlsx",
+                        "012DAKHSPU2APRDDYGENEITMPUDCQUM5NK": "/EHS/Registers/Work Permits/Hot work permit.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Basic causes (what personal factors or fundamental job factors caused the event) Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer36']",
+                            "By whom": "@triggerBody()?['answer46']",
+                            "Comment on A": "-@{triggerBody()?['question40']}",
+                            "Comment on B": "-@{triggerBody()?['answer41']}",
+                            "Comment on C": "-@{triggerBody()?['answer42']}",
+                            "Comment on D": "-@{triggerBody()?['answer43']}",
+                            "Contact with": "@triggerBody()?['answer32']",
+                            "Cost estimates": "@triggerBody()?['answer25']",
+                            "Date (UTC)": "@triggerBody()?['answer12']",
+                            "Date (UTC)11": "@triggerBody()?['answer61']",
+                            "Date (UTC)4": "@triggerBody()?['answer53']",
+                            "Date (UTC)7": "@triggerBody()?['answer57']",
+                            "Date and time work completed (UTC)": "@triggerBody()?['answer15']",
+                            "Department Manager's comments": "@triggerBody()?['question58']",
+                            "Employee's comments": "@triggerBody()?['answer50']",
+                            "Employee's name": "@triggerBody()?['answer51']",
+                            "Evaluation of loss potential if not corrected_x003a_ Loss severity potential": "@triggerBody()?['answer29_with_singular_value']",
+                            "Fire watch/ Hot work area monitoring": "@triggerBody()?['answer22']",
+                            "Hot work done by": "@triggerBody()?['answer3_with_singular_value']",
+                            "Hot work of enclosed spaces (i_x002e_e inside)": "@triggerBody()?['question20']",
+                            "Hot work on enclosed equipment (i_x002e_e, welding on the outside)_x002e_": "@triggerBody()?['answer19']",
+                            "Hot work performer Name": "@triggerBody()?['answer8']",
+                            "Hot work/ Fire safety notifications": "@triggerBody()?['answer21']",
+                            "Hot worker supervisor approval_x002e_ Name": "@triggerBody()?['answer10']",
+                            "Immediate causes (what sub-standard actions &amp; conditions caused the event)_x003a_ Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer33']",
+                            "Job factors": "@triggerBody()?['answer38_with_singular_value']",
+                            "Lack of control_x003a_ Inadequacies in the safety management standards or compliance within standards_x003a_ Please comment on all applicable below": "@triggerBody()?['answer44']",
+                            "Location/ building and floor": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer55']",
+                            "Name9": "@triggerBody()?['answer59']",
+                            "Object/ equipment/ substance related": "@triggerBody()?['answer26']",
+                            "Occupation": "@triggerBody()?['answer28']",
+                            "Other PPE required": "@triggerBody()?['answer7']",
+                            "Other incident or property damage_x003a_ Describe nature of damage": "@triggerBody()?['answer24']",
+                            "Other precautions/ special instructions": "@triggerBody()?['answer23']",
+                            "Others": "@triggerBody()?['answer39']",
+                            "PPE required": "@triggerBody()?['answer6']",
+                            "Permit dates_x002e_ Permit activated (UTC)": "@triggerBody()?['answer13']",
+                            "Permit expires (UTC)": "@triggerBody()?['answer14']",
+                            "Permit number": "@triggerBody()?['answer2']",
+                            "Person with most control of item_x002e_Name": "@triggerBody()?['answer27']",
+                            "Personal factors": "@triggerBody()?['answer37']",
+                            "Probability of occurence": "@triggerBody()?['answer30_with_singular_value']",
+                            "Reason for job": "@triggerBody()?['answer5']",
+                            "Remedial action to prevent reoccurence": "@triggerBody()?['answer45']",
+                            "Required precautions checklist": "@triggerBody()?['answer17']",
+                            "Requirements within 35 ft_x002e_ of hot work": "@triggerBody()?['answer18']",
+                            "SUBSTANDARD ACTIONS": "@triggerBody()?['answer34']",
+                            "SUBSTANDARD CONDITIONS": "@triggerBody()?['answer35']",
+                            "Sign when completed (full names)": "@triggerBody()?['answer49']",
+                            "Signature (full name)": "@triggerBody()?['answer9']",
+                            "Signature (full name)10": "@triggerBody()?['answer60']",
+                            "Signature (full name)2": "@triggerBody()?['answer11']",
+                            "Signature (full name)3": "@triggerBody()?['answer52']",
+                            "Signature (full name)6": "@triggerBody()?['answer56']",
+                            "Site safety Officer Signature_x002e_ (Full name)": "@triggerBody()?['answer16']",
+                            "Supervisor's comments": "@triggerBody()?['answer54']",
+                            "Type of contact": "@triggerBody()?['answer31']",
+                            "When": "@triggerBody()?['answer48']",
+                            "When (UTC)": "@triggerBody()?['answer47']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20Ih8Qra-VNQ5WlPcEmbDcI')}/items/@{encodeURIComponent('012DAKHSPU2APRDDYGENEITMPUDCQUM5NK')}/workbook/tables/@{encodeURIComponent('{3BF80975-023E-47E2-84DE-40E2F6B87DDA}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_2": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "MarketPower"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_4": {
+            "actions": {
+                "Add_a_row_into_a_table_4": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI3STE6BDOLENDJK5MLAXNZORI5": "/EHS/Registers/Work Permits/Hot work permit.xlsx",
+                        "012DAKHSLE6VQIUKHFFJBJUAUN255JMULY": "/EHS/Registers/Work Permits/Hot work permit.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Basic causes (what personal factors or fundamental job factors caused the event) Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer36']",
+                            "By whom": "@triggerBody()?['answer46']",
+                            "Comment on A": "-@{triggerBody()?['question40']}",
+                            "Comment on B": "-@{triggerBody()?['answer41']}",
+                            "Comment on C": "-@{triggerBody()?['answer42']}",
+                            "Comment on D": "-@{triggerBody()?['answer43']}",
+                            "Contact with": "@triggerBody()?['answer32']",
+                            "Cost estimates": "@triggerBody()?['answer25']",
+                            "Date (UTC)": "@triggerBody()?['answer12']",
+                            "Date (UTC)11": "@triggerBody()?['answer61']",
+                            "Date (UTC)4": "@triggerBody()?['answer53']",
+                            "Date (UTC)7": "@triggerBody()?['answer57']",
+                            "Date and time work completed (UTC)": "@triggerBody()?['answer15']",
+                            "Department Manager's comments": "@triggerBody()?['question58']",
+                            "Employee's comments": "@triggerBody()?['answer50']",
+                            "Employee's name": "@triggerBody()?['answer51']",
+                            "Evaluation of loss potential if not corrected_x003a_ Loss severity potential": "@triggerBody()?['answer29_with_singular_value']",
+                            "Fire watch/ Hot work area monitoring": "@triggerBody()?['answer22']",
+                            "Hot work done by": "@triggerBody()?['answer3_with_singular_value']",
+                            "Hot work of enclosed spaces (i_x002e_e inside)": "@triggerBody()?['question20']",
+                            "Hot work on enclosed equipment (i_x002e_e, welding on the outside)_x002e_": "@triggerBody()?['answer19']",
+                            "Hot work performer Name": "@triggerBody()?['answer8']",
+                            "Hot work/ Fire safety notifications": "@triggerBody()?['answer21']",
+                            "Hot worker supervisor approval_x002e_ Name": "@triggerBody()?['answer10']",
+                            "Immediate causes (what sub-standard actions &amp; conditions caused the event)_x003a_ Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer33']",
+                            "Job factors": "@triggerBody()?['answer38_with_singular_value']",
+                            "Lack of control_x003a_ Inadequacies in the safety management standards or compliance within standards_x003a_ Please comment on all applicable below": "@triggerBody()?['answer44']",
+                            "Location/ building and floor": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer55']",
+                            "Name9": "@triggerBody()?['answer59']",
+                            "Object/ equipment/ substance related": "@triggerBody()?['answer26']",
+                            "Occupation": "@triggerBody()?['answer28']",
+                            "Other PPE required": "@triggerBody()?['answer7']",
+                            "Other incident or property damage_x003a_ Describe nature of damage": "@triggerBody()?['answer24']",
+                            "Other precautions/ special instructions": "@triggerBody()?['answer23']",
+                            "Others": "@triggerBody()?['answer39']",
+                            "PPE required": "@triggerBody()?['answer6']",
+                            "Permit dates_x002e_ Permit activated (UTC)": "@triggerBody()?['answer13']",
+                            "Permit expires (UTC)": "@triggerBody()?['answer14']",
+                            "Permit number": "@triggerBody()?['answer2']",
+                            "Person with most control of item_x002e_Name": "@triggerBody()?['answer27']",
+                            "Personal factors": "@triggerBody()?['answer37']",
+                            "Probability of occurence": "@triggerBody()?['answer30_with_singular_value']",
+                            "Reason for job": "@triggerBody()?['answer5']",
+                            "Remedial action to prevent reoccurence": "@triggerBody()?['answer45']",
+                            "Required precautions checklist": "@triggerBody()?['answer17']",
+                            "Requirements within 35 ft_x002e_ of hot work": "@triggerBody()?['answer18']",
+                            "SUBSTANDARD ACTIONS": "@triggerBody()?['answer34']",
+                            "SUBSTANDARD CONDITIONS": "@triggerBody()?['answer35']",
+                            "Sign when completed (full names)": "@triggerBody()?['answer49']",
+                            "Signature (full name)": "@triggerBody()?['answer9']",
+                            "Signature (full name)10": "@triggerBody()?['answer60']",
+                            "Signature (full name)2": "@triggerBody()?['answer11']",
+                            "Signature (full name)3": "@triggerBody()?['answer52']",
+                            "Signature (full name)6": "@triggerBody()?['answer56']",
+                            "Site safety Officer Signature_x002e_ (Full name)": "@triggerBody()?['answer16']",
+                            "Supervisor's comments": "@triggerBody()?['answer54']",
+                            "Type of contact": "@triggerBody()?['answer31']",
+                            "When": "@triggerBody()?['answer48']",
+                            "When (UTC)": "@triggerBody()?['answer47']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22X5-_jdHAvQLoyxRsU7UeG')}/items/@{encodeURIComponent('012DAKHSLE6VQIUKHFFJBJUAUN255JMULY')}/workbook/tables/@{encodeURIComponent('{3BF80975-023E-47E2-84DE-40E2F6B87DDA}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_3": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Panthera"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_5": {
+            "actions": {
+                "Add_a_row_into_a_table_5": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI3STE6BDOLENDJK5MLAXNZORI5": "/EHS/Registers/Work Permits/Hot work permit.xlsx",
+                        "012DAKHSKO45GALAXOBJB2FGMRRZHZ46VE": "/EHS/Registers/Work Permits/Hot work permit.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Basic causes (what personal factors or fundamental job factors caused the event) Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer36']",
+                            "By whom": "@triggerBody()?['answer46']",
+                            "Comment on A": "-@{triggerBody()?['question40']}",
+                            "Comment on B": "-@{triggerBody()?['answer41']}",
+                            "Comment on C": "-@{triggerBody()?['answer42']}",
+                            "Comment on D": "-@{triggerBody()?['answer43']}",
+                            "Contact with": "@triggerBody()?['answer32']",
+                            "Cost estimates": "@triggerBody()?['answer25']",
+                            "Date (UTC)": "@triggerBody()?['answer12']",
+                            "Date (UTC)11": "@triggerBody()?['answer61']",
+                            "Date (UTC)4": "@triggerBody()?['answer53']",
+                            "Date (UTC)7": "@triggerBody()?['answer57']",
+                            "Date and time work completed (UTC)": "@triggerBody()?['answer15']",
+                            "Department Manager's comments": "@triggerBody()?['question58']",
+                            "Employee's comments": "@triggerBody()?['answer50']",
+                            "Employee's name": "@triggerBody()?['answer51']",
+                            "Evaluation of loss potential if not corrected_x003a_ Loss severity potential": "@triggerBody()?['answer29_with_singular_value']",
+                            "Fire watch/ Hot work area monitoring": "@triggerBody()?['answer22']",
+                            "Hot work done by": "@triggerBody()?['answer3_with_singular_value']",
+                            "Hot work of enclosed spaces (i_x002e_e inside)": "@triggerBody()?['question20']",
+                            "Hot work on enclosed equipment (i_x002e_e, welding on the outside)_x002e_": "@triggerBody()?['answer19']",
+                            "Hot work performer Name": "@triggerBody()?['answer8']",
+                            "Hot work/ Fire safety notifications": "@triggerBody()?['answer21']",
+                            "Hot worker supervisor approval_x002e_ Name": "@triggerBody()?['answer10']",
+                            "Immediate causes (what sub-standard actions &amp; conditions caused the event)_x003a_ Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer33']",
+                            "Job factors": "@triggerBody()?['answer38_with_singular_value']",
+                            "Lack of control_x003a_ Inadequacies in the safety management standards or compliance within standards_x003a_ Please comment on all applicable below": "@triggerBody()?['answer44']",
+                            "Location/ building and floor": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer55']",
+                            "Name9": "@triggerBody()?['answer59']",
+                            "Object/ equipment/ substance related": "@triggerBody()?['answer26']",
+                            "Occupation": "@triggerBody()?['answer28']",
+                            "Other PPE required": "@triggerBody()?['answer7']",
+                            "Other incident or property damage_x003a_ Describe nature of damage": "@triggerBody()?['answer24']",
+                            "Other precautions/ special instructions": "@triggerBody()?['answer23']",
+                            "Others": "@triggerBody()?['answer39']",
+                            "PPE required": "@triggerBody()?['answer6']",
+                            "Permit dates_x002e_ Permit activated (UTC)": "@triggerBody()?['answer13']",
+                            "Permit expires (UTC)": "@triggerBody()?['answer14']",
+                            "Permit number": "@triggerBody()?['answer2']",
+                            "Person with most control of item_x002e_Name": "@triggerBody()?['answer27']",
+                            "Personal factors": "@triggerBody()?['answer37']",
+                            "Probability of occurence": "@triggerBody()?['answer30_with_singular_value']",
+                            "Reason for job": "@triggerBody()?['answer5']",
+                            "Remedial action to prevent reoccurence": "@triggerBody()?['answer45']",
+                            "Required precautions checklist": "@triggerBody()?['answer17']",
+                            "Requirements within 35 ft_x002e_ of hot work": "@triggerBody()?['answer18']",
+                            "SUBSTANDARD ACTIONS": "@triggerBody()?['answer34']",
+                            "SUBSTANDARD CONDITIONS": "@triggerBody()?['answer35']",
+                            "Sign when completed (full names)": "@triggerBody()?['answer49']",
+                            "Signature (full name)": "@triggerBody()?['answer9']",
+                            "Signature (full name)10": "@triggerBody()?['answer60']",
+                            "Signature (full name)2": "@triggerBody()?['answer11']",
+                            "Signature (full name)3": "@triggerBody()?['answer52']",
+                            "Signature (full name)6": "@triggerBody()?['answer56']",
+                            "Site safety Officer Signature_x002e_ (Full name)": "@triggerBody()?['answer16']",
+                            "Supervisor's comments": "@triggerBody()?['answer54']",
+                            "Type of contact": "@triggerBody()?['answer31']",
+                            "When": "@triggerBody()?['answer48']",
+                            "When (UTC)": "@triggerBody()?['answer47']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/items/@{encodeURIComponent('012DAKHSKO45GALAXOBJB2FGMRRZHZ46VE')}/workbook/tables/@{encodeURIComponent('{3BF80975-023E-47E2-84DE-40E2F6B87DDA}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_4": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Polythene"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_6": {
+            "actions": {
+                "Add_a_row_into_a_table_6": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI3STE6BDOLENDJK5MLAXNZORI5": "/EHS/Registers/Work Permits/Hot work permit.xlsx",
+                        "012DAKHSNOVKJCYZWXGNGKDWYEX2VXNKMF": "/EHS/Registers/Work Permits/Hot work permit.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Basic causes (what personal factors or fundamental job factors caused the event) Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer36']",
+                            "By whom": "@triggerBody()?['answer46']",
+                            "Comment on A": "-@{triggerBody()?['question40']}",
+                            "Comment on B": "-@{triggerBody()?['answer41']}",
+                            "Comment on C": "-@{triggerBody()?['answer42']}",
+                            "Comment on D": "-@{triggerBody()?['answer43']}",
+                            "Contact with": "@triggerBody()?['answer32']",
+                            "Cost estimates": "@triggerBody()?['answer25']",
+                            "Date (UTC)": "@triggerBody()?['answer12']",
+                            "Date (UTC)11": "@triggerBody()?['answer61']",
+                            "Date (UTC)4": "@triggerBody()?['answer53']",
+                            "Date (UTC)7": "@triggerBody()?['answer57']",
+                            "Date and time work completed (UTC)": "@triggerBody()?['answer15']",
+                            "Department Manager's comments": "@triggerBody()?['question58']",
+                            "Employee's comments": "@triggerBody()?['answer50']",
+                            "Employee's name": "@triggerBody()?['answer51']",
+                            "Evaluation of loss potential if not corrected_x003a_ Loss severity potential": "@triggerBody()?['answer29_with_singular_value']",
+                            "Fire watch/ Hot work area monitoring": "@triggerBody()?['answer22']",
+                            "Hot work done by": "@triggerBody()?['answer3_with_singular_value']",
+                            "Hot work of enclosed spaces (i_x002e_e inside)": "@triggerBody()?['question20']",
+                            "Hot work on enclosed equipment (i_x002e_e, welding on the outside)_x002e_": "@triggerBody()?['answer19']",
+                            "Hot work performer Name": "@triggerBody()?['answer8']",
+                            "Hot work/ Fire safety notifications": "@triggerBody()?['answer21']",
+                            "Hot worker supervisor approval_x002e_ Name": "@triggerBody()?['answer10']",
+                            "Immediate causes (what sub-standard actions &amp; conditions caused the event)_x003a_ Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer33']",
+                            "Job factors": "@triggerBody()?['answer38_with_singular_value']",
+                            "Lack of control_x003a_ Inadequacies in the safety management standards or compliance within standards_x003a_ Please comment on all applicable below": "@triggerBody()?['answer44']",
+                            "Location/ building and floor": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer55']",
+                            "Name9": "@triggerBody()?['answer59']",
+                            "Object/ equipment/ substance related": "@triggerBody()?['answer26']",
+                            "Occupation": "@triggerBody()?['answer28']",
+                            "Other PPE required": "@triggerBody()?['answer7']",
+                            "Other incident or property damage_x003a_ Describe nature of damage": "@triggerBody()?['answer24']",
+                            "Other precautions/ special instructions": "@triggerBody()?['answer23']",
+                            "Others": "@triggerBody()?['answer39']",
+                            "PPE required": "@triggerBody()?['answer6']",
+                            "Permit dates_x002e_ Permit activated (UTC)": "@triggerBody()?['answer13']",
+                            "Permit expires (UTC)": "@triggerBody()?['answer14']",
+                            "Permit number": "@triggerBody()?['answer2']",
+                            "Person with most control of item_x002e_Name": "@triggerBody()?['answer27']",
+                            "Personal factors": "@triggerBody()?['answer37']",
+                            "Probability of occurence": "@triggerBody()?['answer30_with_singular_value']",
+                            "Reason for job": "@triggerBody()?['answer5']",
+                            "Remedial action to prevent reoccurence": "@triggerBody()?['answer45']",
+                            "Required precautions checklist": "@triggerBody()?['answer17']",
+                            "Requirements within 35 ft_x002e_ of hot work": "@triggerBody()?['answer18']",
+                            "SUBSTANDARD ACTIONS": "@triggerBody()?['answer34']",
+                            "SUBSTANDARD CONDITIONS": "@triggerBody()?['answer35']",
+                            "Sign when completed (full names)": "@triggerBody()?['answer49']",
+                            "Signature (full name)": "@triggerBody()?['answer9']",
+                            "Signature (full name)10": "@triggerBody()?['answer60']",
+                            "Signature (full name)2": "@triggerBody()?['answer11']",
+                            "Signature (full name)3": "@triggerBody()?['answer52']",
+                            "Signature (full name)6": "@triggerBody()?['answer56']",
+                            "Site safety Officer Signature_x002e_ (Full name)": "@triggerBody()?['answer16']",
+                            "Supervisor's comments": "@triggerBody()?['answer54']",
+                            "Type of contact": "@triggerBody()?['answer31']",
+                            "When": "@triggerBody()?['answer48']",
+                            "When (UTC)": "@triggerBody()?['answer47']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22kk4tt4keDSZ_ZdgmrQkph')}/items/@{encodeURIComponent('012DAKHSNOVKJCYZWXGNGKDWYEX2VXNKMF')}/workbook/tables/@{encodeURIComponent('{3BF80975-023E-47E2-84DE-40E2F6B87DDA}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_5": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "PPL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_7": {
+            "actions": {
+                "Add_a_row_into_a_table_7": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI3STE6BDOLENDJK5MLAXNZORI5": "/EHS/Registers/Work Permits/Hot work permit.xlsx",
+                        "012DAKHSOCCD6XR3QLHBC2P5GQOVKBUDTC": "/EHS/Registers/Work Permits/Hot work permit (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Basic causes (what personal factors or fundamental job factors caused the event) Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer36']",
+                            "By whom": "@triggerBody()?['answer46']",
+                            "Comment on A": "-@{triggerBody()?['question40']}",
+                            "Comment on B": "-@{triggerBody()?['answer41']}",
+                            "Comment on C": "-@{triggerBody()?['answer42']}",
+                            "Comment on D": "-@{triggerBody()?['answer43']}",
+                            "Contact with": "@triggerBody()?['answer32']",
+                            "Cost estimates": "@triggerBody()?['answer25']",
+                            "Date (UTC)": "@triggerBody()?['answer12']",
+                            "Date (UTC)11": "@triggerBody()?['answer61']",
+                            "Date (UTC)4": "@triggerBody()?['answer53']",
+                            "Date (UTC)7": "@triggerBody()?['answer57']",
+                            "Date and time work completed (UTC)": "@triggerBody()?['answer15']",
+                            "Department Manager's comments": "@triggerBody()?['question58']",
+                            "Employee's comments": "@triggerBody()?['answer50']",
+                            "Employee's name": "@triggerBody()?['answer51']",
+                            "Evaluation of loss potential if not corrected_x003a_ Loss severity potential": "@triggerBody()?['answer29_with_singular_value']",
+                            "Fire watch/ Hot work area monitoring": "@triggerBody()?['answer22']",
+                            "Hot work done by": "@triggerBody()?['answer3_with_singular_value']",
+                            "Hot work of enclosed spaces (i_x002e_e inside)": "@triggerBody()?['question20']",
+                            "Hot work on enclosed equipment (i_x002e_e, welding on the outside)_x002e_": "@triggerBody()?['answer19']",
+                            "Hot work performer Name": "@triggerBody()?['answer8']",
+                            "Hot work/ Fire safety notifications": "@triggerBody()?['answer21']",
+                            "Hot worker supervisor approval_x002e_ Name": "@triggerBody()?['answer10']",
+                            "Immediate causes (what sub-standard actions &amp; conditions caused the event)_x003a_ Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer33']",
+                            "Job factors": "@triggerBody()?['answer38_with_singular_value']",
+                            "Lack of control_x003a_ Inadequacies in the safety management standards or compliance within standards_x003a_ Please comment on all applicable below": "@triggerBody()?['answer44']",
+                            "Location/ building and floor": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer55']",
+                            "Name9": "@triggerBody()?['answer59']",
+                            "Object/ equipment/ substance related": "@triggerBody()?['answer26']",
+                            "Occupation": "@triggerBody()?['answer28']",
+                            "Other PPE required": "@triggerBody()?['answer7']",
+                            "Other incident or property damage_x003a_ Describe nature of damage": "@triggerBody()?['answer24']",
+                            "Other precautions/ special instructions": "@triggerBody()?['answer23']",
+                            "Others": "@triggerBody()?['answer39']",
+                            "PPE required": "@triggerBody()?['answer6']",
+                            "Permit dates_x002e_ Permit activated (UTC)": "@triggerBody()?['answer13']",
+                            "Permit expires (UTC)": "@triggerBody()?['answer14']",
+                            "Permit number": "@triggerBody()?['answer2']",
+                            "Person with most control of item_x002e_Name": "@triggerBody()?['answer27']",
+                            "Personal factors": "@triggerBody()?['answer37']",
+                            "Probability of occurence": "@triggerBody()?['answer30_with_singular_value']",
+                            "Reason for job": "@triggerBody()?['answer5']",
+                            "Remedial action to prevent reoccurence": "@triggerBody()?['answer45']",
+                            "Required precautions checklist": "@triggerBody()?['answer17']",
+                            "Requirements within 35 ft_x002e_ of hot work": "@triggerBody()?['answer18']",
+                            "SUBSTANDARD ACTIONS": "@triggerBody()?['answer34']",
+                            "SUBSTANDARD CONDITIONS": "@triggerBody()?['answer35']",
+                            "Sign when completed (full names)": "@triggerBody()?['answer49']",
+                            "Signature (full name)": "@triggerBody()?['answer9']",
+                            "Signature (full name)10": "@triggerBody()?['answer60']",
+                            "Signature (full name)2": "@triggerBody()?['answer11']",
+                            "Signature (full name)3": "@triggerBody()?['answer52']",
+                            "Signature (full name)6": "@triggerBody()?['answer56']",
+                            "Site safety Officer Signature_x002e_ (Full name)": "@triggerBody()?['answer16']",
+                            "Supervisor's comments": "@triggerBody()?['answer54']",
+                            "Type of contact": "@triggerBody()?['answer31']",
+                            "When": "@triggerBody()?['answer48']",
+                            "When (UTC)": "@triggerBody()?['answer47']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22UsYI9vqFGSazzeAY4Evkz')}/items/@{encodeURIComponent('012DAKHSOCCD6XR3QLHBC2P5GQOVKBUDTC')}/workbook/tables/@{encodeURIComponent('{3BF80975-023E-47E2-84DE-40E2F6B87DDA}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_6": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Pressmaster"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_8": {
+            "actions": {
+                "Add_a_row_into_a_table_8": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI3STE6BDOLENDJK5MLAXNZORI5": "/EHS/Registers/Work Permits/Hot work permit.xlsx",
+                        "012DAKHSN7RSHRNYC2ZRGIAMQ7HWWHHAYA": "/EHS/Registers/Work Permits/Hot work permit (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Basic causes (what personal factors or fundamental job factors caused the event) Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer36']",
+                            "By whom": "@triggerBody()?['answer46']",
+                            "Comment on A": "-@{triggerBody()?['question40']}",
+                            "Comment on B": "-@{triggerBody()?['answer41']}",
+                            "Comment on C": "-@{triggerBody()?['answer42']}",
+                            "Comment on D": "-@{triggerBody()?['answer43']}",
+                            "Contact with": "@triggerBody()?['answer32']",
+                            "Cost estimates": "@triggerBody()?['answer25']",
+                            "Date (UTC)": "@triggerBody()?['answer12']",
+                            "Date (UTC)11": "@triggerBody()?['answer61']",
+                            "Date (UTC)4": "@triggerBody()?['answer53']",
+                            "Date (UTC)7": "@triggerBody()?['answer57']",
+                            "Date and time work completed (UTC)": "@triggerBody()?['answer15']",
+                            "Department Manager's comments": "@triggerBody()?['question58']",
+                            "Employee's comments": "@triggerBody()?['answer50']",
+                            "Employee's name": "@triggerBody()?['answer51']",
+                            "Evaluation of loss potential if not corrected_x003a_ Loss severity potential": "@triggerBody()?['answer29_with_singular_value']",
+                            "Fire watch/ Hot work area monitoring": "@triggerBody()?['answer22']",
+                            "Hot work done by": "@triggerBody()?['answer3_with_singular_value']",
+                            "Hot work of enclosed spaces (i_x002e_e inside)": "@triggerBody()?['question20']",
+                            "Hot work on enclosed equipment (i_x002e_e, welding on the outside)_x002e_": "@triggerBody()?['answer19']",
+                            "Hot work performer Name": "@triggerBody()?['answer8']",
+                            "Hot work/ Fire safety notifications": "@triggerBody()?['answer21']",
+                            "Hot worker supervisor approval_x002e_ Name": "@triggerBody()?['answer10']",
+                            "Immediate causes (what sub-standard actions &amp; conditions caused the event)_x003a_ Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer33']",
+                            "Job factors": "@triggerBody()?['answer38_with_singular_value']",
+                            "Lack of control_x003a_ Inadequacies in the safety management standards or compliance within standards_x003a_ Please comment on all applicable below": "@triggerBody()?['answer44']",
+                            "Location/ building and floor": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer55']",
+                            "Name9": "@triggerBody()?['answer59']",
+                            "Object/ equipment/ substance related": "@triggerBody()?['answer26']",
+                            "Occupation": "@triggerBody()?['answer28']",
+                            "Other PPE required": "@triggerBody()?['answer7']",
+                            "Other incident or property damage_x003a_ Describe nature of damage": "@triggerBody()?['answer24']",
+                            "Other precautions/ special instructions": "@triggerBody()?['answer23']",
+                            "Others": "@triggerBody()?['answer39']",
+                            "PPE required": "@triggerBody()?['answer6']",
+                            "Permit dates_x002e_ Permit activated (UTC)": "@triggerBody()?['answer13']",
+                            "Permit expires (UTC)": "@triggerBody()?['answer14']",
+                            "Permit number": "@triggerBody()?['answer2']",
+                            "Person with most control of item_x002e_Name": "@triggerBody()?['answer27']",
+                            "Personal factors": "@triggerBody()?['answer37']",
+                            "Probability of occurence": "@triggerBody()?['answer30_with_singular_value']",
+                            "Reason for job": "@triggerBody()?['answer5']",
+                            "Remedial action to prevent reoccurence": "@triggerBody()?['answer45']",
+                            "Required precautions checklist": "@triggerBody()?['answer17']",
+                            "Requirements within 35 ft_x002e_ of hot work": "@triggerBody()?['answer18']",
+                            "SUBSTANDARD ACTIONS": "@triggerBody()?['answer34']",
+                            "SUBSTANDARD CONDITIONS": "@triggerBody()?['answer35']",
+                            "Sign when completed (full names)": "@triggerBody()?['answer49']",
+                            "Signature (full name)": "@triggerBody()?['answer9']",
+                            "Signature (full name)10": "@triggerBody()?['answer60']",
+                            "Signature (full name)2": "@triggerBody()?['answer11']",
+                            "Signature (full name)3": "@triggerBody()?['answer52']",
+                            "Signature (full name)6": "@triggerBody()?['answer56']",
+                            "Site safety Officer Signature_x002e_ (Full name)": "@triggerBody()?['answer16']",
+                            "Supervisor's comments": "@triggerBody()?['answer54']",
+                            "Type of contact": "@triggerBody()?['answer31']",
+                            "When": "@triggerBody()?['answer48']",
+                            "When (UTC)": "@triggerBody()?['answer47']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21Zbz70lhgeRrEUj-vRcpoJ')}/items/@{encodeURIComponent('012DAKHSN7RSHRNYC2ZRGIAMQ7HWWHHAYA')}/workbook/tables/@{encodeURIComponent('{3BF80975-023E-47E2-84DE-40E2F6B87DDA}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_7": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit1"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_9": {
+            "actions": {
+                "Add_a_row_into_a_table_9": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI3STE6BDOLENDJK5MLAXNZORI5": "/EHS/Registers/Work Permits/Hot work permit.xlsx",
+                        "012DAKHSN7RSHRNYC2ZRGIAMQ7HWWHHAYA": "/EHS/Registers/Work Permits/Hot work permit (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Basic causes (what personal factors or fundamental job factors caused the event) Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer36']",
+                            "By whom": "@triggerBody()?['answer46']",
+                            "Comment on A": "-@{triggerBody()?['question40']}",
+                            "Comment on B": "-@{triggerBody()?['answer41']}",
+                            "Comment on C": "-@{triggerBody()?['answer42']}",
+                            "Comment on D": "-@{triggerBody()?['answer43']}",
+                            "Contact with": "@triggerBody()?['answer32']",
+                            "Cost estimates": "@triggerBody()?['answer25']",
+                            "Date (UTC)": "@triggerBody()?['answer12']",
+                            "Date (UTC)11": "@triggerBody()?['answer61']",
+                            "Date (UTC)4": "@triggerBody()?['answer53']",
+                            "Date (UTC)7": "@triggerBody()?['answer57']",
+                            "Date and time work completed (UTC)": "@triggerBody()?['answer15']",
+                            "Department Manager's comments": "@triggerBody()?['question58']",
+                            "Employee's comments": "@triggerBody()?['answer50']",
+                            "Employee's name": "@triggerBody()?['answer51']",
+                            "Evaluation of loss potential if not corrected_x003a_ Loss severity potential": "@triggerBody()?['answer29_with_singular_value']",
+                            "Fire watch/ Hot work area monitoring": "@triggerBody()?['answer22']",
+                            "Hot work done by": "@triggerBody()?['answer3_with_singular_value']",
+                            "Hot work of enclosed spaces (i_x002e_e inside)": "@triggerBody()?['question20']",
+                            "Hot work on enclosed equipment (i_x002e_e, welding on the outside)_x002e_": "@triggerBody()?['answer19']",
+                            "Hot work performer Name": "@triggerBody()?['answer8']",
+                            "Hot work/ Fire safety notifications": "@triggerBody()?['answer21']",
+                            "Hot worker supervisor approval_x002e_ Name": "@triggerBody()?['answer10']",
+                            "Immediate causes (what sub-standard actions &amp; conditions caused the event)_x003a_ Tick all applicable below and explain here_x003a_": "@triggerBody()?['answer33']",
+                            "Job factors": "@triggerBody()?['answer38_with_singular_value']",
+                            "Lack of control_x003a_ Inadequacies in the safety management standards or compliance within standards_x003a_ Please comment on all applicable below": "@triggerBody()?['answer44']",
+                            "Location/ building and floor": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer55']",
+                            "Name9": "@triggerBody()?['answer59']",
+                            "Object/ equipment/ substance related": "@triggerBody()?['answer26']",
+                            "Occupation": "@triggerBody()?['answer28']",
+                            "Other PPE required": "@triggerBody()?['answer7']",
+                            "Other incident or property damage_x003a_ Describe nature of damage": "@triggerBody()?['answer24']",
+                            "Other precautions/ special instructions": "@triggerBody()?['answer23']",
+                            "Others": "@triggerBody()?['answer39']",
+                            "PPE required": "@triggerBody()?['answer6']",
+                            "Permit dates_x002e_ Permit activated (UTC)": "@triggerBody()?['answer13']",
+                            "Permit expires (UTC)": "@triggerBody()?['answer14']",
+                            "Permit number": "@triggerBody()?['answer2']",
+                            "Person with most control of item_x002e_Name": "@triggerBody()?['answer27']",
+                            "Personal factors": "@triggerBody()?['answer37']",
+                            "Probability of occurence": "@triggerBody()?['answer30_with_singular_value']",
+                            "Reason for job": "@triggerBody()?['answer5']",
+                            "Remedial action to prevent reoccurence": "@triggerBody()?['answer45']",
+                            "Required precautions checklist": "@triggerBody()?['answer17']",
+                            "Requirements within 35 ft_x002e_ of hot work": "@triggerBody()?['answer18']",
+                            "SUBSTANDARD ACTIONS": "@triggerBody()?['answer34']",
+                            "SUBSTANDARD CONDITIONS": "@triggerBody()?['answer35']",
+                            "Sign when completed (full names)": "@triggerBody()?['answer49']",
+                            "Signature (full name)": "@triggerBody()?['answer9']",
+                            "Signature (full name)10": "@triggerBody()?['answer60']",
+                            "Signature (full name)2": "@triggerBody()?['answer11']",
+                            "Signature (full name)3": "@triggerBody()?['answer52']",
+                            "Signature (full name)6": "@triggerBody()?['answer56']",
+                            "Site safety Officer Signature_x002e_ (Full name)": "@triggerBody()?['answer16']",
+                            "Supervisor's comments": "@triggerBody()?['answer54']",
+                            "Type of contact": "@triggerBody()?['answer31']",
+                            "When": "@triggerBody()?['answer48']",
+                            "When (UTC)": "@triggerBody()?['answer47']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21Zbz70lhgeRrEUj-vRcpoJ')}/items/@{encodeURIComponent('012DAKHSN7RSHRNYC2ZRGIAMQ7HWWHHAYA')}/workbook/tables/@{encodeURIComponent('{3BF80975-023E-47E2-84DE-40E2F6B87DDA}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_8": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit1"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        }
+    },
+    "outputs": {}
+}

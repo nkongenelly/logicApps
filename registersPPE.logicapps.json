@@ -1,0 +1,665 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala_1']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "b3a3ffdc-6a8e-44c5-84ec-ed5ddc3f89df",
+                    "groupId": "0dafb7cd-2b37-46dd-a97d-7de423693231@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Condition": {
+            "actions": {
+                "Add_a_row_into_a_table": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@triggerBody()?['answer6']",
+                            "Date of issue": "@triggerBody()?['answer10']",
+                            "Date2": "@triggerBody()?['answer8']",
+                            "Description": "@triggerBody()?['answer9']",
+                            "Employee No_x002e_": "@triggerBody()?['answer3']",
+                            "Hereby accept responsibility for the items below, which I have signed for_x002e_": "@triggerBody()?['answer5']",
+                            "I,": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer2']",
+                            "Signature (full name)": "@triggerBody()?['answer11']",
+                            "Witness": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK')}/workbook/tables/@{encodeURIComponent('{1EEA52FE-4682-46FC-A59F-8952421C7B00}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {},
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "ASL Pack"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_10": {
+            "actions": {
+                "Add_a_row_into_a_table_10": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI46WFFNR2HX5CYLOKV7L65DFEL": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@triggerBody()?['answer6']",
+                            "Date of issue": "@triggerBody()?['answer10']",
+                            "Date2": "@triggerBody()?['answer8']",
+                            "Description": "@triggerBody()?['answer9']",
+                            "Employee No_x002e_": "@triggerBody()?['answer3']",
+                            "Hereby accept responsibility for the items below, which I have signed for_x002e_": "@triggerBody()?['answer5']",
+                            "I,": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer2']",
+                            "Signature (full name)": "@triggerBody()?['answer11']",
+                            "Witness": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23CcVP99gEfQ4EjLalW8EVd')}/items/@{encodeURIComponent('012DAKHSI46WFFNR2HX5CYLOKV7L65DFEL')}/workbook/tables/@{encodeURIComponent('{1EEA52FE-4682-46FC-A59F-8952421C7B00}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_9": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Sintel"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_11": {
+            "actions": {
+                "Add_a_row_into_a_table_11": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSOBJPPEF66ORJFY3F37365MNALV": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@triggerBody()?['answer6']",
+                            "Date of issue": "@triggerBody()?['answer10']",
+                            "Date2": "@triggerBody()?['answer8']",
+                            "Description": "@triggerBody()?['answer9']",
+                            "Employee No_x002e_": "@triggerBody()?['answer3']",
+                            "Hereby accept responsibility for the items below, which I have signed for_x002e_": "@triggerBody()?['answer5']",
+                            "I,": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer2']",
+                            "Signature (full name)": "@triggerBody()?['answer11']",
+                            "Witness": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23SOjeg2ex3SKPV30tAC8Sq')}/items/@{encodeURIComponent('012DAKHSOBJPPEF66ORJFY3F37365MNALV')}/workbook/tables/@{encodeURIComponent('{1EEA52FE-4682-46FC-A59F-8952421C7B00}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_10": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "TPSL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_12": {
+            "actions": {
+                "Add_a_row_into_a_table_12": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSPIGO7274ZELRHKQX6LZQDOX6WM": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@triggerBody()?['answer6']",
+                            "Date of issue": "@triggerBody()?['answer10']",
+                            "Date2": "@triggerBody()?['answer8']",
+                            "Description": "@triggerBody()?['answer9']",
+                            "Employee No_x002e_": "@triggerBody()?['answer3']",
+                            "Hereby accept responsibility for the items below, which I have signed for_x002e_": "@triggerBody()?['answer5']",
+                            "I,": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer2']",
+                            "Signature (full name)": "@triggerBody()?['answer11']",
+                            "Witness": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21OE4Lc5Sx1SZwFdBOFz34o')}/items/@{encodeURIComponent('012DAKHSPIGO7274ZELRHKQX6LZQDOX6WM')}/workbook/tables/@{encodeURIComponent('{1EEA52FE-4682-46FC-A59F-8952421C7B00}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_11": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Wild Elegance"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_2": {
+            "actions": {
+                "Add_a_row_into_a_table_2": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI5XLCX5IIDNNBLNZRA7LUGXWP6": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@triggerBody()?['answer6']",
+                            "Date of issue": "@triggerBody()?['answer10']",
+                            "Date2": "@triggerBody()?['answer8']",
+                            "Description": "@triggerBody()?['answer9']",
+                            "Employee No_x002e_": "@triggerBody()?['answer3']",
+                            "Hereby accept responsibility for the items below, which I have signed for_x002e_": "@triggerBody()?['answer5']",
+                            "I,": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer2']",
+                            "Signature (full name)": "@triggerBody()?['answer11']",
+                            "Witness": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20_IPQJOQqtRrh4P5a0Fiel')}/items/@{encodeURIComponent('012DAKHSI5XLCX5IIDNNBLNZRA7LUGXWP6')}/workbook/tables/@{encodeURIComponent('{1EEA52FE-4682-46FC-A59F-8952421C7B00}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Flexowork"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_3": {
+            "actions": {
+                "Add_a_row_into_a_table_3": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSLPMRUXRD6R7VDZJNNRPAVEDO7H": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@triggerBody()?['answer6']",
+                            "Date of issue": "@triggerBody()?['answer10']",
+                            "Date2": "@triggerBody()?['answer8']",
+                            "Description": "@triggerBody()?['answer9']",
+                            "Employee No_x002e_": "@triggerBody()?['answer3']",
+                            "Hereby accept responsibility for the items below, which I have signed for_x002e_": "@triggerBody()?['answer5']",
+                            "I,": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer2']",
+                            "Signature (full name)": "@triggerBody()?['answer11']",
+                            "Witness": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20Ih8Qra-VNQ5WlPcEmbDcI')}/items/@{encodeURIComponent('012DAKHSLPMRUXRD6R7VDZJNNRPAVEDO7H')}/workbook/tables/@{encodeURIComponent('{1EEA52FE-4682-46FC-A59F-8952421C7B00}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_2": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "MarketPower"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_4": {
+            "actions": {
+                "Add_a_row_into_a_table_4": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSNJEBD5EXDZRBE2AGFN65V5N5MY": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@triggerBody()?['answer6']",
+                            "Date of issue": "@triggerBody()?['answer10']",
+                            "Date2": "@triggerBody()?['answer8']",
+                            "Description": "@triggerBody()?['answer9']",
+                            "Employee No_x002e_": "@triggerBody()?['answer3']",
+                            "Hereby accept responsibility for the items below, which I have signed for_x002e_": "@triggerBody()?['answer5']",
+                            "I,": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer2']",
+                            "Signature (full name)": "@triggerBody()?['answer11']",
+                            "Witness": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22X5-_jdHAvQLoyxRsU7UeG')}/items/@{encodeURIComponent('012DAKHSNJEBD5EXDZRBE2AGFN65V5N5MY')}/workbook/tables/@{encodeURIComponent('{1EEA52FE-4682-46FC-A59F-8952421C7B00}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_3": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Panthera"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_5": {
+            "actions": {
+                "Add_a_row_into_a_table_5": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSJMYQ2GOH4CGNCJ2MXZBDKFLNAF": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@triggerBody()?['answer6']",
+                            "Date of issue": "@triggerBody()?['answer10']",
+                            "Date2": "@triggerBody()?['answer8']",
+                            "Description": "@triggerBody()?['answer9']",
+                            "Employee No_x002e_": "@triggerBody()?['answer3']",
+                            "Hereby accept responsibility for the items below, which I have signed for_x002e_": "@triggerBody()?['answer5']",
+                            "I,": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer2']",
+                            "Signature (full name)": "@triggerBody()?['answer11']",
+                            "Witness": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/items/@{encodeURIComponent('012DAKHSJMYQ2GOH4CGNCJ2MXZBDKFLNAF')}/workbook/tables/@{encodeURIComponent('{1EEA52FE-4682-46FC-A59F-8952421C7B00}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_4": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Polythene"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_6": {
+            "actions": {
+                "Add_a_row_into_a_table_6": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSODT4J35YBWQNG3BJGD2XFWQGBH": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@triggerBody()?['answer6']",
+                            "Date of issue": "@triggerBody()?['answer10']",
+                            "Date2": "@triggerBody()?['answer8']",
+                            "Description": "@triggerBody()?['answer9']",
+                            "Employee No_x002e_": "@triggerBody()?['answer3']",
+                            "Hereby accept responsibility for the items below, which I have signed for_x002e_": "@triggerBody()?['answer5']",
+                            "I,": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer2']",
+                            "Signature (full name)": "@triggerBody()?['answer11']",
+                            "Witness": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22kk4tt4keDSZ_ZdgmrQkph')}/items/@{encodeURIComponent('012DAKHSODT4J35YBWQNG3BJGD2XFWQGBH')}/workbook/tables/@{encodeURIComponent('{1EEA52FE-4682-46FC-A59F-8952421C7B00}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_5": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "PPL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_7": {
+            "actions": {
+                "Add_a_row_into_a_table_7": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSIS5QIZFDOW3JEJADT322QHTLHF": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@triggerBody()?['answer6']",
+                            "Date of issue": "@triggerBody()?['answer10']",
+                            "Date2": "@triggerBody()?['answer8']",
+                            "Description": "@triggerBody()?['answer9']",
+                            "Employee No_x002e_": "@triggerBody()?['answer3']",
+                            "Hereby accept responsibility for the items below, which I have signed for_x002e_": "@triggerBody()?['answer5']",
+                            "I,": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer2']",
+                            "Signature (full name)": "@triggerBody()?['answer11']",
+                            "Witness": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22UsYI9vqFGSazzeAY4Evkz')}/items/@{encodeURIComponent('012DAKHSIS5QIZFDOW3JEJADT322QHTLHF')}/workbook/tables/@{encodeURIComponent('{1EEA52FE-4682-46FC-A59F-8952421C7B00}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_6": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Pressmaster"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_8": {
+            "actions": {
+                "Add_a_row_into_a_table_8": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSKWMBP6UMEMMJAZBOF3R3GVVZO2": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@triggerBody()?['answer6']",
+                            "Date of issue": "@triggerBody()?['answer10']",
+                            "Date2": "@triggerBody()?['answer8']",
+                            "Description": "@triggerBody()?['answer9']",
+                            "Employee No_x002e_": "@triggerBody()?['answer3']",
+                            "Hereby accept responsibility for the items below, which I have signed for_x002e_": "@triggerBody()?['answer5']",
+                            "I,": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer2']",
+                            "Signature (full name)": "@triggerBody()?['answer11']",
+                            "Witness": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21Zbz70lhgeRrEUj-vRcpoJ')}/items/@{encodeURIComponent('012DAKHSKWMBP6UMEMMJAZBOF3R3GVVZO2')}/workbook/tables/@{encodeURIComponent('{1EEA52FE-4682-46FC-A59F-8952421C7B00}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_7": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit1"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_9": {
+            "actions": {
+                "Add_a_row_into_a_table_9": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSKS5TNUSBJNPZEK6SFHHPSCJQ26": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@triggerBody()?['answer6']",
+                            "Date of issue": "@triggerBody()?['answer10']",
+                            "Date2": "@triggerBody()?['answer8']",
+                            "Description": "@triggerBody()?['answer9']",
+                            "Employee No_x002e_": "@triggerBody()?['answer3']",
+                            "Hereby accept responsibility for the items below, which I have signed for_x002e_": "@triggerBody()?['answer5']",
+                            "I,": "@triggerBody()?['answer4']",
+                            "Name": "@triggerBody()?['answer2']",
+                            "Signature (full name)": "@triggerBody()?['answer11']",
+                            "Witness": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK224_MWHSLrlToHLAKKgheJk')}/items/@{encodeURIComponent('012DAKHSKS5TNUSBJNPZEK6SFHHPSCJQ26')}/workbook/tables/@{encodeURIComponent('{1EEA52FE-4682-46FC-A59F-8952421C7B00}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_8": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit2"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        }
+    },
+    "outputs": {}
+}

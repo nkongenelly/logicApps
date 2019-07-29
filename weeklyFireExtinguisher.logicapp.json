@@ -1,0 +1,823 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "c7e91781-daba-4f3b-8f72-b1493d6c2bd6.2",
+                    "groupId": "b159c833-e416-490f-ab9d-8eb3e5adc999@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Condition": {
+            "actions": {
+                "Add_a_row_into_a_table": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSLDHNYFIN2A5VF2BZJ6JC4EMWHS": "/EHS/Checklists/Weekly/Fire Extinguisher (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employee name": "@triggerBody()?['answer4']",
+                            "Extinguisher type designated for that particular location": "@triggerBody()?['answer20_with_singular_value']",
+                            "Fairly accessible, nothing is blocking access to it (visible)": "@triggerBody()?['answer17_with_singular_value']",
+                            "Fire Extinguisher Number": "@triggerBody()?['answer3']",
+                            "Fire extinguisher present in it's designated location": "@triggerBody()?['answer5_with_singular_value']",
+                            "Fully charged (pressure gauge indicators in the operable range and it \"feels\" full)": "@triggerBody()?['answer7_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer22']['n'])}",
+                            "Positioned so that instructions on nameplate face the user": "@triggerBody()?['answer15_with_singular_value']",
+                            "Quarterely inspection stickers up-to-date": "@triggerBody()?['answer13_with_singular_value']",
+                            "Shows no sign of physical damage, leaking or clogging": "@triggerBody()?['answer11_with_singular_value']",
+                            "Shows no signs of tampering": "@triggerBody()?['answer9_with_singular_value']",
+                            "Sign/ sticker indicating location is posted": "@triggerBody()?['answer19']",
+                            "Time": "@body('Convert_time_zone')",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer8']}",
+                            "You answered No, explain3": "-@{triggerBody()?['answer10']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain5": "-@{triggerBody()?['answer14']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer16']}",
+                            "You answered No, explain7": "-@{triggerBody()?['answer18']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer20_with_singular_value']}",
+                            "You answered No, explain9": "-@{triggerBody()?['answer21']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSLDHNYFIN2A5VF2BZJ6JC4EMWHS')}/workbook/tables/@{encodeURIComponent('{DB1F5C84-41A0-4CEC-A22A-8AB57F22BC76}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Convert_time_zone": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "ASL Pack"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_10": {
+            "actions": {
+                "Add_a_row_into_a_table_10": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSP2QZD2CP4DNZDI67GHRFTYOKYB": "/EHS/Checklists/Weekly/Fire Extinguisher (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employee name": "@triggerBody()?['answer4']",
+                            "Extinguisher type designated for that particular location": "@triggerBody()?['answer20_with_singular_value']",
+                            "Fairly accessible, nothing is blocking access to it (visible)": "@triggerBody()?['answer17_with_singular_value']",
+                            "Fire Extinguisher Number": "@triggerBody()?['answer3']",
+                            "Fire extinguisher present in it's designated location": "@triggerBody()?['answer5_with_singular_value']",
+                            "Fully charged (pressure gauge indicators in the operable range and it \"feels\" full)": "@triggerBody()?['answer7_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer22']['n'])}",
+                            "Positioned so that instructions on nameplate face the user": "@triggerBody()?['answer15_with_singular_value']",
+                            "Quarterely inspection stickers up-to-date": "@triggerBody()?['answer13_with_singular_value']",
+                            "Shows no sign of physical damage, leaking or clogging": "@triggerBody()?['answer11_with_singular_value']",
+                            "Shows no signs of tampering": "@triggerBody()?['answer9_with_singular_value']",
+                            "Sign/ sticker indicating location is posted": "@triggerBody()?['answer19']",
+                            "Time": "@body('Convert_time_zone')",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer8']}",
+                            "You answered No, explain3": "-@{triggerBody()?['answer10']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain5": "-@{triggerBody()?['answer14']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer16']}",
+                            "You answered No, explain7": "-@{triggerBody()?['answer18']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer20_with_singular_value']}",
+                            "You answered No, explain9": "-@{triggerBody()?['answer21']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23CcVP99gEfQ4EjLalW8EVd')}/items/@{encodeURIComponent('012DAKHSP2QZD2CP4DNZDI67GHRFTYOKYB')}/workbook/tables/@{encodeURIComponent('{DB1F5C84-41A0-4CEC-A22A-8AB57F22BC76}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_9": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Sintel"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_11": {
+            "actions": {
+                "Add_a_row_into_a_table_11": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSOHJBSMK2NUGRBIYTMVKMBAYRGL": "/EHS/Checklists/Weekly/Fire Extinguisher (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employee name": "@triggerBody()?['answer4']",
+                            "Extinguisher type designated for that particular location": "@triggerBody()?['answer20_with_singular_value']",
+                            "Fairly accessible, nothing is blocking access to it (visible)": "@triggerBody()?['answer17_with_singular_value']",
+                            "Fire Extinguisher Number": "@triggerBody()?['answer3']",
+                            "Fire extinguisher present in it's designated location": "@triggerBody()?['answer5_with_singular_value']",
+                            "Fully charged (pressure gauge indicators in the operable range and it \"feels\" full)": "@triggerBody()?['answer7_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer22']['n'])}",
+                            "Positioned so that instructions on nameplate face the user": "@triggerBody()?['answer15_with_singular_value']",
+                            "Quarterely inspection stickers up-to-date": "@triggerBody()?['answer13_with_singular_value']",
+                            "Shows no sign of physical damage, leaking or clogging": "@triggerBody()?['answer11_with_singular_value']",
+                            "Shows no signs of tampering": "@triggerBody()?['answer9_with_singular_value']",
+                            "Sign/ sticker indicating location is posted": "@triggerBody()?['answer19']",
+                            "Time": "@body('Convert_time_zone')",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer8']}",
+                            "You answered No, explain3": "-@{triggerBody()?['answer10']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain5": "-@{triggerBody()?['answer14']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer16']}",
+                            "You answered No, explain7": "-@{triggerBody()?['answer18']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer20_with_singular_value']}",
+                            "You answered No, explain9": "-@{triggerBody()?['answer21']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23SOjeg2ex3SKPV30tAC8Sq')}/items/@{encodeURIComponent('012DAKHSOHJBSMK2NUGRBIYTMVKMBAYRGL')}/workbook/tables/@{encodeURIComponent('{DB1F5C84-41A0-4CEC-A22A-8AB57F22BC76}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_10": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "TPSL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_12": {
+            "actions": {
+                "Add_a_row_into_a_table_12": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSPOZ6QUMVLWYJCYJYKYAOOICKWH": "/EHS/Checklists/Weekly/Fire Extinguisher (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employee name": "@triggerBody()?['answer4']",
+                            "Extinguisher type designated for that particular location": "@triggerBody()?['answer20_with_singular_value']",
+                            "Fairly accessible, nothing is blocking access to it (visible)": "@triggerBody()?['answer17_with_singular_value']",
+                            "Fire Extinguisher Number": "@triggerBody()?['answer3']",
+                            "Fire extinguisher present in it's designated location": "@triggerBody()?['answer5_with_singular_value']",
+                            "Fully charged (pressure gauge indicators in the operable range and it \"feels\" full)": "@triggerBody()?['answer7_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer22']['n'])}",
+                            "Positioned so that instructions on nameplate face the user": "@triggerBody()?['answer15_with_singular_value']",
+                            "Quarterely inspection stickers up-to-date": "@triggerBody()?['answer13_with_singular_value']",
+                            "Shows no sign of physical damage, leaking or clogging": "@triggerBody()?['answer11_with_singular_value']",
+                            "Shows no signs of tampering": "@triggerBody()?['answer9_with_singular_value']",
+                            "Sign/ sticker indicating location is posted": "@triggerBody()?['answer19']",
+                            "Time": "@body('Convert_time_zone')",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer8']}",
+                            "You answered No, explain3": "-@{triggerBody()?['answer10']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain5": "-@{triggerBody()?['answer14']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer16']}",
+                            "You answered No, explain7": "-@{triggerBody()?['answer18']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer20_with_singular_value']}",
+                            "You answered No, explain9": "-@{triggerBody()?['answer21']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21OE4Lc5Sx1SZwFdBOFz34o')}/items/@{encodeURIComponent('012DAKHSPOZ6QUMVLWYJCYJYKYAOOICKWH')}/workbook/tables/@{encodeURIComponent('{DB1F5C84-41A0-4CEC-A22A-8AB57F22BC76}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_11": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Wild Elegance"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_2": {
+            "actions": {
+                "Add_a_row_into_a_table_2": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSMKQZXBZPQL2RGL6MTER62GTYDM": "/EHS/Checklists/Weekly/Fire Extinguisher (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employee name": "@triggerBody()?['answer4']",
+                            "Extinguisher type designated for that particular location": "@triggerBody()?['answer20_with_singular_value']",
+                            "Fairly accessible, nothing is blocking access to it (visible)": "@triggerBody()?['answer17_with_singular_value']",
+                            "Fire Extinguisher Number": "@triggerBody()?['answer3']",
+                            "Fire extinguisher present in it's designated location": "@triggerBody()?['answer5_with_singular_value']",
+                            "Fully charged (pressure gauge indicators in the operable range and it \"feels\" full)": "@triggerBody()?['answer7_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer22']['n'])}",
+                            "Positioned so that instructions on nameplate face the user": "@triggerBody()?['answer15_with_singular_value']",
+                            "Quarterely inspection stickers up-to-date": "@triggerBody()?['answer13_with_singular_value']",
+                            "Shows no sign of physical damage, leaking or clogging": "@triggerBody()?['answer11_with_singular_value']",
+                            "Shows no signs of tampering": "@triggerBody()?['answer9_with_singular_value']",
+                            "Sign/ sticker indicating location is posted": "@triggerBody()?['answer19']",
+                            "Time": "@body('Convert_time_zone')",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer8']}",
+                            "You answered No, explain3": "-@{triggerBody()?['answer10']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain5": "-@{triggerBody()?['answer14']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer16']}",
+                            "You answered No, explain7": "-@{triggerBody()?['answer18']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer20_with_singular_value']}",
+                            "You answered No, explain9": "-@{triggerBody()?['answer21']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20_IPQJOQqtRrh4P5a0Fiel')}/items/@{encodeURIComponent('012DAKHSMKQZXBZPQL2RGL6MTER62GTYDM')}/workbook/tables/@{encodeURIComponent('{DB1F5C84-41A0-4CEC-A22A-8AB57F22BC76}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Flexowork"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_3": {
+            "actions": {
+                "Add_a_row_into_a_table_3": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSN6NQ6445TWKRA234DVTWZQJ7QJ": "/EHS/Checklists/Weekly/Fire Extinguisher (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employee name": "@triggerBody()?['answer4']",
+                            "Extinguisher type designated for that particular location": "@triggerBody()?['answer20_with_singular_value']",
+                            "Fairly accessible, nothing is blocking access to it (visible)": "@triggerBody()?['answer17_with_singular_value']",
+                            "Fire Extinguisher Number": "@triggerBody()?['answer3']",
+                            "Fire extinguisher present in it's designated location": "@triggerBody()?['answer5_with_singular_value']",
+                            "Fully charged (pressure gauge indicators in the operable range and it \"feels\" full)": "@triggerBody()?['answer7_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer22']['n'])}",
+                            "Positioned so that instructions on nameplate face the user": "@triggerBody()?['answer15_with_singular_value']",
+                            "Quarterely inspection stickers up-to-date": "@triggerBody()?['answer13_with_singular_value']",
+                            "Shows no sign of physical damage, leaking or clogging": "@triggerBody()?['answer11_with_singular_value']",
+                            "Shows no signs of tampering": "@triggerBody()?['answer9_with_singular_value']",
+                            "Sign/ sticker indicating location is posted": "@triggerBody()?['answer19']",
+                            "Time": "@body('Convert_time_zone')",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer8']}",
+                            "You answered No, explain3": "-@{triggerBody()?['answer10']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain5": "-@{triggerBody()?['answer14']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer16']}",
+                            "You answered No, explain7": "-@{triggerBody()?['answer18']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer20_with_singular_value']}",
+                            "You answered No, explain9": "-@{triggerBody()?['answer21']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20Ih8Qra-VNQ5WlPcEmbDcI')}/items/@{encodeURIComponent('012DAKHSN6NQ6445TWKRA234DVTWZQJ7QJ')}/workbook/tables/@{encodeURIComponent('{DB1F5C84-41A0-4CEC-A22A-8AB57F22BC76}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_2": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "MarketPower"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_4": {
+            "actions": {
+                "Add_a_row_into_a_table_4": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSLRK2O4AYDDERHYMLP67VMQOWLB": "/EHS/Checklists/Weekly/Fire Extinguisher (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employee name": "@triggerBody()?['answer4']",
+                            "Extinguisher type designated for that particular location": "@triggerBody()?['answer20_with_singular_value']",
+                            "Fairly accessible, nothing is blocking access to it (visible)": "@triggerBody()?['answer17_with_singular_value']",
+                            "Fire Extinguisher Number": "@triggerBody()?['answer3']",
+                            "Fire extinguisher present in it's designated location": "@triggerBody()?['answer5_with_singular_value']",
+                            "Fully charged (pressure gauge indicators in the operable range and it \"feels\" full)": "@triggerBody()?['answer7_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer22']['n'])}",
+                            "Positioned so that instructions on nameplate face the user": "@triggerBody()?['answer15_with_singular_value']",
+                            "Quarterely inspection stickers up-to-date": "@triggerBody()?['answer13_with_singular_value']",
+                            "Shows no sign of physical damage, leaking or clogging": "@triggerBody()?['answer11_with_singular_value']",
+                            "Shows no signs of tampering": "@triggerBody()?['answer9_with_singular_value']",
+                            "Sign/ sticker indicating location is posted": "@triggerBody()?['answer19']",
+                            "Time": "@body('Convert_time_zone')",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer8']}",
+                            "You answered No, explain3": "-@{triggerBody()?['answer10']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain5": "-@{triggerBody()?['answer14']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer16']}",
+                            "You answered No, explain7": "-@{triggerBody()?['answer18']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer20_with_singular_value']}",
+                            "You answered No, explain9": "-@{triggerBody()?['answer21']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22X5-_jdHAvQLoyxRsU7UeG')}/items/@{encodeURIComponent('012DAKHSLRK2O4AYDDERHYMLP67VMQOWLB')}/workbook/tables/@{encodeURIComponent('{DB1F5C84-41A0-4CEC-A22A-8AB57F22BC76}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_3": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "\"Panthera"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_5": {
+            "actions": {
+                "Add_a_row_into_a_table_5": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSP5TWK2G2XT7FBYZ62TMSOGOFC4": "/EHS/Checklists/Weekly/Fire Extinguisher (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employee name": "@triggerBody()?['answer4']",
+                            "Extinguisher type designated for that particular location": "@triggerBody()?['answer20_with_singular_value']",
+                            "Fairly accessible, nothing is blocking access to it (visible)": "@triggerBody()?['answer17_with_singular_value']",
+                            "Fire Extinguisher Number": "@triggerBody()?['answer3']",
+                            "Fire extinguisher present in it's designated location": "@triggerBody()?['answer5_with_singular_value']",
+                            "Fully charged (pressure gauge indicators in the operable range and it \"feels\" full)": "@triggerBody()?['answer7_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer22']['n'])}",
+                            "Positioned so that instructions on nameplate face the user": "@triggerBody()?['answer15_with_singular_value']",
+                            "Quarterely inspection stickers up-to-date": "@triggerBody()?['answer13_with_singular_value']",
+                            "Shows no sign of physical damage, leaking or clogging": "@triggerBody()?['answer11_with_singular_value']",
+                            "Shows no signs of tampering": "@triggerBody()?['answer9_with_singular_value']",
+                            "Sign/ sticker indicating location is posted": "@triggerBody()?['answer19']",
+                            "Time": "@body('Convert_time_zone')",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer8']}",
+                            "You answered No, explain3": "-@{triggerBody()?['answer10']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain5": "-@{triggerBody()?['answer14']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer16']}",
+                            "You answered No, explain7": "-@{triggerBody()?['answer18']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer20_with_singular_value']}",
+                            "You answered No, explain9": "-@{triggerBody()?['answer21']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/items/@{encodeURIComponent('012DAKHSP5TWK2G2XT7FBYZ62TMSOGOFC4')}/workbook/tables/@{encodeURIComponent('{DB1F5C84-41A0-4CEC-A22A-8AB57F22BC76}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_4": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Polythene"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_6": {
+            "actions": {
+                "Add_a_row_into_a_table_6": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSLLEFTNW22SGREIVDUAUKGOSINH": "/EHS/Checklists/Weekly/Fire Extinguisher (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employee name": "@triggerBody()?['answer4']",
+                            "Extinguisher type designated for that particular location": "@triggerBody()?['answer20_with_singular_value']",
+                            "Fairly accessible, nothing is blocking access to it (visible)": "@triggerBody()?['answer17_with_singular_value']",
+                            "Fire Extinguisher Number": "@triggerBody()?['answer3']",
+                            "Fire extinguisher present in it's designated location": "@triggerBody()?['answer5_with_singular_value']",
+                            "Fully charged (pressure gauge indicators in the operable range and it \"feels\" full)": "@triggerBody()?['answer7_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer22']['n'])}",
+                            "Positioned so that instructions on nameplate face the user": "@triggerBody()?['answer15_with_singular_value']",
+                            "Quarterely inspection stickers up-to-date": "@triggerBody()?['answer13_with_singular_value']",
+                            "Shows no sign of physical damage, leaking or clogging": "@triggerBody()?['answer11_with_singular_value']",
+                            "Shows no signs of tampering": "@triggerBody()?['answer9_with_singular_value']",
+                            "Sign/ sticker indicating location is posted": "@triggerBody()?['answer19']",
+                            "Time": "@body('Convert_time_zone')",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer8']}",
+                            "You answered No, explain3": "-@{triggerBody()?['answer10']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain5": "-@{triggerBody()?['answer14']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer16']}",
+                            "You answered No, explain7": "-@{triggerBody()?['answer18']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer20_with_singular_value']}",
+                            "You answered No, explain9": "-@{triggerBody()?['answer21']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22kk4tt4keDSZ_ZdgmrQkph')}/items/@{encodeURIComponent('012DAKHSLLEFTNW22SGREIVDUAUKGOSINH')}/workbook/tables/@{encodeURIComponent('{DB1F5C84-41A0-4CEC-A22A-8AB57F22BC76}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_5": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "PPL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_7": {
+            "actions": {
+                "Add_a_row_into_a_table_7": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSIFJKUAUDUW5JFIWLVFMDWTT5TS": "/EHS/Checklists/Weekly/Fire Extinguisher (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employee name": "@triggerBody()?['answer4']",
+                            "Extinguisher type designated for that particular location": "@triggerBody()?['answer20_with_singular_value']",
+                            "Fairly accessible, nothing is blocking access to it (visible)": "@triggerBody()?['answer17_with_singular_value']",
+                            "Fire Extinguisher Number": "@triggerBody()?['answer3']",
+                            "Fire extinguisher present in it's designated location": "@triggerBody()?['answer5_with_singular_value']",
+                            "Fully charged (pressure gauge indicators in the operable range and it \"feels\" full)": "@triggerBody()?['answer7_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer22']['n'])}",
+                            "Positioned so that instructions on nameplate face the user": "@triggerBody()?['answer15_with_singular_value']",
+                            "Quarterely inspection stickers up-to-date": "@triggerBody()?['answer13_with_singular_value']",
+                            "Shows no sign of physical damage, leaking or clogging": "@triggerBody()?['answer11_with_singular_value']",
+                            "Shows no signs of tampering": "@triggerBody()?['answer9_with_singular_value']",
+                            "Sign/ sticker indicating location is posted": "@triggerBody()?['answer19']",
+                            "Time": "@body('Convert_time_zone')",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer8']}",
+                            "You answered No, explain3": "-@{triggerBody()?['answer10']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain5": "-@{triggerBody()?['answer14']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer16']}",
+                            "You answered No, explain7": "-@{triggerBody()?['answer18']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer20_with_singular_value']}",
+                            "You answered No, explain9": "-@{triggerBody()?['answer21']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22UsYI9vqFGSazzeAY4Evkz')}/items/@{encodeURIComponent('012DAKHSIFJKUAUDUW5JFIWLVFMDWTT5TS')}/workbook/tables/@{encodeURIComponent('{DB1F5C84-41A0-4CEC-A22A-8AB57F22BC76}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_6": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Pressmaster"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_8": {
+            "actions": {
+                "Add_a_row_into_a_table_8": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSPECFBHEDI6RVG3ESOZB3EFCKFZ": "/EHS/Checklists/Weekly/Fire Extinguisher (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employee name": "@triggerBody()?['answer4']",
+                            "Extinguisher type designated for that particular location": "@triggerBody()?['answer20_with_singular_value']",
+                            "Fairly accessible, nothing is blocking access to it (visible)": "@triggerBody()?['answer17_with_singular_value']",
+                            "Fire Extinguisher Number": "@triggerBody()?['answer3']",
+                            "Fire extinguisher present in it's designated location": "@triggerBody()?['answer5_with_singular_value']",
+                            "Fully charged (pressure gauge indicators in the operable range and it \"feels\" full)": "@triggerBody()?['answer7_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer22']['n'])}",
+                            "Positioned so that instructions on nameplate face the user": "@triggerBody()?['answer15_with_singular_value']",
+                            "Quarterely inspection stickers up-to-date": "@triggerBody()?['answer13_with_singular_value']",
+                            "Shows no sign of physical damage, leaking or clogging": "@triggerBody()?['answer11_with_singular_value']",
+                            "Shows no signs of tampering": "@triggerBody()?['answer9_with_singular_value']",
+                            "Sign/ sticker indicating location is posted": "@triggerBody()?['answer19']",
+                            "Time": "@body('Convert_time_zone')",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer8']}",
+                            "You answered No, explain3": "-@{triggerBody()?['answer10']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain5": "-@{triggerBody()?['answer14']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer16']}",
+                            "You answered No, explain7": "-@{triggerBody()?['answer18']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer20_with_singular_value']}",
+                            "You answered No, explain9": "-@{triggerBody()?['answer21']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21Zbz70lhgeRrEUj-vRcpoJ')}/items/@{encodeURIComponent('012DAKHSPECFBHEDI6RVG3ESOZB3EFCKFZ')}/workbook/tables/@{encodeURIComponent('{DB1F5C84-41A0-4CEC-A22A-8AB57F22BC76}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_7": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "\"RPWL Unit1"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_9": {
+            "actions": {
+                "Add_a_row_into_a_table_9": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSIIKPDS3UO2OVE2FWJJXA27DGDQ": "/EHS/Checklists/Weekly/Fire Extinguisher (1).xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Date": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                            "Employee name": "@triggerBody()?['answer4']",
+                            "Extinguisher type designated for that particular location": "@triggerBody()?['answer20_with_singular_value']",
+                            "Fairly accessible, nothing is blocking access to it (visible)": "@triggerBody()?['answer17_with_singular_value']",
+                            "Fire Extinguisher Number": "@triggerBody()?['answer3']",
+                            "Fire extinguisher present in it's designated location": "@triggerBody()?['answer5_with_singular_value']",
+                            "Fully charged (pressure gauge indicators in the operable range and it \"feels\" full)": "@triggerBody()?['answer7_with_singular_value']",
+                            "Location": "@{string(triggerBody()?['answer22']['n'])}",
+                            "Positioned so that instructions on nameplate face the user": "@triggerBody()?['answer15_with_singular_value']",
+                            "Quarterely inspection stickers up-to-date": "@triggerBody()?['answer13_with_singular_value']",
+                            "Shows no sign of physical damage, leaking or clogging": "@triggerBody()?['answer11_with_singular_value']",
+                            "Shows no signs of tampering": "@triggerBody()?['answer9_with_singular_value']",
+                            "Sign/ sticker indicating location is posted": "@triggerBody()?['answer19']",
+                            "Time": "@body('Convert_time_zone')",
+                            "You answered No, explain": "-@{triggerBody()?['answer6']}",
+                            "You answered No, explain2": "-@{triggerBody()?['answer8']}",
+                            "You answered No, explain3": "-@{triggerBody()?['answer10']}",
+                            "You answered No, explain4": "-@{triggerBody()?['answer12']}",
+                            "You answered No, explain5": "-@{triggerBody()?['answer14']}",
+                            "You answered No, explain6": "-@{triggerBody()?['answer16']}",
+                            "You answered No, explain7": "-@{triggerBody()?['answer18']}",
+                            "You answered No, explain8": "-@{triggerBody()?['answer20_with_singular_value']}",
+                            "You answered No, explain9": "-@{triggerBody()?['answer21']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK224_MWHSLrlToHLAKKgheJk')}/items/@{encodeURIComponent('012DAKHSIIKPDS3UO2OVE2FWJJXA27DGDQ')}/workbook/tables/@{encodeURIComponent('{DB1F5C84-41A0-4CEC-A22A-8AB57F22BC76}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_8": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit2"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Convert_time_zone": {
+            "runAfter": {
+                "Current_time": [
+                    "Succeeded"
+                ]
+            },
+            "type": "Expression",
+            "kind": "ConvertTimeZone",
+            "inputs": {
+                "baseTime": "@body('Current_time')",
+                "destinationTimeZone": "E. Africa Standard Time",
+                "formatString": "t",
+                "sourceTimeZone": "UTC"
+            }
+        },
+        "Current_time": {
+            "runAfter": {},
+            "type": "Expression",
+            "kind": "CurrentTime",
+            "inputs": {}
+        }
+    },
+    "outputs": {}
+}

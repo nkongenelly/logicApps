@@ -1,0 +1,171 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "ict.plexus.healthchecklist.9",
+                    "groupId": "50810c59-2263-437e-89de-ee74a989a41b@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "HTTP": {
+            "runAfter": {},
+            "type": "Http",
+            "inputs": {
+                "body": {
+                    "answer1": "@triggerBody()?['answer4_with_singular_value']",
+                    "answer10": "@triggerBody()?['answer31_with_singular_value']",
+                    "answer11": "@triggerBody()?['answer34_with_singular_value']",
+                    "answer12": "@triggerBody()?['answer37_with_singular_value']",
+                    "answer13": "@triggerBody()?['answer40_with_singular_value']",
+                    "answer2": "@triggerBody()?['answer7_with_singular_value']",
+                    "answer3": "@triggerBody()?['answer10_with_singular_value']",
+                    "answer4": "@triggerBody()?['answer13_with_singular_value']",
+                    "answer5": "@triggerBody()?['answer16_with_singular_value']",
+                    "answer6": "@triggerBody()?['answer19_with_singular_value']",
+                    "answer7": "@triggerBody()?['answer22_with_singular_value']",
+                    "answer8": "@triggerBody()?['answer25_with_singular_value']",
+                    "answer9": "@triggerBody()?['answer28_with_singular_value']",
+                    "company": "@triggerBody()?['answer1_with_singular_value']",
+                    "departmenta": "@triggerBody()?['answer2_with_singular_value']",
+                    "departmentq": "@triggerBody()?['question2']",
+                    "describe1": "@triggerBody()?['answer5']",
+                    "describe10": "@triggerBody()?['answer32']",
+                    "describe11": "@triggerBody()?['answer35']",
+                    "describe12": "@triggerBody()?['answer38']",
+                    "describe13": "@triggerBody()?['answer41']",
+                    "describe2": "@triggerBody()?['answer8']",
+                    "describe3": "@triggerBody()?['answer11']",
+                    "describe4": "@triggerBody()?['answer14']",
+                    "describe5": "@triggerBody()?['answer17']",
+                    "describe6": "@triggerBody()?['answer20']",
+                    "describe7": "@triggerBody()?['answer23']",
+                    "describe8": "@triggerBody()?['answer26']",
+                    "describe9": "@triggerBody()?['answer29']",
+                    "eight": "@triggerBody()?['answer27']",
+                    "elleven": "@triggerBody()?['answer36']",
+                    "five": "@triggerBody()?['answer18']",
+                    "four": "@triggerBody()?['answer15']",
+                    "fourteen": "@triggerBody()?['answer43']",
+                    "locationa": "@triggerBody()['answer44']['n']",
+                    "locationq": "@triggerBody()?['question44']",
+                    "namea": "@triggerBody()?['answer3']",
+                    "nameq": "@triggerBody()?['question3']",
+                    "nine": "@triggerBody()?['answer30']",
+                    "one": "@triggerBody()?['answer6']",
+                    "seven": "@triggerBody()?['answer24']",
+                    "six": "@triggerBody()?['answer21']",
+                    "ten": "@triggerBody()?['answer33']",
+                    "thirteen": "@triggerBody()?['answer42']",
+                    "three": "@triggerBody()?['answer12']",
+                    "twelve": "@triggerBody()?['answer39']",
+                    "two": "@triggerBody()?['answer9']"
+                },
+                "headers": {
+                    "Content-type": "application/json"
+                },
+                "method": "POST",
+                "uri": "http://ict-a.co.ke/kaizalaEndpoints/allChecklists/EHS/Daily/housekeeping.php"
+            }
+        },
+        "HTTP_2": {
+            "runAfter": {
+                "HTTP": [
+                    "Succeeded"
+                ]
+            },
+            "type": "Http",
+            "inputs": {
+                "body": {
+                    "answer1": "@triggerBody()?['answer4_with_singular_value']",
+                    "answer10": "@triggerBody()?['answer31_with_singular_value']",
+                    "answer11": "@triggerBody()?['answer34_with_singular_value']",
+                    "answer12": "@triggerBody()?['answer37_with_singular_value']",
+                    "answer13": "@triggerBody()?['answer40_with_singular_value']",
+                    "answer2": "@triggerBody()?['answer7_with_singular_value']",
+                    "answer3": "@triggerBody()?['answer10_with_singular_value']",
+                    "answer4": "@triggerBody()?['answer13_with_singular_value']",
+                    "answer5": "@triggerBody()?['answer16_with_singular_value']",
+                    "answer6": "@triggerBody()?['answer19_with_singular_value']",
+                    "answer7": "@triggerBody()?['answer22_with_singular_value']",
+                    "answer8": "@triggerBody()?['answer25_with_singular_value']",
+                    "answer9": "@triggerBody()?['answer28_with_singular_value']",
+                    "departmenta": "@triggerBody()?['answer2_with_singular_value']",
+                    "departmentq": "@triggerBody()?['question2']",
+                    "describe1": "@triggerBody()?['answer5']",
+                    "describe10": "@triggerBody()?['answer32']",
+                    "describe11": "@triggerBody()?['answer35']",
+                    "describe12": "@triggerBody()?['answer38']",
+                    "describe13": "@triggerBody()?['answer41']",
+                    "describe2": "@triggerBody()?['answer8']",
+                    "describe3": "@triggerBody()?['answer11']",
+                    "describe4": "@triggerBody()?['answer14']",
+                    "describe5": "@triggerBody()?['answer17']",
+                    "describe6": "@triggerBody()?['answer20']",
+                    "describe7": "@triggerBody()?['answer23']",
+                    "describe8": "@triggerBody()?['answer26']",
+                    "describe9": "@triggerBody()?['answer29']",
+                    "eight": "@triggerBody()?['answer27']",
+                    "elleven": "@triggerBody()?['answer36']",
+                    "five": "@triggerBody()?['answer18']",
+                    "four": "@triggerBody()?['answer15']",
+                    "fourteen": "@triggerBody()?['answer43']",
+                    "locationa": "@triggerBody()['answer44']['n']",
+                    "locationq": "@triggerBody()?['question44']",
+                    "namea": "@triggerBody()?['answer3']",
+                    "nameq": "@triggerBody()?['question3']",
+                    "nine": "@triggerBody()?['answer30']",
+                    "one": "@triggerBody()?['answer6']",
+                    "question1": "@triggerBody()?['question4']",
+                    "question10": "@triggerBody()?['question31']",
+                    "question11": "@triggerBody()?['question34']",
+                    "question12": "@triggerBody()?['question37']",
+                    "question13": "@triggerBody()?['question40']",
+                    "question14": "@triggerBody()?['question43']",
+                    "question2": "@triggerBody()?['question7']",
+                    "question3": "@triggerBody()?['question10']",
+                    "question4": "@triggerBody()?['question13']",
+                    "question5": "@triggerBody()?['question16']",
+                    "question6": "@triggerBody()?['question19']",
+                    "question7": "@triggerBody()?['question22']",
+                    "question8": "@triggerBody()?['question25']",
+                    "question9": "@triggerBody()?['question28']",
+                    "seven": "@triggerBody()?['answer24']",
+                    "six": "@triggerBody()?['answer21']",
+                    "ten": "@triggerBody()?['answer33']",
+                    "thirteen": "@triggerBody()?['answer42']",
+                    "three": "@triggerBody()?['answer12']",
+                    "twelve": "@triggerBody()?['answer39']",
+                    "two": "@triggerBody()?['answer9']"
+                },
+                "headers": {
+                    "Content-type": "application/json"
+                },
+                "method": "POST",
+                "uri": "http://ict-a.co.ke/kaizalaEndpoints/checklistOutlook.php"
+            }
+        }
+    },
+    "outputs": {}
+}

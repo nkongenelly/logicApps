@@ -1,0 +1,74 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala_1']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "fdb60f52-ae8b-4cfc-9d0f-0e2b966eee3a",
+                    "groupId": "d2de99b4-7546-43d2-8587-0d728f6fa61b@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Send_text_message_to_a_group": {
+            "runAfter": {},
+            "type": "ApiConnection",
+            "inputs": {
+                "body": {
+                    "Message": "@triggerBody()?['answer1']",
+                    "subscribers": "@triggerBody()?['answer2']"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala_1']['connectionId']"
+                    }
+                },
+                "method": "post",
+                "path": "/v1/groups/@{encodeURIComponent('d2de99b4-7546-43d2-8587-0d728f6fa61b@2')}/messages",
+                "queries": {
+                    "sendToAll": "No"
+                }
+            }
+        },
+        "Send_text_message_to_a_group_2": {
+            "runAfter": {
+                "Send_text_message_to_a_group": [
+                    "Succeeded"
+                ]
+            },
+            "type": "ApiConnection",
+            "inputs": {
+                "body": {
+                    "Message": "To: @{triggerBody()?['answer2']},\n\n@{triggerBody()?['answer1']}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala_1']['connectionId']"
+                    }
+                },
+                "method": "post",
+                "path": "/v1/groups/@{encodeURIComponent('d2de99b4-7546-43d2-8587-0d728f6fa61b@2')}/messages"
+            }
+        }
+    },
+    "outputs": {}
+}

@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_survey": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook/Action/SurveyResponse",
+                "queries": {
+                    "groupId": "d2de99b4-7546-43d2-8587-0d728f6fa61b@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "HTTP": {
+            "runAfter": {},
+            "type": "Http",
+            "inputs": {
+                "body": {
+                    "feedback": "",
+                    "jobcardNo": "123456"
+                },
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "method": "POST",
+                "uri": "http://ict-a.co.ke/kaizalaEndpoints/helpdeskFeedback.php"
+            }
+        }
+    },
+    "outputs": {}
+}

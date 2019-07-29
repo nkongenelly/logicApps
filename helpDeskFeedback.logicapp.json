@@ -1,0 +1,98 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "manual": {
+            "type": "Request",
+            "kind": "Http",
+            "inputs": {
+                "schema": {
+                    "items": {
+                        "properties": {
+                            "client": {
+                                "type": "string"
+                            },
+                            "jobcard_no": {
+                                "type": "string"
+                            },
+                            "phoneNumber": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "jobcard_no",
+                            "phoneNumber"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            }
+        }
+    },
+    "actions": {
+        "For_each": {
+            "foreach": "@triggerBody()",
+            "actions": {
+                "Send_action_on_a_group": {
+                    "runAfter": {
+                        "Send_action_on_a_group_2": [
+                            "Succeeded"
+                        ]
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "actionBody": {
+                                "Title": "JOB #@{items('For_each')['jobcard_no']} HAS BEEN RESOLVED"
+                            }
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['kaizala']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/groups/@{encodeURIComponent('d2de99b4-7546-43d2-8587-0d728f6fa61b@2')}/actions",
+                        "queries": {
+                            "actionType": "announcement"
+                        }
+                    }
+                },
+                "Send_action_on_a_group_2": {
+                    "runAfter": {},
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "actionBody": {
+                                "Message": "To give feedback, start your text with;\n@-@{items('For_each')['jobcard_no']}-\n\n(Do not forget the @ sign and\nmake sure to copy the jobcard no. as it is)",
+                                "Title": "JOB #@{items('For_each')['jobcard_no']} HAS BEEN RESOLVED"
+                            },
+                            "subscribers": "+@{items('For_each')['phoneNumber']}"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['kaizala']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/groups/@{encodeURIComponent('d2de99b4-7546-43d2-8587-0d728f6fa61b@2')}/actions",
+                        "queries": {
+                            "actionType": "announcement",
+                            "sendToAll": "No"
+                        }
+                    }
+                }
+            },
+            "runAfter": {},
+            "type": "Foreach"
+        }
+    },
+    "outputs": {}
+}

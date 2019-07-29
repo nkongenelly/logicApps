@@ -1,0 +1,749 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala_2']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "866f4072-d503-42ed-9c7c-186b81a00973.2",
+                    "groupId": "90948578-5472-4f09-ba4a-645c2dd4fdc8@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Condition": {
+            "actions": {
+                "Add_a_row_into_a_table": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSIKIC556LZVUZGIDLNXJADER4EA": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "AUTHORIZED WORKER Name3": "@triggerBody()?['answer10']",
+                            "AUTHORIZED WORKER SIGN OFF_x002e_ Name": "@triggerBody()?['answer12']",
+                            "AUTHORIZED WORKER SIGN ON_x002e_ Name": "@triggerBody()?['answer14']",
+                            "Authorized worker name": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer5']",
+                            "Date4": "@triggerBody()?['answer11']",
+                            "Date5": "@triggerBody()?['answer13']",
+                            "Date6": "@triggerBody()?['answer15']",
+                            "Date7": "@triggerBody()?['answer17']",
+                            "General description of work": "@triggerBody()?['answer6']",
+                            "Location": "@triggerBody()?['answer7']",
+                            "Lockout-Tagout ID": "@triggerBody()?['answer2']",
+                            "PLANT MANAGER / SUPERVISOR_x002e_ Name": "@triggerBody()?['answer8']",
+                            "Sign (Full name)": "@triggerBody()?['answer4']",
+                            "Sign (full name)2": "@triggerBody()?['answer9']",
+                            "Sign Off Name": "@triggerBody()?['answer16']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_1']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSIKIC556LZVUZGIDLNXJADER4EA')}/workbook/tables/@{encodeURIComponent('{8FC403B4-F273-4696-B1A8-C06D689B7B3C}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {},
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "ASL Pack"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_10": {
+            "actions": {
+                "Add_a_row_into_a_table_10": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSIKIC556LZVUZGIDLNXJADER4EA": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSMZEBU7DCRIQVEJA2CTP36G76FB": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "AUTHORIZED WORKER Name3": "@triggerBody()?['answer10']",
+                            "AUTHORIZED WORKER SIGN OFF_x002e_ Name": "@triggerBody()?['answer12']",
+                            "AUTHORIZED WORKER SIGN ON_x002e_ Name": "@triggerBody()?['answer14']",
+                            "Authorized worker name": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer5']",
+                            "Date4": "@triggerBody()?['answer11']",
+                            "Date5": "@triggerBody()?['answer13']",
+                            "Date6": "@triggerBody()?['answer15']",
+                            "Date7": "@triggerBody()?['answer17']",
+                            "General description of work": "@triggerBody()?['answer6']",
+                            "Location": "@triggerBody()?['answer7']",
+                            "Lockout-Tagout ID": "@triggerBody()?['answer2']",
+                            "PLANT MANAGER / SUPERVISOR_x002e_ Name": "@triggerBody()?['answer8']",
+                            "Sign (Full name)": "@triggerBody()?['answer4']",
+                            "Sign (full name)2": "@triggerBody()?['answer9']",
+                            "Sign Off Name": "@triggerBody()?['answer16']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_1']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23CcVP99gEfQ4EjLalW8EVd')}/items/@{encodeURIComponent('012DAKHSMZEBU7DCRIQVEJA2CTP36G76FB')}/workbook/tables/@{encodeURIComponent('{8FC403B4-F273-4696-B1A8-C06D689B7B3C}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_9": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Sintel"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_11": {
+            "actions": {
+                "Add_a_row_into_a_table_11": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSIKIC556LZVUZGIDLNXJADER4EA": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSJMHNA2MYZBIFFKL43AWVY7HRSE": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "AUTHORIZED WORKER Name3": "@triggerBody()?['answer10']",
+                            "AUTHORIZED WORKER SIGN OFF_x002e_ Name": "@triggerBody()?['answer12']",
+                            "AUTHORIZED WORKER SIGN ON_x002e_ Name": "@triggerBody()?['answer14']",
+                            "Authorized worker name": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer5']",
+                            "Date4": "@triggerBody()?['answer11']",
+                            "Date5": "@triggerBody()?['answer13']",
+                            "Date6": "@triggerBody()?['answer15']",
+                            "Date7": "@triggerBody()?['answer17']",
+                            "General description of work": "@triggerBody()?['answer6']",
+                            "Location": "@triggerBody()?['answer7']",
+                            "Lockout-Tagout ID": "@triggerBody()?['answer2']",
+                            "PLANT MANAGER / SUPERVISOR_x002e_ Name": "@triggerBody()?['answer8']",
+                            "Sign (Full name)": "@triggerBody()?['answer4']",
+                            "Sign (full name)2": "@triggerBody()?['answer9']",
+                            "Sign Off Name": "@triggerBody()?['answer16']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_1']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23SOjeg2ex3SKPV30tAC8Sq')}/items/@{encodeURIComponent('012DAKHSJMHNA2MYZBIFFKL43AWVY7HRSE')}/workbook/tables/@{encodeURIComponent('{8FC403B4-F273-4696-B1A8-C06D689B7B3C}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_10": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "TPSL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_12": {
+            "actions": {
+                "Add_a_row_into_a_table_12": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSIKIC556LZVUZGIDLNXJADER4EA": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSM7QVKGKHNIUJA2IFSOXN5RJ6X3": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "AUTHORIZED WORKER Name3": "@triggerBody()?['answer10']",
+                            "AUTHORIZED WORKER SIGN OFF_x002e_ Name": "@triggerBody()?['answer12']",
+                            "AUTHORIZED WORKER SIGN ON_x002e_ Name": "@triggerBody()?['answer14']",
+                            "Authorized worker name": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer5']",
+                            "Date4": "@triggerBody()?['answer11']",
+                            "Date5": "@triggerBody()?['answer13']",
+                            "Date6": "@triggerBody()?['answer15']",
+                            "Date7": "@triggerBody()?['answer17']",
+                            "General description of work": "@triggerBody()?['answer6']",
+                            "Location": "@triggerBody()?['answer7']",
+                            "Lockout-Tagout ID": "@triggerBody()?['answer2']",
+                            "PLANT MANAGER / SUPERVISOR_x002e_ Name": "@triggerBody()?['answer8']",
+                            "Sign (Full name)": "@triggerBody()?['answer4']",
+                            "Sign (full name)2": "@triggerBody()?['answer9']",
+                            "Sign Off Name": "@triggerBody()?['answer16']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_1']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21OE4Lc5Sx1SZwFdBOFz34o')}/items/@{encodeURIComponent('012DAKHSM7QVKGKHNIUJA2IFSOXN5RJ6X3')}/workbook/tables/@{encodeURIComponent('{8FC403B4-F273-4696-B1A8-C06D689B7B3C}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_11": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Wild Elegance"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_2": {
+            "actions": {
+                "Add_a_row_into_a_table_2": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSIKIC556LZVUZGIDLNXJADER4EA": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSIOM4P543ZYOFGI2XBF6DY6K6WB": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "AUTHORIZED WORKER Name3": "@triggerBody()?['answer10']",
+                            "AUTHORIZED WORKER SIGN OFF_x002e_ Name": "@triggerBody()?['answer12']",
+                            "AUTHORIZED WORKER SIGN ON_x002e_ Name": "@triggerBody()?['answer14']",
+                            "Authorized worker name": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer5']",
+                            "Date4": "@triggerBody()?['answer11']",
+                            "Date5": "@triggerBody()?['answer13']",
+                            "Date6": "@triggerBody()?['answer15']",
+                            "Date7": "@triggerBody()?['answer17']",
+                            "General description of work": "@triggerBody()?['answer6']",
+                            "Location": "@triggerBody()?['answer7']",
+                            "Lockout-Tagout ID": "@triggerBody()?['answer2']",
+                            "PLANT MANAGER / SUPERVISOR_x002e_ Name": "@triggerBody()?['answer8']",
+                            "Sign (Full name)": "@triggerBody()?['answer4']",
+                            "Sign (full name)2": "@triggerBody()?['answer9']",
+                            "Sign Off Name": "@triggerBody()?['answer16']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_1']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20_IPQJOQqtRrh4P5a0Fiel')}/items/@{encodeURIComponent('012DAKHSIOM4P543ZYOFGI2XBF6DY6K6WB')}/workbook/tables/@{encodeURIComponent('{8FC403B4-F273-4696-B1A8-C06D689B7B3C}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Flexowork"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_3": {
+            "actions": {
+                "Add_a_row_into_a_table_3": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSIKIC556LZVUZGIDLNXJADER4EA": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSKP4I6PLE2DRRG2ZQB4UGQPDAPE": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "AUTHORIZED WORKER Name3": "@triggerBody()?['answer10']",
+                            "AUTHORIZED WORKER SIGN OFF_x002e_ Name": "@triggerBody()?['answer12']",
+                            "AUTHORIZED WORKER SIGN ON_x002e_ Name": "@triggerBody()?['answer14']",
+                            "Authorized worker name": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer5']",
+                            "Date4": "@triggerBody()?['answer11']",
+                            "Date5": "@triggerBody()?['answer13']",
+                            "Date6": "@triggerBody()?['answer15']",
+                            "Date7": "@triggerBody()?['answer17']",
+                            "General description of work": "@triggerBody()?['answer6']",
+                            "Location": "@triggerBody()?['answer7']",
+                            "Lockout-Tagout ID": "@triggerBody()?['answer2']",
+                            "PLANT MANAGER / SUPERVISOR_x002e_ Name": "@triggerBody()?['answer8']",
+                            "Sign (Full name)": "@triggerBody()?['answer4']",
+                            "Sign (full name)2": "@triggerBody()?['answer9']",
+                            "Sign Off Name": "@triggerBody()?['answer16']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_1']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20Ih8Qra-VNQ5WlPcEmbDcI')}/items/@{encodeURIComponent('012DAKHSKP4I6PLE2DRRG2ZQB4UGQPDAPE')}/workbook/tables/@{encodeURIComponent('{8FC403B4-F273-4696-B1A8-C06D689B7B3C}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_2": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "MarketPower"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_4": {
+            "actions": {
+                "Add_a_row_into_a_table_4": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSIKIC556LZVUZGIDLNXJADER4EA": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSMDKX3W32NKKJAISOLFUQ5MBXTW": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "AUTHORIZED WORKER Name3": "@triggerBody()?['answer10']",
+                            "AUTHORIZED WORKER SIGN OFF_x002e_ Name": "@triggerBody()?['answer12']",
+                            "AUTHORIZED WORKER SIGN ON_x002e_ Name": "@triggerBody()?['answer14']",
+                            "Authorized worker name": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer5']",
+                            "Date4": "@triggerBody()?['answer11']",
+                            "Date5": "@triggerBody()?['answer13']",
+                            "Date6": "@triggerBody()?['answer15']",
+                            "Date7": "@triggerBody()?['answer17']",
+                            "General description of work": "@triggerBody()?['answer6']",
+                            "Location": "@triggerBody()?['answer7']",
+                            "Lockout-Tagout ID": "@triggerBody()?['answer2']",
+                            "PLANT MANAGER / SUPERVISOR_x002e_ Name": "@triggerBody()?['answer8']",
+                            "Sign (Full name)": "@triggerBody()?['answer4']",
+                            "Sign (full name)2": "@triggerBody()?['answer9']",
+                            "Sign Off Name": "@triggerBody()?['answer16']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_1']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22X5-_jdHAvQLoyxRsU7UeG')}/items/@{encodeURIComponent('012DAKHSMDKX3W32NKKJAISOLFUQ5MBXTW')}/workbook/tables/@{encodeURIComponent('{8FC403B4-F273-4696-B1A8-C06D689B7B3C}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_3": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Panthera"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_5": {
+            "actions": {
+                "Add_a_row_into_a_table_5": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSIKIC556LZVUZGIDLNXJADER4EA": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx",
+                        "012DAKHSPUTIO2ODEYC5FYER5ZWLBBOKFJ": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "AUTHORIZED WORKER Name3": "@triggerBody()?['answer10']",
+                            "AUTHORIZED WORKER SIGN OFF_x002e_ Name": "@triggerBody()?['answer12']",
+                            "AUTHORIZED WORKER SIGN ON_x002e_ Name": "@triggerBody()?['answer14']",
+                            "Authorized worker name": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer5']",
+                            "Date4": "@triggerBody()?['answer11']",
+                            "Date5": "@triggerBody()?['answer13']",
+                            "Date6": "@triggerBody()?['answer15']",
+                            "Date7": "@triggerBody()?['answer17']",
+                            "General description of work": "@triggerBody()?['answer6']",
+                            "Location": "@triggerBody()?['answer7']",
+                            "Lockout-Tagout ID": "@triggerBody()?['answer2']",
+                            "PLANT MANAGER / SUPERVISOR_x002e_ Name": "@triggerBody()?['answer8']",
+                            "Sign (Full name)": "@triggerBody()?['answer4']",
+                            "Sign (full name)2": "@triggerBody()?['answer9']",
+                            "Sign Off Name": "@triggerBody()?['answer16']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_1']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/items/@{encodeURIComponent('012DAKHSPUTIO2ODEYC5FYER5ZWLBBOKFJ')}/workbook/tables/@{encodeURIComponent('{8FC403B4-F273-4696-B1A8-C06D689B7B3C}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_4": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Polythene"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_6": {
+            "actions": {
+                "Add_a_row_into_a_table_6": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSIKIC556LZVUZGIDLNXJADER4EA": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSJA2GC7QR4FJRE2V4KHNEDF4D47": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "AUTHORIZED WORKER Name3": "@triggerBody()?['answer10']",
+                            "AUTHORIZED WORKER SIGN OFF_x002e_ Name": "@triggerBody()?['answer12']",
+                            "AUTHORIZED WORKER SIGN ON_x002e_ Name": "@triggerBody()?['answer14']",
+                            "Authorized worker name": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer5']",
+                            "Date4": "@triggerBody()?['answer11']",
+                            "Date5": "@triggerBody()?['answer13']",
+                            "Date6": "@triggerBody()?['answer15']",
+                            "Date7": "@triggerBody()?['answer17']",
+                            "General description of work": "@triggerBody()?['answer6']",
+                            "Location": "@triggerBody()?['answer7']",
+                            "Lockout-Tagout ID": "@triggerBody()?['answer2']",
+                            "PLANT MANAGER / SUPERVISOR_x002e_ Name": "@triggerBody()?['answer8']",
+                            "Sign (Full name)": "@triggerBody()?['answer4']",
+                            "Sign (full name)2": "@triggerBody()?['answer9']",
+                            "Sign Off Name": "@triggerBody()?['answer16']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_1']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22kk4tt4keDSZ_ZdgmrQkph')}/items/@{encodeURIComponent('012DAKHSJA2GC7QR4FJRE2V4KHNEDF4D47')}/workbook/tables/@{encodeURIComponent('{8FC403B4-F273-4696-B1A8-C06D689B7B3C}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_5": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "PPL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_7": {
+            "actions": {
+                "Add_a_row_into_a_table_7": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSIKIC556LZVUZGIDLNXJADER4EA": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSOWV3NDVYMDWBE2BIXJSIRKRZEG": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "AUTHORIZED WORKER Name3": "@triggerBody()?['answer10']",
+                            "AUTHORIZED WORKER SIGN OFF_x002e_ Name": "@triggerBody()?['answer12']",
+                            "AUTHORIZED WORKER SIGN ON_x002e_ Name": "@triggerBody()?['answer14']",
+                            "Authorized worker name": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer5']",
+                            "Date4": "@triggerBody()?['answer11']",
+                            "Date5": "@triggerBody()?['answer13']",
+                            "Date6": "@triggerBody()?['answer15']",
+                            "Date7": "@triggerBody()?['answer17']",
+                            "General description of work": "@triggerBody()?['answer6']",
+                            "Location": "@triggerBody()?['answer7']",
+                            "Lockout-Tagout ID": "@triggerBody()?['answer2']",
+                            "PLANT MANAGER / SUPERVISOR_x002e_ Name": "@triggerBody()?['answer8']",
+                            "Sign (Full name)": "@triggerBody()?['answer4']",
+                            "Sign (full name)2": "@triggerBody()?['answer9']",
+                            "Sign Off Name": "@triggerBody()?['answer16']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_1']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22UsYI9vqFGSazzeAY4Evkz')}/items/@{encodeURIComponent('012DAKHSOWV3NDVYMDWBE2BIXJSIRKRZEG')}/workbook/tables/@{encodeURIComponent('{8FC403B4-F273-4696-B1A8-C06D689B7B3C}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_6": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Pressmaster"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_8": {
+            "actions": {
+                "Add_a_row_into_a_table_8": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSIKIC556LZVUZGIDLNXJADER4EA": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSNSFQYSNNY665H2TELIZL3OGSEW": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "AUTHORIZED WORKER Name3": "@triggerBody()?['answer10']",
+                            "AUTHORIZED WORKER SIGN OFF_x002e_ Name": "@triggerBody()?['answer12']",
+                            "AUTHORIZED WORKER SIGN ON_x002e_ Name": "@triggerBody()?['answer14']",
+                            "Authorized worker name": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer5']",
+                            "Date4": "@triggerBody()?['answer11']",
+                            "Date5": "@triggerBody()?['answer13']",
+                            "Date6": "@triggerBody()?['answer15']",
+                            "Date7": "@triggerBody()?['answer17']",
+                            "General description of work": "@triggerBody()?['answer6']",
+                            "Location": "@triggerBody()?['answer7']",
+                            "Lockout-Tagout ID": "@triggerBody()?['answer2']",
+                            "PLANT MANAGER / SUPERVISOR_x002e_ Name": "@triggerBody()?['answer8']",
+                            "Sign (Full name)": "@triggerBody()?['answer4']",
+                            "Sign (full name)2": "@triggerBody()?['answer9']",
+                            "Sign Off Name": "@triggerBody()?['answer16']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_1']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21Zbz70lhgeRrEUj-vRcpoJ')}/items/@{encodeURIComponent('012DAKHSNSFQYSNNY665H2TELIZL3OGSEW')}/workbook/tables/@{encodeURIComponent('{8FC403B4-F273-4696-B1A8-C06D689B7B3C}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_7": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit1"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_9": {
+            "actions": {
+                "Add_a_row_into_a_table_9": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSIKIC556LZVUZGIDLNXJADER4EA": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSNYPPUO7PUV3FBJNRRKQASSU4Z5": "/EHS/Registers/Maintenance Logs or Registers/Lockout Tagout permit to work.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "AUTHORIZED WORKER Name3": "@triggerBody()?['answer10']",
+                            "AUTHORIZED WORKER SIGN OFF_x002e_ Name": "@triggerBody()?['answer12']",
+                            "AUTHORIZED WORKER SIGN ON_x002e_ Name": "@triggerBody()?['answer14']",
+                            "Authorized worker name": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer5']",
+                            "Date4": "@triggerBody()?['answer11']",
+                            "Date5": "@triggerBody()?['answer13']",
+                            "Date6": "@triggerBody()?['answer15']",
+                            "Date7": "@triggerBody()?['answer17']",
+                            "General description of work": "@triggerBody()?['answer6']",
+                            "Location": "@triggerBody()?['answer7']",
+                            "Lockout-Tagout ID": "@triggerBody()?['answer2']",
+                            "PLANT MANAGER / SUPERVISOR_x002e_ Name": "@triggerBody()?['answer8']",
+                            "Sign (Full name)": "@triggerBody()?['answer4']",
+                            "Sign (full name)2": "@triggerBody()?['answer9']",
+                            "Sign Off Name": "@triggerBody()?['answer16']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_1']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK224_MWHSLrlToHLAKKgheJk')}/items/@{encodeURIComponent('012DAKHSNYPPUO7PUV3FBJNRRKQASSU4Z5')}/workbook/tables/@{encodeURIComponent('{8FC403B4-F273-4696-B1A8-C06D689B7B3C}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_8": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit2"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        }
+    },
+    "outputs": {}
+}

@@ -1,0 +1,2605 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "staticResults": {
+        "List_rows_present_in_a_table0": {
+            "status": "Succeeded",
+            "code": "200",
+            "outputs": {
+                "headers": {},
+                "statusCode": "OK"
+            }
+        }
+    },
+    "triggers": {
+        "manual": {
+            "type": "Request",
+            "kind": "Http",
+            "inputs": {
+                "schema": {
+                    "items": {
+                        "properties": {
+                            "answer1": {
+                                "type": "string"
+                            },
+                            "answer10": {
+                                "type": "string"
+                            },
+                            "answer11": {
+                                "type": "string"
+                            },
+                            "answer12": {
+                                "type": "string"
+                            },
+                            "answer13": {
+                                "type": "string"
+                            },
+                            "answer2": {
+                                "type": "string"
+                            },
+                            "answer3": {
+                                "type": "string"
+                            },
+                            "answer4": {
+                                "type": "string"
+                            },
+                            "answer5": {
+                                "type": "string"
+                            },
+                            "answer6": {
+                                "type": "string"
+                            },
+                            "answer7": {
+                                "type": "string"
+                            },
+                            "answer8": {
+                                "type": "string"
+                            },
+                            "answer9": {
+                                "type": "string"
+                            },
+                            "company": {
+                                "type": "string"
+                            },
+                            "departmenta": {
+                                "type": "string"
+                            },
+                            "departmentq": {
+                                "type": "string"
+                            },
+                            "describe1": {
+                                "type": "string"
+                            },
+                            "describe10": {
+                                "type": "string"
+                            },
+                            "describe11": {
+                                "type": "string"
+                            },
+                            "describe12": {
+                                "type": "string"
+                            },
+                            "describe13": {
+                                "type": "string"
+                            },
+                            "describe2": {
+                                "type": "string"
+                            },
+                            "describe3": {
+                                "type": "string"
+                            },
+                            "describe4": {
+                                "type": "string"
+                            },
+                            "describe5": {
+                                "type": "string"
+                            },
+                            "describe6": {
+                                "type": "string"
+                            },
+                            "describe7": {
+                                "type": "string"
+                            },
+                            "describe8": {
+                                "type": "string"
+                            },
+                            "describe9": {
+                                "type": "string"
+                            },
+                            "eights": {
+                                "type": "string"
+                            },
+                            "eights2": {
+                                "type": "string"
+                            },
+                            "eights3": {
+                                "type": "string"
+                            },
+                            "eights4": {
+                                "type": "string"
+                            },
+                            "eights5": {
+                                "type": "string"
+                            },
+                            "ellevens": {
+                                "type": "string"
+                            },
+                            "ellevens2": {
+                                "type": "string"
+                            },
+                            "ellevens3": {
+                                "type": "string"
+                            },
+                            "ellevens4": {
+                                "type": "string"
+                            },
+                            "ellevens5": {
+                                "type": "string"
+                            },
+                            "fives": {
+                                "type": "string"
+                            },
+                            "fives2": {
+                                "type": "string"
+                            },
+                            "fives3": {
+                                "type": "string"
+                            },
+                            "fives4": {
+                                "type": "string"
+                            },
+                            "fives5": {
+                                "type": "string"
+                            },
+                            "fours": {
+                                "type": "string"
+                            },
+                            "fours2": {
+                                "type": "string"
+                            },
+                            "fours3": {
+                                "type": "string"
+                            },
+                            "fours4": {
+                                "type": "string"
+                            },
+                            "fours5": {
+                                "type": "string"
+                            },
+                            "fourteens": {
+                                "type": "string"
+                            },
+                            "locationa": {
+                                "type": "string"
+                            },
+                            "locationq": {
+                                "type": "string"
+                            },
+                            "namea": {
+                                "type": "string"
+                            },
+                            "nameq": {
+                                "type": "string"
+                            },
+                            "nines": {
+                                "type": "string"
+                            },
+                            "nines2": {
+                                "type": "string"
+                            },
+                            "nines3": {
+                                "type": "string"
+                            },
+                            "nines4": {
+                                "type": "string"
+                            },
+                            "nines5": {
+                                "type": "string"
+                            },
+                            "ones": {
+                                "type": "string"
+                            },
+                            "ones2": {
+                                "type": "string"
+                            },
+                            "ones3": {
+                                "type": "string"
+                            },
+                            "ones4": {
+                                "type": "string"
+                            },
+                            "ones5": {
+                                "type": "string"
+                            },
+                            "sevens": {
+                                "type": "string"
+                            },
+                            "sevens2": {
+                                "type": "string"
+                            },
+                            "sevens3": {
+                                "type": "string"
+                            },
+                            "sevens4": {
+                                "type": "string"
+                            },
+                            "sevens5": {
+                                "type": "string"
+                            },
+                            "sixes": {
+                                "type": "string"
+                            },
+                            "sixes2": {
+                                "type": "string"
+                            },
+                            "sixes3": {
+                                "type": "string"
+                            },
+                            "sixes4": {
+                                "type": "string"
+                            },
+                            "sixes5": {
+                                "type": "string"
+                            },
+                            "tens": {
+                                "type": "string"
+                            },
+                            "tens2": {
+                                "type": "string"
+                            },
+                            "tens3": {
+                                "type": "string"
+                            },
+                            "tens4": {
+                                "type": "string"
+                            },
+                            "tens5": {
+                                "type": "string"
+                            },
+                            "thirteens": {
+                                "type": "string"
+                            },
+                            "thirteens2": {
+                                "type": "string"
+                            },
+                            "thirteens3": {
+                                "type": "string"
+                            },
+                            "thirteens4": {
+                                "type": "string"
+                            },
+                            "thirteens5": {
+                                "type": "string"
+                            },
+                            "threes": {
+                                "type": "string"
+                            },
+                            "threes2": {
+                                "type": "string"
+                            },
+                            "threes3": {
+                                "type": "string"
+                            },
+                            "threes4": {
+                                "type": "string"
+                            },
+                            "threes5": {
+                                "type": "string"
+                            },
+                            "twelves": {
+                                "type": "string"
+                            },
+                            "twelves2": {
+                                "type": "string"
+                            },
+                            "twelves3": {
+                                "type": "string"
+                            },
+                            "twelves4": {
+                                "type": "string"
+                            },
+                            "twelves5": {
+                                "type": "string"
+                            },
+                            "twos": {
+                                "type": "string"
+                            },
+                            "twos2": {
+                                "type": "string"
+                            },
+                            "twos3": {
+                                "type": "string"
+                            },
+                            "twos4": {
+                                "type": "string"
+                            },
+                            "twos5": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [],
+                        "type": "object"
+                    },
+                    "type": "array"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Add_a_key_column_to_a_table": {
+            "runAfter": {
+                "Get_tables": [
+                    "Succeeded"
+                ]
+            },
+            "metadata": {
+                "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+            },
+            "type": "ApiConnection",
+            "inputs": {
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                    }
+                },
+                "method": "post",
+                "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/createIdColumn",
+                "queries": {
+                    "idColumn": "@{formatDateTime(utcNow(),'yyyy-MM-dd')}",
+                    "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                }
+            }
+        },
+        "Current_time": {
+            "runAfter": {},
+            "type": "Expression",
+            "kind": "CurrentTime",
+            "inputs": {}
+        },
+        "For_each": {
+            "foreach": "@body('List_rows_present_in_a_table')?['value']",
+            "actions": {
+                "For_each_46": {
+                    "foreach": "@triggerBody()",
+                    "actions": {
+                        "Condition_46": {
+                            "actions": {
+                                "Condition_101": {
+                                    "actions": {
+                                        "For_each_102": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_101": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_102')?['departmenta']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {},
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "1"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_102": {
+                                    "actions": {
+                                        "For_each_103": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_102": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_103')?['namea']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_101": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "2"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_103": {
+                                    "actions": {
+                                        "For_each_104": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_103": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_104')?['answer1']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_129": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "3"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_104": {
+                                    "actions": {
+                                        "For_each_105": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_104": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_105')?['describe1']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_139": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "4"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_105": {
+                                    "actions": {
+                                        "For_each_106": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_105": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_106')?['ones']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_102": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "5"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_106": {
+                                    "actions": {
+                                        "For_each_107": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_106": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_107')?['answer2']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_105": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "6"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_107": {
+                                    "actions": {
+                                        "For_each_108": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_107": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_108')?['describe2']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_106": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "7"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_108": {
+                                    "actions": {
+                                        "For_each_109": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_108": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_109')?['twos']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_107": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "8"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_109": {
+                                    "actions": {
+                                        "For_each_110": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_109": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_110')?['answer3']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_108": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "9"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_110": {
+                                    "actions": {
+                                        "For_each_111": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_110": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_111')?['describe3']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_109": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "10"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_111": {
+                                    "actions": {
+                                        "For_each_112": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_111": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_112')?['threes']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_110": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "11"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_112": {
+                                    "actions": {
+                                        "For_each_113": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_112": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_113')?['answer4']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_111": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "12"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_113": {
+                                    "actions": {
+                                        "For_each_114": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_113": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_114')?['describe4']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_112": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "13"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_114": {
+                                    "actions": {
+                                        "For_each_115": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_114": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_115')?['fours']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_113": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "14"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_115": {
+                                    "actions": {
+                                        "For_each_116": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_115": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_116')?['answer5']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_114": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "15"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_116": {
+                                    "actions": {
+                                        "For_each_117": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_116": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_117')?['describe5']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_115": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "16"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_117": {
+                                    "actions": {
+                                        "For_each_118": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_117": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_118')?['fives']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_116": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "17"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_118": {
+                                    "actions": {
+                                        "For_each_119": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_118": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_119')?['answer6']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_117": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "18"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_119": {
+                                    "actions": {
+                                        "For_each_120": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_119": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_120')?['describe6']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_118": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "19"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_120": {
+                                    "actions": {
+                                        "For_each_121": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_120": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_121')?['sixes']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_119": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "20"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_121": {
+                                    "actions": {
+                                        "For_each_122": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_121": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_122')?['answer7']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_120": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "21"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_122": {
+                                    "actions": {
+                                        "For_each_123": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_122": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_123')?['answer7']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_121": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "22"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_123": {
+                                    "actions": {
+                                        "For_each_124": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_123": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_124')?['sevens']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_122": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "23"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_124": {
+                                    "actions": {
+                                        "For_each_125": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_124": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_125')?['answer8']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_123": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "24"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_125": {
+                                    "actions": {
+                                        "For_each_126": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_125": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_126')?['describe8']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_124": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "25"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_126": {
+                                    "actions": {
+                                        "For_each_127": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_126": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_127')?['eights']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_125": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "26"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_127": {
+                                    "actions": {
+                                        "For_each_128": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_127": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_128')?['answer9']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_126": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "27"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_128": {
+                                    "actions": {
+                                        "For_each_129": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_128": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_129')?['describe9']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_127": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "28"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_129": {
+                                    "actions": {
+                                        "For_each_130": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_129": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_130')?['nines']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_128": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "29"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_130": {
+                                    "actions": {
+                                        "For_each_131": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_130": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_131')?['answer10']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_103": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "30"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_131": {
+                                    "actions": {
+                                        "For_each_132": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_131": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_132')?['describe10']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_130": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "31"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_132": {
+                                    "actions": {
+                                        "For_each_133": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_132": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_133')?['tens']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_131": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "32"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_133": {
+                                    "actions": {
+                                        "For_each_134": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_133": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_134')?['answer11']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_132": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "33"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_134": {
+                                    "actions": {
+                                        "For_each_135": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_134": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_135')?['describe11']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_133": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "34"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_135": {
+                                    "actions": {
+                                        "For_each_136": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_135": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@{items('For_each_136')?['ellevens']}"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_134": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "35"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_136": {
+                                    "actions": {
+                                        "For_each_137": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_136": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_137')?['answer12']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_135": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "36"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_137": {
+                                    "actions": {
+                                        "For_each_138": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_137": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_138')?['describe12']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_136": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "37"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_138": {
+                                    "actions": {
+                                        "For_each_139": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_138": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_139')?['twelves']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_137": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "38"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_139": {
+                                    "actions": {
+                                        "For_each_140": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_139": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_140')?['answer13']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_138": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "39"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_140": {
+                                    "actions": {
+                                        "For_each_141": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_140": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            " @@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_141')?['describe13']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_104": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "40"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_141": {
+                                    "actions": {
+                                        "For_each_142": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_141": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_142')?['thirteens']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_140": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "41"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_142": {
+                                    "actions": {
+                                        "For_each_143": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_142": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_143')?['fourteens']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_141": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "42"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                },
+                                "Condition_143": {
+                                    "actions": {
+                                        "For_each_144": {
+                                            "foreach": "@triggerBody()",
+                                            "actions": {
+                                                "Update_a_row_143": {
+                                                    "runAfter": {},
+                                                    "metadata": {
+                                                        "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+                                                    },
+                                                    "type": "ApiConnection",
+                                                    "inputs": {
+                                                        "body": {
+                                                            "@@{formatDateTime(utcNow(),'yyyy-MM-dd')}": "@items('For_each_144')?['locationa']"
+                                                        },
+                                                        "host": {
+                                                            "connection": {
+                                                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                                                            }
+                                                        },
+                                                        "method": "patch",
+                                                        "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items/@{encodeURIComponent(encodeURIComponent(items('For_each')?['RowId']))}",
+                                                        "queries": {
+                                                            "idColumn": "RowId",
+                                                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "runAfter": {},
+                                            "type": "Foreach"
+                                        }
+                                    },
+                                    "runAfter": {
+                                        "Condition_142": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "expression": {
+                                        "and": [
+                                            {
+                                                "equals": [
+                                                    "@items('For_each')?['RowId']",
+                                                    "43"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "type": "If"
+                                }
+                            },
+                            "runAfter": {},
+                            "expression": {
+                                "and": [
+                                    {
+                                        "equals": [
+                                            "@items('For_each_46')?['company']",
+                                            "Polythene"
+                                        ]
+                                    },
+                                    {
+                                        "equals": [
+                                            "@items('For_each_46')?['departmenta']",
+                                            "Extrusion"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "type": "If"
+                        }
+                    },
+                    "runAfter": {},
+                    "type": "Foreach"
+                }
+            },
+            "runAfter": {
+                "List_rows_present_in_a_table": [
+                    "Succeeded"
+                ]
+            },
+            "type": "Foreach"
+        },
+        "Get_tables": {
+            "runAfter": {
+                "Current_time": [
+                    "Succeeded"
+                ]
+            },
+            "metadata": {
+                "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+            },
+            "type": "ApiConnection",
+            "inputs": {
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                    }
+                },
+                "method": "get",
+                "path": "/codeless/v1.0/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/items/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/workbook/tables",
+                "queries": {
+                    "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                }
+            }
+        },
+        "List_rows_present_in_a_table": {
+            "runAfter": {
+                "Add_a_key_column_to_a_table": [
+                    "Succeeded"
+                ]
+            },
+            "metadata": {
+                "012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC": "/EHS/Checklists/Daily/HealthChecklist (2).xlsx"
+            },
+            "type": "ApiConnection",
+            "inputs": {
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                    }
+                },
+                "method": "get",
+                "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/files/@{encodeURIComponent('012DAKHSM7VCHZ5426V5BY75B5Z7KOFMXC')}/tables/@{encodeURIComponent('{706DF1B4-D00C-4862-8E8D-2FDD36D58563}')}/items",
+                "queries": {
+                    "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                }
+            },
+            "runtimeConfiguration": {
+                "staticResult": {
+                    "staticResultOptions": "Disabled",
+                    "name": "List_rows_present_in_a_table0"
+                }
+            }
+        }
+    },
+    "outputs": {}
+}

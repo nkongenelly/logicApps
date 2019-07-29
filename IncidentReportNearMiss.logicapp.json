@@ -1,0 +1,928 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala_1']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "ce7f418f-147d-43af-9ab0-b7a246ca82bf.2",
+                    "groupId": "c1a2ff37-1dfb-4b9b-aadd-c29525b100ba@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Condition": {
+            "actions": {
+                "Add_a_row_into_a_table": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Action taken": "@triggerBody()?['answer30']",
+                            "Area where near miss occured": "@triggerBody()?['answer5']",
+                            "Attach photos?": "@triggerBody()?['answer24_with_singular_value']",
+                            "Briefly describe what happened including the sequence of events, investigate scene of the near miss": "@triggerBody()?['answer23']",
+                            "Completion date": "@triggerBody()?['answer28']",
+                            "Contact number": "@triggerBody()?['answer15']",
+                            "Contact number2": "@triggerBody()?['answer18']",
+                            "Date": "@triggerBody()?['answer34']",
+                            "Date of incident": "@triggerBody()?['answer2']",
+                            "Date of report": "@triggerBody()?['answer9']",
+                            "Date report completed": "@triggerBody()?['answer12']",
+                            "Full description of events_x002e_ Who was involved?": "@triggerBody()?['answer22_with_singular_value']",
+                            "How much experience did the employee have in the task/s that was being performed when the near miss occurred? What training has been provided?": "@triggerBody()?['answer20']",
+                            "Implementation details_x002e_ Date implemented": "@triggerBody()?['answer29']",
+                            "Injury potential": "@triggerBody()?['answer7']",
+                            "Investigation recommendation_x002e_ Investigators recommendation": "@triggerBody()?['answer26']",
+                            "Investigator's name": "@triggerBody()?['answer33']",
+                            "Job title (if relevant)": "@triggerBody()?['answer14']",
+                            "Job titltle (if relevant)": "@triggerBody()?['answer17']",
+                            "Name of person (if relevant)": "-@{triggerBody()?['answer6']}",
+                            "Name of person completing this form": "@triggerBody()?['answer10']",
+                            "Name of person who reported incident": "@triggerBody()?['answer8']",
+                            "Name of person/s conducting investigation": "@triggerBody()?['answer16']",
+                            "Person to action": "@triggerBody()?['answer27']",
+                            "Photos": "-@{triggerBody()?['answer25']}",
+                            "Responsible person": "@triggerBody()?['answer31']",
+                            "Review date": "@triggerBody()?['answer32']",
+                            "Short description of incident/ near miss": "@triggerBody()?['answer4']",
+                            "Telephone number": "@triggerBody()?['answer11']",
+                            "Time of incident": "@triggerBody()?['answer3']",
+                            "WITNESS DETAILS_x002e_ Name/s": "@triggerBody()?['answer13']",
+                            "What is the chance of the accident/ incident occuring again?": "@triggerBody()?['answer21']",
+                            "What preventative action could have been taken? Why was this action not taken?": "@triggerBody()?['answer19']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ')}/workbook/tables/@{encodeURIComponent('{3F80FD83-6437-46F5-BA17-8B05C635FFFF}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {},
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "ASL Pack"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_10": {
+            "actions": {
+                "Add_a_row_into_a_table_10": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSKUEJUICCNI6FFYG3X6EYXTXFAR": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx",
+                        "012DAKHSNTM3R4VIPAQNBKIOR3SRHYRBLC": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Action taken": "@triggerBody()?['answer30']",
+                            "Area where near miss occured": "@triggerBody()?['answer5']",
+                            "Attach photos?": "@triggerBody()?['answer24_with_singular_value']",
+                            "Briefly describe what happened including the sequence of events, investigate scene of the near miss": "@triggerBody()?['answer23']",
+                            "Completion date": "@triggerBody()?['answer28']",
+                            "Contact number": "@triggerBody()?['answer15']",
+                            "Contact number2": "@triggerBody()?['answer18']",
+                            "Date": "@triggerBody()?['answer34']",
+                            "Date of incident": "@triggerBody()?['answer2']",
+                            "Date of report": "@triggerBody()?['answer9']",
+                            "Date report completed": "@triggerBody()?['answer12']",
+                            "Full description of events_x002e_ Who was involved?": "@triggerBody()?['answer22_with_singular_value']",
+                            "How much experience did the employee have in the task/s that was being performed when the near miss occurred? What training has been provided?": "@triggerBody()?['answer20']",
+                            "Implementation details_x002e_ Date implemented": "@triggerBody()?['answer29']",
+                            "Injury potential": "@triggerBody()?['answer7']",
+                            "Investigation recommendation_x002e_ Investigators recommendation": "@triggerBody()?['answer26']",
+                            "Investigator's name": "@triggerBody()?['answer33']",
+                            "Job title (if relevant)": "@triggerBody()?['answer14']",
+                            "Job titltle (if relevant)": "@triggerBody()?['answer17']",
+                            "Name of person (if relevant)": "-@{triggerBody()?['answer6']}",
+                            "Name of person completing this form": "@triggerBody()?['answer10']",
+                            "Name of person who reported incident": "@triggerBody()?['answer8']",
+                            "Name of person/s conducting investigation": "@triggerBody()?['answer16']",
+                            "Person to action": "@triggerBody()?['answer27']",
+                            "Photos": "-@{triggerBody()?['answer25']}",
+                            "Responsible person": "@triggerBody()?['answer31']",
+                            "Review date": "@triggerBody()?['answer32']",
+                            "Short description of incident/ near miss": "@triggerBody()?['answer4']",
+                            "Telephone number": "@triggerBody()?['answer11']",
+                            "Time of incident": "@triggerBody()?['answer3']",
+                            "WITNESS DETAILS_x002e_ Name/s": "@triggerBody()?['answer13']",
+                            "What is the chance of the accident/ incident occuring again?": "@triggerBody()?['answer21']",
+                            "What preventative action could have been taken? Why was this action not taken?": "@triggerBody()?['answer19']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23CcVP99gEfQ4EjLalW8EVd')}/items/@{encodeURIComponent('012DAKHSKUEJUICCNI6FFYG3X6EYXTXFAR')}/workbook/tables/@{encodeURIComponent('{3F80FD83-6437-46F5-BA17-8B05C635FFFF}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_9": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Sintel"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_11": {
+            "actions": {
+                "Add_a_row_into_a_table_11": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSLYPBLINA7ZMVAJ4RQBCU373QVT": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx",
+                        "012DAKHSNTM3R4VIPAQNBKIOR3SRHYRBLC": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Action taken": "@triggerBody()?['answer30']",
+                            "Area where near miss occured": "@triggerBody()?['answer5']",
+                            "Attach photos?": "@triggerBody()?['answer24_with_singular_value']",
+                            "Briefly describe what happened including the sequence of events, investigate scene of the near miss": "@triggerBody()?['answer23']",
+                            "Completion date": "@triggerBody()?['answer28']",
+                            "Contact number": "@triggerBody()?['answer15']",
+                            "Contact number2": "@triggerBody()?['answer18']",
+                            "Date": "@triggerBody()?['answer34']",
+                            "Date of incident": "@triggerBody()?['answer2']",
+                            "Date of report": "@triggerBody()?['answer9']",
+                            "Date report completed": "@triggerBody()?['answer12']",
+                            "Full description of events_x002e_ Who was involved?": "@triggerBody()?['answer22_with_singular_value']",
+                            "How much experience did the employee have in the task/s that was being performed when the near miss occurred? What training has been provided?": "@triggerBody()?['answer20']",
+                            "Implementation details_x002e_ Date implemented": "@triggerBody()?['answer29']",
+                            "Injury potential": "@triggerBody()?['answer7']",
+                            "Investigation recommendation_x002e_ Investigators recommendation": "@triggerBody()?['answer26']",
+                            "Investigator's name": "@triggerBody()?['answer33']",
+                            "Job title (if relevant)": "@triggerBody()?['answer14']",
+                            "Job titltle (if relevant)": "@triggerBody()?['answer17']",
+                            "Name of person (if relevant)": "-@{triggerBody()?['answer6']}",
+                            "Name of person completing this form": "@triggerBody()?['answer10']",
+                            "Name of person who reported incident": "@triggerBody()?['answer8']",
+                            "Name of person/s conducting investigation": "@triggerBody()?['answer16']",
+                            "Person to action": "@triggerBody()?['answer27']",
+                            "Photos": "-@{triggerBody()?['answer25']}",
+                            "Responsible person": "@triggerBody()?['answer31']",
+                            "Review date": "@triggerBody()?['answer32']",
+                            "Short description of incident/ near miss": "@triggerBody()?['answer4']",
+                            "Telephone number": "@triggerBody()?['answer11']",
+                            "Time of incident": "@triggerBody()?['answer3']",
+                            "WITNESS DETAILS_x002e_ Name/s": "@triggerBody()?['answer13']",
+                            "What is the chance of the accident/ incident occuring again?": "@triggerBody()?['answer21']",
+                            "What preventative action could have been taken? Why was this action not taken?": "@triggerBody()?['answer19']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23SOjeg2ex3SKPV30tAC8Sq')}/items/@{encodeURIComponent('012DAKHSLYPBLINA7ZMVAJ4RQBCU373QVT')}/workbook/tables/@{encodeURIComponent('{3F80FD83-6437-46F5-BA17-8B05C635FFFF}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_10": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "TPSL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_12": {
+            "actions": {
+                "Add_a_row_into_a_table_12": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSKAQQVWQXQMYBEJRNF5P7R4ATRG": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx",
+                        "012DAKHSNTM3R4VIPAQNBKIOR3SRHYRBLC": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Action taken": "@triggerBody()?['answer30']",
+                            "Area where near miss occured": "@triggerBody()?['answer5']",
+                            "Attach photos?": "@triggerBody()?['answer24_with_singular_value']",
+                            "Briefly describe what happened including the sequence of events, investigate scene of the near miss": "@triggerBody()?['answer23']",
+                            "Completion date": "@triggerBody()?['answer28']",
+                            "Contact number": "@triggerBody()?['answer15']",
+                            "Contact number2": "@triggerBody()?['answer18']",
+                            "Date": "@triggerBody()?['answer34']",
+                            "Date of incident": "@triggerBody()?['answer2']",
+                            "Date of report": "@triggerBody()?['answer9']",
+                            "Date report completed": "@triggerBody()?['answer12']",
+                            "Full description of events_x002e_ Who was involved?": "@triggerBody()?['answer22_with_singular_value']",
+                            "How much experience did the employee have in the task/s that was being performed when the near miss occurred? What training has been provided?": "@triggerBody()?['answer20']",
+                            "Implementation details_x002e_ Date implemented": "@triggerBody()?['answer29']",
+                            "Injury potential": "@triggerBody()?['answer7']",
+                            "Investigation recommendation_x002e_ Investigators recommendation": "@triggerBody()?['answer26']",
+                            "Investigator's name": "@triggerBody()?['answer33']",
+                            "Job title (if relevant)": "@triggerBody()?['answer14']",
+                            "Job titltle (if relevant)": "@triggerBody()?['answer17']",
+                            "Name of person (if relevant)": "-@{triggerBody()?['answer6']}",
+                            "Name of person completing this form": "@triggerBody()?['answer10']",
+                            "Name of person who reported incident": "@triggerBody()?['answer8']",
+                            "Name of person/s conducting investigation": "@triggerBody()?['answer16']",
+                            "Person to action": "@triggerBody()?['answer27']",
+                            "Photos": "-@{triggerBody()?['answer25']}",
+                            "Responsible person": "@triggerBody()?['answer31']",
+                            "Review date": "@triggerBody()?['answer32']",
+                            "Short description of incident/ near miss": "@triggerBody()?['answer4']",
+                            "Telephone number": "@triggerBody()?['answer11']",
+                            "Time of incident": "@triggerBody()?['answer3']",
+                            "WITNESS DETAILS_x002e_ Name/s": "@triggerBody()?['answer13']",
+                            "What is the chance of the accident/ incident occuring again?": "@triggerBody()?['answer21']",
+                            "What preventative action could have been taken? Why was this action not taken?": "@triggerBody()?['answer19']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21OE4Lc5Sx1SZwFdBOFz34o')}/items/@{encodeURIComponent('012DAKHSKAQQVWQXQMYBEJRNF5P7R4ATRG')}/workbook/tables/@{encodeURIComponent('{3F80FD83-6437-46F5-BA17-8B05C635FFFF}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_11": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Wild Elegance"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_2": {
+            "actions": {
+                "Add_a_row_into_a_table_2": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSNTM3R4VIPAQNBKIOR3SRHYRBLC": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Action taken": "@triggerBody()?['answer30']",
+                            "Area where near miss occured": "@triggerBody()?['answer5']",
+                            "Attach photos?": "@triggerBody()?['answer24_with_singular_value']",
+                            "Briefly describe what happened including the sequence of events, investigate scene of the near miss": "@triggerBody()?['answer23']",
+                            "Completion date": "@triggerBody()?['answer28']",
+                            "Contact number": "@triggerBody()?['answer15']",
+                            "Contact number2": "@triggerBody()?['answer18']",
+                            "Date": "@triggerBody()?['answer34']",
+                            "Date of incident": "@triggerBody()?['answer2']",
+                            "Date of report": "@triggerBody()?['answer9']",
+                            "Date report completed": "@triggerBody()?['answer12']",
+                            "Full description of events_x002e_ Who was involved?": "@triggerBody()?['answer22_with_singular_value']",
+                            "How much experience did the employee have in the task/s that was being performed when the near miss occurred? What training has been provided?": "@triggerBody()?['answer20']",
+                            "Implementation details_x002e_ Date implemented": "@triggerBody()?['answer29']",
+                            "Injury potential": "@triggerBody()?['answer7']",
+                            "Investigation recommendation_x002e_ Investigators recommendation": "@triggerBody()?['answer26']",
+                            "Investigator's name": "@triggerBody()?['answer33']",
+                            "Job title (if relevant)": "@triggerBody()?['answer14']",
+                            "Job titltle (if relevant)": "@triggerBody()?['answer17']",
+                            "Name of person (if relevant)": "-@{triggerBody()?['answer6']}",
+                            "Name of person completing this form": "@triggerBody()?['answer10']",
+                            "Name of person who reported incident": "@triggerBody()?['answer8']",
+                            "Name of person/s conducting investigation": "@triggerBody()?['answer16']",
+                            "Person to action": "@triggerBody()?['answer27']",
+                            "Photos": "-@{triggerBody()?['answer25']}",
+                            "Responsible person": "@triggerBody()?['answer31']",
+                            "Review date": "@triggerBody()?['answer32']",
+                            "Short description of incident/ near miss": "@triggerBody()?['answer4']",
+                            "Telephone number": "@triggerBody()?['answer11']",
+                            "Time of incident": "@triggerBody()?['answer3']",
+                            "WITNESS DETAILS_x002e_ Name/s": "@triggerBody()?['answer13']",
+                            "What is the chance of the accident/ incident occuring again?": "@triggerBody()?['answer21']",
+                            "What preventative action could have been taken? Why was this action not taken?": "@triggerBody()?['answer19']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20_IPQJOQqtRrh4P5a0Fiel')}/items/@{encodeURIComponent('012DAKHSNTM3R4VIPAQNBKIOR3SRHYRBLC')}/workbook/tables/@{encodeURIComponent('{3F80FD83-6437-46F5-BA17-8B05C635FFFF}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Flexowork"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_3": {
+            "actions": {
+                "Add_a_row_into_a_table_3": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSNTM3R4VIPAQNBKIOR3SRHYRBLC": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx",
+                        "012DAKHSOY56JGRMWUYZE2QH7PQRC7PYQG": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Action taken": "@triggerBody()?['answer30']",
+                            "Area where near miss occured": "@triggerBody()?['answer5']",
+                            "Attach photos?": "@triggerBody()?['answer24_with_singular_value']",
+                            "Briefly describe what happened including the sequence of events, investigate scene of the near miss": "@triggerBody()?['answer23']",
+                            "Completion date": "@triggerBody()?['answer28']",
+                            "Contact number": "@triggerBody()?['answer15']",
+                            "Contact number2": "@triggerBody()?['answer18']",
+                            "Date": "@triggerBody()?['answer34']",
+                            "Date of incident": "@triggerBody()?['answer2']",
+                            "Date of report": "@triggerBody()?['answer9']",
+                            "Date report completed": "@triggerBody()?['answer12']",
+                            "Full description of events_x002e_ Who was involved?": "@triggerBody()?['answer22_with_singular_value']",
+                            "How much experience did the employee have in the task/s that was being performed when the near miss occurred? What training has been provided?": "@triggerBody()?['answer20']",
+                            "Implementation details_x002e_ Date implemented": "@triggerBody()?['answer29']",
+                            "Injury potential": "@triggerBody()?['answer7']",
+                            "Investigation recommendation_x002e_ Investigators recommendation": "@triggerBody()?['answer26']",
+                            "Investigator's name": "@triggerBody()?['answer33']",
+                            "Job title (if relevant)": "@triggerBody()?['answer14']",
+                            "Job titltle (if relevant)": "@triggerBody()?['answer17']",
+                            "Name of person (if relevant)": "-@{triggerBody()?['answer6']}",
+                            "Name of person completing this form": "@triggerBody()?['answer10']",
+                            "Name of person who reported incident": "@triggerBody()?['answer8']",
+                            "Name of person/s conducting investigation": "@triggerBody()?['answer16']",
+                            "Person to action": "@triggerBody()?['answer27']",
+                            "Photos": "-@{triggerBody()?['answer25']}",
+                            "Responsible person": "@triggerBody()?['answer31']",
+                            "Review date": "@triggerBody()?['answer32']",
+                            "Short description of incident/ near miss": "@triggerBody()?['answer4']",
+                            "Telephone number": "@triggerBody()?['answer11']",
+                            "Time of incident": "@triggerBody()?['answer3']",
+                            "WITNESS DETAILS_x002e_ Name/s": "@triggerBody()?['answer13']",
+                            "What is the chance of the accident/ incident occuring again?": "@triggerBody()?['answer21']",
+                            "What preventative action could have been taken? Why was this action not taken?": "@triggerBody()?['answer19']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20Ih8Qra-VNQ5WlPcEmbDcI')}/items/@{encodeURIComponent('012DAKHSOY56JGRMWUYZE2QH7PQRC7PYQG')}/workbook/tables/@{encodeURIComponent('{3F80FD83-6437-46F5-BA17-8B05C635FFFF}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_2": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "MarketPower"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_4": {
+            "actions": {
+                "Add_a_row_into_a_table_4": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSNTM3R4VIPAQNBKIOR3SRHYRBLC": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx",
+                        "012DAKHSNUC4F46DO75FG35SYG5EZ4HT75": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Action taken": "@triggerBody()?['answer30']",
+                            "Area where near miss occured": "@triggerBody()?['answer5']",
+                            "Attach photos?": "@triggerBody()?['answer24_with_singular_value']",
+                            "Briefly describe what happened including the sequence of events, investigate scene of the near miss": "@triggerBody()?['answer23']",
+                            "Completion date": "@triggerBody()?['answer28']",
+                            "Contact number": "@triggerBody()?['answer15']",
+                            "Contact number2": "@triggerBody()?['answer18']",
+                            "Date": "@triggerBody()?['answer34']",
+                            "Date of incident": "@triggerBody()?['answer2']",
+                            "Date of report": "@triggerBody()?['answer9']",
+                            "Date report completed": "@triggerBody()?['answer12']",
+                            "Full description of events_x002e_ Who was involved?": "@triggerBody()?['answer22_with_singular_value']",
+                            "How much experience did the employee have in the task/s that was being performed when the near miss occurred? What training has been provided?": "@triggerBody()?['answer20']",
+                            "Implementation details_x002e_ Date implemented": "@triggerBody()?['answer29']",
+                            "Injury potential": "@triggerBody()?['answer7']",
+                            "Investigation recommendation_x002e_ Investigators recommendation": "@triggerBody()?['answer26']",
+                            "Investigator's name": "@triggerBody()?['answer33']",
+                            "Job title (if relevant)": "@triggerBody()?['answer14']",
+                            "Job titltle (if relevant)": "@triggerBody()?['answer17']",
+                            "Name of person (if relevant)": "-@{triggerBody()?['answer6']}",
+                            "Name of person completing this form": "@triggerBody()?['answer10']",
+                            "Name of person who reported incident": "@triggerBody()?['answer8']",
+                            "Name of person/s conducting investigation": "@triggerBody()?['answer16']",
+                            "Person to action": "@triggerBody()?['answer27']",
+                            "Photos": "-@{triggerBody()?['answer25']}",
+                            "Responsible person": "@triggerBody()?['answer31']",
+                            "Review date": "@triggerBody()?['answer32']",
+                            "Short description of incident/ near miss": "@triggerBody()?['answer4']",
+                            "Telephone number": "@triggerBody()?['answer11']",
+                            "Time of incident": "@triggerBody()?['answer3']",
+                            "WITNESS DETAILS_x002e_ Name/s": "@triggerBody()?['answer13']",
+                            "What is the chance of the accident/ incident occuring again?": "@triggerBody()?['answer21']",
+                            "What preventative action could have been taken? Why was this action not taken?": "@triggerBody()?['answer19']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22X5-_jdHAvQLoyxRsU7UeG')}/items/@{encodeURIComponent('012DAKHSNUC4F46DO75FG35SYG5EZ4HT75')}/workbook/tables/@{encodeURIComponent('{3F80FD83-6437-46F5-BA17-8B05C635FFFF}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_3": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Panthera"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_5": {
+            "actions": {
+                "Add_a_row_into_a_table_5": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSNTM3R4VIPAQNBKIOR3SRHYRBLC": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx",
+                        "012DAKHSO64FFHRQXZOFH3WOX24XFM4DXN": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Action taken": "@triggerBody()?['answer30']",
+                            "Area where near miss occured": "@triggerBody()?['answer5']",
+                            "Attach photos?": "@triggerBody()?['answer24_with_singular_value']",
+                            "Briefly describe what happened including the sequence of events, investigate scene of the near miss": "@triggerBody()?['answer23']",
+                            "Completion date": "@triggerBody()?['answer28']",
+                            "Contact number": "@triggerBody()?['answer15']",
+                            "Contact number2": "@triggerBody()?['answer18']",
+                            "Date": "@triggerBody()?['answer34']",
+                            "Date of incident": "@triggerBody()?['answer2']",
+                            "Date of report": "@triggerBody()?['answer9']",
+                            "Date report completed": "@triggerBody()?['answer12']",
+                            "Full description of events_x002e_ Who was involved?": "@triggerBody()?['answer22_with_singular_value']",
+                            "How much experience did the employee have in the task/s that was being performed when the near miss occurred? What training has been provided?": "@triggerBody()?['answer20']",
+                            "Implementation details_x002e_ Date implemented": "@triggerBody()?['answer29']",
+                            "Injury potential": "@triggerBody()?['answer7']",
+                            "Investigation recommendation_x002e_ Investigators recommendation": "@triggerBody()?['answer26']",
+                            "Investigator's name": "@triggerBody()?['answer33']",
+                            "Job title (if relevant)": "@triggerBody()?['answer14']",
+                            "Job titltle (if relevant)": "@triggerBody()?['answer17']",
+                            "Name of person (if relevant)": "-@{triggerBody()?['answer6']}",
+                            "Name of person completing this form": "@triggerBody()?['answer10']",
+                            "Name of person who reported incident": "@triggerBody()?['answer8']",
+                            "Name of person/s conducting investigation": "@triggerBody()?['answer16']",
+                            "Person to action": "@triggerBody()?['answer27']",
+                            "Photos": "-@{triggerBody()?['answer25']}",
+                            "Responsible person": "@triggerBody()?['answer31']",
+                            "Review date": "@triggerBody()?['answer32']",
+                            "Short description of incident/ near miss": "@triggerBody()?['answer4']",
+                            "Telephone number": "@triggerBody()?['answer11']",
+                            "Time of incident": "@triggerBody()?['answer3']",
+                            "WITNESS DETAILS_x002e_ Name/s": "@triggerBody()?['answer13']",
+                            "What is the chance of the accident/ incident occuring again?": "@triggerBody()?['answer21']",
+                            "What preventative action could have been taken? Why was this action not taken?": "@triggerBody()?['answer19']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/items/@{encodeURIComponent('012DAKHSO64FFHRQXZOFH3WOX24XFM4DXN')}/workbook/tables/@{encodeURIComponent('{3F80FD83-6437-46F5-BA17-8B05C635FFFF}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_4": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Polythene"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_6": {
+            "actions": {
+                "Add_a_row_into_a_table_6": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJMDX5VYSR2WRB3RKNCYO2X4MMZ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx",
+                        "012DAKHSNTM3R4VIPAQNBKIOR3SRHYRBLC": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Action taken": "@triggerBody()?['answer30']",
+                            "Area where near miss occured": "@triggerBody()?['answer5']",
+                            "Attach photos?": "@triggerBody()?['answer24_with_singular_value']",
+                            "Briefly describe what happened including the sequence of events, investigate scene of the near miss": "@triggerBody()?['answer23']",
+                            "Completion date": "@triggerBody()?['answer28']",
+                            "Contact number": "@triggerBody()?['answer15']",
+                            "Contact number2": "@triggerBody()?['answer18']",
+                            "Date": "@triggerBody()?['answer34']",
+                            "Date of incident": "@triggerBody()?['answer2']",
+                            "Date of report": "@triggerBody()?['answer9']",
+                            "Date report completed": "@triggerBody()?['answer12']",
+                            "Full description of events_x002e_ Who was involved?": "@triggerBody()?['answer22_with_singular_value']",
+                            "How much experience did the employee have in the task/s that was being performed when the near miss occurred? What training has been provided?": "@triggerBody()?['answer20']",
+                            "Implementation details_x002e_ Date implemented": "@triggerBody()?['answer29']",
+                            "Injury potential": "@triggerBody()?['answer7']",
+                            "Investigation recommendation_x002e_ Investigators recommendation": "@triggerBody()?['answer26']",
+                            "Investigator's name": "@triggerBody()?['answer33']",
+                            "Job title (if relevant)": "@triggerBody()?['answer14']",
+                            "Job titltle (if relevant)": "@triggerBody()?['answer17']",
+                            "Name of person (if relevant)": "-@{triggerBody()?['answer6']}",
+                            "Name of person completing this form": "@triggerBody()?['answer10']",
+                            "Name of person who reported incident": "@triggerBody()?['answer8']",
+                            "Name of person/s conducting investigation": "@triggerBody()?['answer16']",
+                            "Person to action": "@triggerBody()?['answer27']",
+                            "Photos": "-@{triggerBody()?['answer25']}",
+                            "Responsible person": "@triggerBody()?['answer31']",
+                            "Review date": "@triggerBody()?['answer32']",
+                            "Short description of incident/ near miss": "@triggerBody()?['answer4']",
+                            "Telephone number": "@triggerBody()?['answer11']",
+                            "Time of incident": "@triggerBody()?['answer3']",
+                            "WITNESS DETAILS_x002e_ Name/s": "@triggerBody()?['answer13']",
+                            "What is the chance of the accident/ incident occuring again?": "@triggerBody()?['answer21']",
+                            "What preventative action could have been taken? Why was this action not taken?": "@triggerBody()?['answer19']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22kk4tt4keDSZ_ZdgmrQkph')}/items/@{encodeURIComponent('012DAKHSJMDX5VYSR2WRB3RKNCYO2X4MMZ')}/workbook/tables/@{encodeURIComponent('{3F80FD83-6437-46F5-BA17-8B05C635FFFF}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_5": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "PPL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_7": {
+            "actions": {
+                "Add_a_row_into_a_table_7": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSI66WKH7DYP2FAYLCWTNLBBIGPS": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx",
+                        "012DAKHSNTM3R4VIPAQNBKIOR3SRHYRBLC": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Action taken": "@triggerBody()?['answer30']",
+                            "Area where near miss occured": "@triggerBody()?['answer5']",
+                            "Attach photos?": "@triggerBody()?['answer24_with_singular_value']",
+                            "Briefly describe what happened including the sequence of events, investigate scene of the near miss": "@triggerBody()?['answer23']",
+                            "Completion date": "@triggerBody()?['answer28']",
+                            "Contact number": "@triggerBody()?['answer15']",
+                            "Contact number2": "@triggerBody()?['answer18']",
+                            "Date": "@triggerBody()?['answer34']",
+                            "Date of incident": "@triggerBody()?['answer2']",
+                            "Date of report": "@triggerBody()?['answer9']",
+                            "Date report completed": "@triggerBody()?['answer12']",
+                            "Full description of events_x002e_ Who was involved?": "@triggerBody()?['answer22_with_singular_value']",
+                            "How much experience did the employee have in the task/s that was being performed when the near miss occurred? What training has been provided?": "@triggerBody()?['answer20']",
+                            "Implementation details_x002e_ Date implemented": "@triggerBody()?['answer29']",
+                            "Injury potential": "@triggerBody()?['answer7']",
+                            "Investigation recommendation_x002e_ Investigators recommendation": "@triggerBody()?['answer26']",
+                            "Investigator's name": "@triggerBody()?['answer33']",
+                            "Job title (if relevant)": "@triggerBody()?['answer14']",
+                            "Job titltle (if relevant)": "@triggerBody()?['answer17']",
+                            "Name of person (if relevant)": "-@{triggerBody()?['answer6']}",
+                            "Name of person completing this form": "@triggerBody()?['answer10']",
+                            "Name of person who reported incident": "@triggerBody()?['answer8']",
+                            "Name of person/s conducting investigation": "@triggerBody()?['answer16']",
+                            "Person to action": "@triggerBody()?['answer27']",
+                            "Photos": "-@{triggerBody()?['answer25']}",
+                            "Responsible person": "@triggerBody()?['answer31']",
+                            "Review date": "@triggerBody()?['answer32']",
+                            "Short description of incident/ near miss": "@triggerBody()?['answer4']",
+                            "Telephone number": "@triggerBody()?['answer11']",
+                            "Time of incident": "@triggerBody()?['answer3']",
+                            "WITNESS DETAILS_x002e_ Name/s": "@triggerBody()?['answer13']",
+                            "What is the chance of the accident/ incident occuring again?": "@triggerBody()?['answer21']",
+                            "What preventative action could have been taken? Why was this action not taken?": "@triggerBody()?['answer19']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22UsYI9vqFGSazzeAY4Evkz')}/items/@{encodeURIComponent('012DAKHSI66WKH7DYP2FAYLCWTNLBBIGPS')}/workbook/tables/@{encodeURIComponent('{3F80FD83-6437-46F5-BA17-8B05C635FFFF}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_6": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Pressmaster"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_8": {
+            "actions": {
+                "Add_a_row_into_a_table_8": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSIFRQ5QMNV5DFBKPUPYVVCA73WV": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx",
+                        "012DAKHSNTM3R4VIPAQNBKIOR3SRHYRBLC": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Action taken": "@triggerBody()?['answer30']",
+                            "Area where near miss occured": "@triggerBody()?['answer5']",
+                            "Attach photos?": "@triggerBody()?['answer24_with_singular_value']",
+                            "Briefly describe what happened including the sequence of events, investigate scene of the near miss": "@triggerBody()?['answer23']",
+                            "Completion date": "@triggerBody()?['answer28']",
+                            "Contact number": "@triggerBody()?['answer15']",
+                            "Contact number2": "@triggerBody()?['answer18']",
+                            "Date": "@triggerBody()?['answer34']",
+                            "Date of incident": "@triggerBody()?['answer2']",
+                            "Date of report": "@triggerBody()?['answer9']",
+                            "Date report completed": "@triggerBody()?['answer12']",
+                            "Full description of events_x002e_ Who was involved?": "@triggerBody()?['answer22_with_singular_value']",
+                            "How much experience did the employee have in the task/s that was being performed when the near miss occurred? What training has been provided?": "@triggerBody()?['answer20']",
+                            "Implementation details_x002e_ Date implemented": "@triggerBody()?['answer29']",
+                            "Injury potential": "@triggerBody()?['answer7']",
+                            "Investigation recommendation_x002e_ Investigators recommendation": "@triggerBody()?['answer26']",
+                            "Investigator's name": "@triggerBody()?['answer33']",
+                            "Job title (if relevant)": "@triggerBody()?['answer14']",
+                            "Job titltle (if relevant)": "@triggerBody()?['answer17']",
+                            "Name of person (if relevant)": "-@{triggerBody()?['answer6']}",
+                            "Name of person completing this form": "@triggerBody()?['answer10']",
+                            "Name of person who reported incident": "@triggerBody()?['answer8']",
+                            "Name of person/s conducting investigation": "@triggerBody()?['answer16']",
+                            "Person to action": "@triggerBody()?['answer27']",
+                            "Photos": "-@{triggerBody()?['answer25']}",
+                            "Responsible person": "@triggerBody()?['answer31']",
+                            "Review date": "@triggerBody()?['answer32']",
+                            "Short description of incident/ near miss": "@triggerBody()?['answer4']",
+                            "Telephone number": "@triggerBody()?['answer11']",
+                            "Time of incident": "@triggerBody()?['answer3']",
+                            "WITNESS DETAILS_x002e_ Name/s": "@triggerBody()?['answer13']",
+                            "What is the chance of the accident/ incident occuring again?": "@triggerBody()?['answer21']",
+                            "What preventative action could have been taken? Why was this action not taken?": "@triggerBody()?['answer19']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21Zbz70lhgeRrEUj-vRcpoJ')}/items/@{encodeURIComponent('012DAKHSIFRQ5QMNV5DFBKPUPYVVCA73WV')}/workbook/tables/@{encodeURIComponent('{3F80FD83-6437-46F5-BA17-8B05C635FFFF}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_7": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit1"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_9": {
+            "actions": {
+                "Add_a_row_into_a_table_9": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSIX74U6EW7QPNHZ52TGSDYKGDJV": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx",
+                        "012DAKHSNTM3R4VIPAQNBKIOR3SRHYRBLC": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Action taken": "@triggerBody()?['answer30']",
+                            "Area where near miss occured": "@triggerBody()?['answer5']",
+                            "Attach photos?": "@triggerBody()?['answer24_with_singular_value']",
+                            "Briefly describe what happened including the sequence of events, investigate scene of the near miss": "@triggerBody()?['answer23']",
+                            "Completion date": "@triggerBody()?['answer28']",
+                            "Contact number": "@triggerBody()?['answer15']",
+                            "Contact number2": "@triggerBody()?['answer18']",
+                            "Date": "@triggerBody()?['answer34']",
+                            "Date of incident": "@triggerBody()?['answer2']",
+                            "Date of report": "@triggerBody()?['answer9']",
+                            "Date report completed": "@triggerBody()?['answer12']",
+                            "Full description of events_x002e_ Who was involved?": "@triggerBody()?['answer22_with_singular_value']",
+                            "How much experience did the employee have in the task/s that was being performed when the near miss occurred? What training has been provided?": "@triggerBody()?['answer20']",
+                            "Implementation details_x002e_ Date implemented": "@triggerBody()?['answer29']",
+                            "Injury potential": "@triggerBody()?['answer7']",
+                            "Investigation recommendation_x002e_ Investigators recommendation": "@triggerBody()?['answer26']",
+                            "Investigator's name": "@triggerBody()?['answer33']",
+                            "Job title (if relevant)": "@triggerBody()?['answer14']",
+                            "Job titltle (if relevant)": "@triggerBody()?['answer17']",
+                            "Name of person (if relevant)": "-@{triggerBody()?['answer6']}",
+                            "Name of person completing this form": "@triggerBody()?['answer10']",
+                            "Name of person who reported incident": "@triggerBody()?['answer8']",
+                            "Name of person/s conducting investigation": "@triggerBody()?['answer16']",
+                            "Person to action": "@triggerBody()?['answer27']",
+                            "Photos": "-@{triggerBody()?['answer25']}",
+                            "Responsible person": "@triggerBody()?['answer31']",
+                            "Review date": "@triggerBody()?['answer32']",
+                            "Short description of incident/ near miss": "@triggerBody()?['answer4']",
+                            "Telephone number": "@triggerBody()?['answer11']",
+                            "Time of incident": "@triggerBody()?['answer3']",
+                            "WITNESS DETAILS_x002e_ Name/s": "@triggerBody()?['answer13']",
+                            "What is the chance of the accident/ incident occuring again?": "@triggerBody()?['answer21']",
+                            "What preventative action could have been taken? Why was this action not taken?": "@triggerBody()?['answer19']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness_2']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK224_MWHSLrlToHLAKKgheJk')}/items/@{encodeURIComponent('012DAKHSIX74U6EW7QPNHZ52TGSDYKGDJV')}/workbook/tables/@{encodeURIComponent('{3F80FD83-6437-46F5-BA17-8B05C635FFFF}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_8": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit2"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        }
+    },
+    "outputs": {}
+}

@@ -1,0 +1,629 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "3b68c86e-a9c6-44b7-a32c-c60fe4d8f5d1",
+                    "groupId": "bb473b02-eead-457f-aea8-5dc3a1151813@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Condition": {
+            "actions": {
+                "Add_a_row_into_a_table": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSNTMW3SFTZXMVFLPYUNBYN65RB6": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Area": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer4']",
+                            "Discussion": "@triggerBody()?['answer5']",
+                            "Name": "@triggerBody()?['answer6']",
+                            "Responsible person": "@triggerBody()?['answer2']",
+                            "Signature (Full name)": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSNTMW3SFTZXMVFLPYUNBYN65RB6')}/workbook/tables/@{encodeURIComponent('{F82D8B7F-9EFE-4A8B-9CD8-53E2D33B2561}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {},
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "ASL Pack"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_10": {
+            "actions": {
+                "Add_a_row_into_a_table_10": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSKKPKDFQ4BUHNHZZDE4WXVU3DLT": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSNTMW3SFTZXMVFLPYUNBYN65RB6": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Area": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer4']",
+                            "Discussion": "@triggerBody()?['answer5']",
+                            "Name": "@triggerBody()?['answer6']",
+                            "Responsible person": "@triggerBody()?['answer2']",
+                            "Signature (Full name)": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23CcVP99gEfQ4EjLalW8EVd')}/items/@{encodeURIComponent('012DAKHSKKPKDFQ4BUHNHZZDE4WXVU3DLT')}/workbook/tables/@{encodeURIComponent('{F82D8B7F-9EFE-4A8B-9CD8-53E2D33B2561}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_9": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Sintel"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_11": {
+            "actions": {
+                "Add_a_row_into_a_table_11": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSNIKBKKHJS5CNALO34DAWWP3RXW": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSNTMW3SFTZXMVFLPYUNBYN65RB6": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Area": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer4']",
+                            "Discussion": "@triggerBody()?['answer5']",
+                            "Name": "@triggerBody()?['answer6']",
+                            "Responsible person": "@triggerBody()?['answer2']",
+                            "Signature (Full name)": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23SOjeg2ex3SKPV30tAC8Sq')}/items/@{encodeURIComponent('012DAKHSNIKBKKHJS5CNALO34DAWWP3RXW')}/workbook/tables/@{encodeURIComponent('{F82D8B7F-9EFE-4A8B-9CD8-53E2D33B2561}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_10": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "TPSL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_12": {
+            "actions": {
+                "Add_a_row_into_a_table_12": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSMNQEYGSGBLPVE2IKHETXQ3D6YB": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSNTMW3SFTZXMVFLPYUNBYN65RB6": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Area": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer4']",
+                            "Discussion": "@triggerBody()?['answer5']",
+                            "Name": "@triggerBody()?['answer6']",
+                            "Responsible person": "@triggerBody()?['answer2']",
+                            "Signature (Full name)": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21OE4Lc5Sx1SZwFdBOFz34o')}/items/@{encodeURIComponent('012DAKHSMNQEYGSGBLPVE2IKHETXQ3D6YB')}/workbook/tables/@{encodeURIComponent('{F82D8B7F-9EFE-4A8B-9CD8-53E2D33B2561}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_11": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Wild Elegance"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_2": {
+            "actions": {
+                "Add_a_row_into_a_table_2": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSMKUO74OL4JT5BIVMKXJ5ZFJ5VC": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSNTMW3SFTZXMVFLPYUNBYN65RB6": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Area": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer4']",
+                            "Discussion": "@triggerBody()?['answer5']",
+                            "Name": "@triggerBody()?['answer6']",
+                            "Responsible person": "@triggerBody()?['answer2']",
+                            "Signature (Full name)": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20_IPQJOQqtRrh4P5a0Fiel')}/items/@{encodeURIComponent('012DAKHSMKUO74OL4JT5BIVMKXJ5ZFJ5VC')}/workbook/tables/@{encodeURIComponent('{F82D8B7F-9EFE-4A8B-9CD8-53E2D33B2561}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Flexowork"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_3": {
+            "actions": {
+                "Add_a_row_into_a_table_3": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSLXAZ7GCXTITZD2P2PYMMP45E7J": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSNTMW3SFTZXMVFLPYUNBYN65RB6": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Area": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer4']",
+                            "Discussion": "@triggerBody()?['answer5']",
+                            "Name": "@triggerBody()?['answer6']",
+                            "Responsible person": "@triggerBody()?['answer2']",
+                            "Signature (Full name)": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20Ih8Qra-VNQ5WlPcEmbDcI')}/items/@{encodeURIComponent('012DAKHSLXAZ7GCXTITZD2P2PYMMP45E7J')}/workbook/tables/@{encodeURIComponent('{F82D8B7F-9EFE-4A8B-9CD8-53E2D33B2561}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_2": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "MarketPower"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_4": {
+            "actions": {
+                "Add_a_row_into_a_table_4": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSKDZMPMMSXZRVCZ5YB6LL3TZK2Z": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSNTMW3SFTZXMVFLPYUNBYN65RB6": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Area": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer4']",
+                            "Discussion": "@triggerBody()?['answer5']",
+                            "Name": "@triggerBody()?['answer6']",
+                            "Responsible person": "@triggerBody()?['answer2']",
+                            "Signature (Full name)": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22X5-_jdHAvQLoyxRsU7UeG')}/items/@{encodeURIComponent('012DAKHSKDZMPMMSXZRVCZ5YB6LL3TZK2Z')}/workbook/tables/@{encodeURIComponent('{F82D8B7F-9EFE-4A8B-9CD8-53E2D33B2561}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_3": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Panthera"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_5": {
+            "actions": {
+                "Add_a_row_into_a_table_5": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSNTMW3SFTZXMVFLPYUNBYN65RB6": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSOCLNYTVBQ3MBH3DKPH6D6BWJLP": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks.xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Area": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer4']",
+                            "Discussion": "@triggerBody()?['answer5']",
+                            "Name": "@triggerBody()?['answer6']",
+                            "Responsible person": "@triggerBody()?['answer2']",
+                            "Signature (Full name)": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/items/@{encodeURIComponent('012DAKHSOCLNYTVBQ3MBH3DKPH6D6BWJLP')}/workbook/tables/@{encodeURIComponent('{F82D8B7F-9EFE-4A8B-9CD8-53E2D33B2561}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_4": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Polythene"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_6": {
+            "actions": {
+                "Add_a_row_into_a_table_6": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSKMW3QRRVJGIFBZRM2F73UB6HNG": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSNTMW3SFTZXMVFLPYUNBYN65RB6": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Area": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer4']",
+                            "Discussion": "@triggerBody()?['answer5']",
+                            "Name": "@triggerBody()?['answer6']",
+                            "Responsible person": "@triggerBody()?['answer2']",
+                            "Signature (Full name)": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22kk4tt4keDSZ_ZdgmrQkph')}/items/@{encodeURIComponent('012DAKHSKMW3QRRVJGIFBZRM2F73UB6HNG')}/workbook/tables/@{encodeURIComponent('{F82D8B7F-9EFE-4A8B-9CD8-53E2D33B2561}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_5": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "PPL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_7": {
+            "actions": {
+                "Add_a_row_into_a_table_7": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSNTMW3SFTZXMVFLPYUNBYN65RB6": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSO3YI5MIVK5ANHJBRYR5YBXGFAX": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Area": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer4']",
+                            "Discussion": "@triggerBody()?['answer5']",
+                            "Name": "@triggerBody()?['answer6']",
+                            "Responsible person": "@triggerBody()?['answer2']",
+                            "Signature (Full name)": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22UsYI9vqFGSazzeAY4Evkz')}/items/@{encodeURIComponent('012DAKHSO3YI5MIVK5ANHJBRYR5YBXGFAX')}/workbook/tables/@{encodeURIComponent('{F82D8B7F-9EFE-4A8B-9CD8-53E2D33B2561}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_6": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Pressmaster"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_8": {
+            "actions": {
+                "Add_a_row_into_a_table_8": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSJRU6NWPE4NXJEKG3X7KOU2MEVE": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSNTMW3SFTZXMVFLPYUNBYN65RB6": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Area": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer4']",
+                            "Discussion": "@triggerBody()?['answer5']",
+                            "Name": "@triggerBody()?['answer6']",
+                            "Responsible person": "@triggerBody()?['answer2']",
+                            "Signature (Full name)": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21Zbz70lhgeRrEUj-vRcpoJ')}/items/@{encodeURIComponent('012DAKHSJRU6NWPE4NXJEKG3X7KOU2MEVE')}/workbook/tables/@{encodeURIComponent('{F82D8B7F-9EFE-4A8B-9CD8-53E2D33B2561}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_7": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit1"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_9": {
+            "actions": {
+                "Add_a_row_into_a_table_9": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSICSNFIOUU7XVAZLPNJQJYH53HK": "/EHS/Registers/PPE/PPE Issuing.xlsx",
+                        "012DAKHSNTMW3SFTZXMVFLPYUNBYN65RB6": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSOPIGCJJPVHXVC2FMDX6VDTKI4X": "/EHS/EHS Reports/Toolbox Talks/Safety Toolbox Talks (1).xlsx",
+                        "012DAKHSPKXTZHI2RM5RCI5HWE3TFKBRYJ": "/EHS/EHS Reports/Incident Reports/Near miss investigation form.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "Area": "@triggerBody()?['answer3']",
+                            "Date": "@triggerBody()?['answer4']",
+                            "Discussion": "@triggerBody()?['answer5']",
+                            "Name": "@triggerBody()?['answer6']",
+                            "Responsible person": "@triggerBody()?['answer2']",
+                            "Signature (Full name)": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK224_MWHSLrlToHLAKKgheJk')}/items/@{encodeURIComponent('012DAKHSOPIGCJJPVHXVC2FMDX6VDTKI4X')}/workbook/tables/@{encodeURIComponent('{F82D8B7F-9EFE-4A8B-9CD8-53E2D33B2561}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_8": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit2"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        }
+    },
+    "outputs": {}
+}

@@ -1,0 +1,132 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala_1']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "4a2d6f53-0d16-4385-9b2d-eba438023807.2",
+                    "groupId": "0dafb7cd-2b37-46dd-a97d-7de423693231@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Condition_11": {
+            "actions": {
+                "Add_a_row_into_a_table_11": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJUR424AEZJANDKF2JFUBTWC47M": "/EHS/Staff Training/Training Register/Proof of Training.xlsx",
+                        "012DAKHSMI4GQR6ANXQ5CKJLZIRXZSSI5D": "/EHS/Staff Training/Training Register/Proof of Training.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "DECLARATION BY EMPLOYEE_x002e_ Name": "@triggerBody()?['answer8']",
+                            "Department": "@triggerBody()?['answer6']",
+                            "EHS OFFICER/ SUPERVISOR'S NAME": "@triggerBody()?['answer2']",
+                            "Employee name": "@triggerBody()?['answer3']",
+                            "Employee number": "@triggerBody()?['answer4']",
+                            "I declare that i was trained in the use of the above mentioned plant, equipment and tools and that I fully understand the safety and hazards involved in the use of such equipment_x002e_ SIGNATURE (full name)": "@triggerBody()?['answer9']",
+                            "Position": "@triggerBody()?['answer5']",
+                            "Signature of EHS officer/Supervisor": "@triggerBody()?['answer10']",
+                            "Was trained and found competent to use the following plant, equipment and tools": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23SOjeg2ex3SKPV30tAC8Sq')}/items/@{encodeURIComponent('012DAKHSMI4GQR6ANXQ5CKJLZIRXZSSI5D')}/workbook/tables/@{encodeURIComponent('{A78F9CBA-220E-4E00-A77E-B591963EF170}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {},
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "TPSL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_12": {
+            "actions": {
+                "Add_a_row_into_a_table_12": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJUR424AEZJANDKF2JFUBTWC47M": "/EHS/Staff Training/Training Register/Proof of Training.xlsx",
+                        "012DAKHSPJFJ5VJEPTDRE2KTPB44TB6NWE": "/EHS/Staff Training/Training Register/Proof of Training.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "DECLARATION BY EMPLOYEE_x002e_ Name": "@triggerBody()?['answer8']",
+                            "Department": "@triggerBody()?['answer6']",
+                            "EHS OFFICER/ SUPERVISOR'S NAME": "@triggerBody()?['answer2']",
+                            "Employee name": "@triggerBody()?['answer3']",
+                            "Employee number": "@triggerBody()?['answer4']",
+                            "I declare that i was trained in the use of the above mentioned plant, equipment and tools and that I fully understand the safety and hazards involved in the use of such equipment_x002e_ SIGNATURE (full name)": "@triggerBody()?['answer9']",
+                            "Position": "@triggerBody()?['answer5']",
+                            "Signature of EHS officer/Supervisor": "@triggerBody()?['answer10']",
+                            "Was trained and found competent to use the following plant, equipment and tools": "@triggerBody()?['answer7']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21OE4Lc5Sx1SZwFdBOFz34o')}/items/@{encodeURIComponent('012DAKHSPJFJ5VJEPTDRE2KTPB44TB6NWE')}/workbook/tables/@{encodeURIComponent('{A78F9CBA-220E-4E00-A77E-B591963EF170}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_11": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Wild Elegance"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        }
+    },
+    "outputs": {}
+}

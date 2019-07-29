@@ -1,0 +1,893 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_someone_responds_to_a_custom_action": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook",
+                "queries": {
+                    "actionPackageId": "580fb403-a044-4df2-ac4e-b1b863500328.2",
+                    "groupId": "c1a2ff37-1dfb-4b9b-aadd-c29525b100ba@2",
+                    "objectId": "00000000-0000-0000-0000-000000000000"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Condition": {
+            "actions": {
+                "Add_a_row_into_a_table": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJLYMILMFHZNJEJU42LX7AKS6H2": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "ACTION TAKEN BY EMPLOYER TO PREVENT THE RECURRENCE OF A SIMILAR INCIDENT": "@triggerBody()?['answer26']",
+                            "Date": "@triggerBody()?['answer25']",
+                            "Date of incident": "@triggerBody()?['answer5']",
+                            "Date of investigation": "@triggerBody()?['answer19']",
+                            "Date2": "@triggerBody()?['answer28']",
+                            "Date3": "@triggerBody()?['answer31']",
+                            "Description of occupational disease": "@triggerBody()?['question10']",
+                            "Designation of investigator": "@triggerBody()?['answer20']",
+                            "Effect on person": "@triggerBody()?['answer8_with_singular_value']",
+                            "Employment number of affected person": "@triggerBody()?['answer4']",
+                            "Expected period of disblement": "@triggerBody()?['answer9_with_singular_value']",
+                            "INVESTIGATION OF THE ABOVE INCIDENT BY A PERSON DESIGNATED THERETO_x002e_ Name of investigator": "@triggerBody()?['answer18']",
+                            "Machine/ process involved/ type of work performed/ exposure": "@triggerBody()?['answer11']",
+                            "Name of affected person": "@triggerBody()?['answer3']",
+                            "Name of employer": "@triggerBody()?['answer2']",
+                            "Part of body affected": "@triggerBody()?['answer7_with_singular_value']",
+                            "Provide copies of risk assessments and relevant safe systems of work/ working procedures_x002e_": "@triggerBody()?['answer15']",
+                            "Provide copies of the witness statements": "@triggerBody()?['answer17']",
+                            "REMARKS BY HEALTH AND SAFETY COMMITTEE": "@triggerBody()?['answer29']",
+                            "Recommended steps to prevent a recurrence": "@triggerBody()?['answer23']",
+                            "Short description of incident": "@triggerBody()?['answer21']",
+                            "Signature of chairperson of Health and Safety Committee (full name)": "@triggerBody()?['answer30']",
+                            "Signature of employer (full name)": "@triggerBody()?['answer27']",
+                            "Signature of investigator (full name)": "@triggerBody()?['answer24']",
+                            "Suspected cause of incident": "@triggerBody()?['answer22']",
+                            "Time of incident": "@triggerBody()?['answer6']",
+                            "Was the incident reported DOSH?": "@triggerBody()?['answer12_with_singular_value']",
+                            "Was the incident reported to the police? (fatality)": "@triggerBody()?['answer13_with_singular_value']",
+                            "Was there a Risk Assessment done with regards to the activities/ tasks being undertaken?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Were witness statements taken": "@triggerBody()?['answer16_with_singular_value']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21TtwYvHnw8R4gmHuIdviQP')}/items/@{encodeURIComponent('012DAKHSJLYMILMFHZNJEJU42LX7AKS6H2')}/workbook/tables/@{encodeURIComponent('{11F650E2-7075-4165-B6B0-C528C6AE5A82}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {},
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "ASL Pack"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_10": {
+            "actions": {
+                "Add_a_row_into_a_table_10": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJLYMILMFHZNJEJU42LX7AKS6H2": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx",
+                        "012DAKHSODZKOMIZLZPVAL4YVO2J3NNR3P": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "ACTION TAKEN BY EMPLOYER TO PREVENT THE RECURRENCE OF A SIMILAR INCIDENT": "@triggerBody()?['answer26']",
+                            "Date": "@triggerBody()?['answer25']",
+                            "Date of incident": "@triggerBody()?['answer5']",
+                            "Date of investigation": "@triggerBody()?['answer19']",
+                            "Date2": "@triggerBody()?['answer28']",
+                            "Date3": "@triggerBody()?['answer31']",
+                            "Description of occupational disease": "@triggerBody()?['question10']",
+                            "Designation of investigator": "@triggerBody()?['answer20']",
+                            "Effect on person": "@triggerBody()?['answer8_with_singular_value']",
+                            "Employment number of affected person": "@triggerBody()?['answer4']",
+                            "Expected period of disblement": "@triggerBody()?['answer9_with_singular_value']",
+                            "INVESTIGATION OF THE ABOVE INCIDENT BY A PERSON DESIGNATED THERETO_x002e_ Name of investigator": "@triggerBody()?['answer18']",
+                            "Machine/ process involved/ type of work performed/ exposure": "@triggerBody()?['answer11']",
+                            "Name of affected person": "@triggerBody()?['answer3']",
+                            "Name of employer": "@triggerBody()?['answer2']",
+                            "Part of body affected": "@triggerBody()?['answer7_with_singular_value']",
+                            "Provide copies of risk assessments and relevant safe systems of work/ working procedures_x002e_": "@triggerBody()?['answer15']",
+                            "Provide copies of the witness statements": "@triggerBody()?['answer17']",
+                            "REMARKS BY HEALTH AND SAFETY COMMITTEE": "@triggerBody()?['answer29']",
+                            "Recommended steps to prevent a recurrence": "@triggerBody()?['answer23']",
+                            "Short description of incident": "@triggerBody()?['answer21']",
+                            "Signature of chairperson of Health and Safety Committee (full name)": "@triggerBody()?['answer30']",
+                            "Signature of employer (full name)": "@triggerBody()?['answer27']",
+                            "Signature of investigator (full name)": "@triggerBody()?['answer24']",
+                            "Suspected cause of incident": "@triggerBody()?['answer22']",
+                            "Time of incident": "@triggerBody()?['answer6']",
+                            "Was the incident reported DOSH?": "@triggerBody()?['answer12_with_singular_value']",
+                            "Was the incident reported to the police? (fatality)": "@triggerBody()?['answer13_with_singular_value']",
+                            "Was there a Risk Assessment done with regards to the activities/ tasks being undertaken?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Were witness statements taken": "@triggerBody()?['answer16_with_singular_value']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23CcVP99gEfQ4EjLalW8EVd')}/items/@{encodeURIComponent('012DAKHSODZKOMIZLZPVAL4YVO2J3NNR3P')}/workbook/tables/@{encodeURIComponent('{11F650E2-7075-4165-B6B0-C528C6AE5A82}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_9": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Sintel"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_11": {
+            "actions": {
+                "Add_a_row_into_a_table_11": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJLYMILMFHZNJEJU42LX7AKS6H2": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx",
+                        "012DAKHSNTXR36X7PH5RFZYAZ2AGPP2ZI4": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "ACTION TAKEN BY EMPLOYER TO PREVENT THE RECURRENCE OF A SIMILAR INCIDENT": "@triggerBody()?['answer26']",
+                            "Date": "@triggerBody()?['answer25']",
+                            "Date of incident": "@triggerBody()?['answer5']",
+                            "Date of investigation": "@triggerBody()?['answer19']",
+                            "Date2": "@triggerBody()?['answer28']",
+                            "Date3": "@triggerBody()?['answer31']",
+                            "Description of occupational disease": "@triggerBody()?['question10']",
+                            "Designation of investigator": "@triggerBody()?['answer20']",
+                            "Effect on person": "@triggerBody()?['answer8_with_singular_value']",
+                            "Employment number of affected person": "@triggerBody()?['answer4']",
+                            "Expected period of disblement": "@triggerBody()?['answer9_with_singular_value']",
+                            "INVESTIGATION OF THE ABOVE INCIDENT BY A PERSON DESIGNATED THERETO_x002e_ Name of investigator": "@triggerBody()?['answer18']",
+                            "Machine/ process involved/ type of work performed/ exposure": "@triggerBody()?['answer11']",
+                            "Name of affected person": "@triggerBody()?['answer3']",
+                            "Name of employer": "@triggerBody()?['answer2']",
+                            "Part of body affected": "@triggerBody()?['answer7_with_singular_value']",
+                            "Provide copies of risk assessments and relevant safe systems of work/ working procedures_x002e_": "@triggerBody()?['answer15']",
+                            "Provide copies of the witness statements": "@triggerBody()?['answer17']",
+                            "REMARKS BY HEALTH AND SAFETY COMMITTEE": "@triggerBody()?['answer29']",
+                            "Recommended steps to prevent a recurrence": "@triggerBody()?['answer23']",
+                            "Short description of incident": "@triggerBody()?['answer21']",
+                            "Signature of chairperson of Health and Safety Committee (full name)": "@triggerBody()?['answer30']",
+                            "Signature of employer (full name)": "@triggerBody()?['answer27']",
+                            "Signature of investigator (full name)": "@triggerBody()?['answer24']",
+                            "Suspected cause of incident": "@triggerBody()?['answer22']",
+                            "Time of incident": "@triggerBody()?['answer6']",
+                            "Was the incident reported DOSH?": "@triggerBody()?['answer12_with_singular_value']",
+                            "Was the incident reported to the police? (fatality)": "@triggerBody()?['answer13_with_singular_value']",
+                            "Was there a Risk Assessment done with regards to the activities/ tasks being undertaken?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Were witness statements taken": "@triggerBody()?['answer16_with_singular_value']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK23SOjeg2ex3SKPV30tAC8Sq')}/items/@{encodeURIComponent('012DAKHSNTXR36X7PH5RFZYAZ2AGPP2ZI4')}/workbook/tables/@{encodeURIComponent('{11F650E2-7075-4165-B6B0-C528C6AE5A82}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_10": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "TPSL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_12": {
+            "actions": {
+                "Add_a_row_into_a_table_12": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJLYMILMFHZNJEJU42LX7AKS6H2": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx",
+                        "012DAKHSOBNU47746OVZGLDDFYDEJPJ65T": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "ACTION TAKEN BY EMPLOYER TO PREVENT THE RECURRENCE OF A SIMILAR INCIDENT": "@triggerBody()?['answer26']",
+                            "Date": "@triggerBody()?['answer25']",
+                            "Date of incident": "@triggerBody()?['answer5']",
+                            "Date of investigation": "@triggerBody()?['answer19']",
+                            "Date2": "@triggerBody()?['answer28']",
+                            "Date3": "@triggerBody()?['answer31']",
+                            "Description of occupational disease": "@triggerBody()?['question10']",
+                            "Designation of investigator": "@triggerBody()?['answer20']",
+                            "Effect on person": "@triggerBody()?['answer8_with_singular_value']",
+                            "Employment number of affected person": "@triggerBody()?['answer4']",
+                            "Expected period of disblement": "@triggerBody()?['answer9_with_singular_value']",
+                            "INVESTIGATION OF THE ABOVE INCIDENT BY A PERSON DESIGNATED THERETO_x002e_ Name of investigator": "@triggerBody()?['answer18']",
+                            "Machine/ process involved/ type of work performed/ exposure": "@triggerBody()?['answer11']",
+                            "Name of affected person": "@triggerBody()?['answer3']",
+                            "Name of employer": "@triggerBody()?['answer2']",
+                            "Part of body affected": "@triggerBody()?['answer7_with_singular_value']",
+                            "Provide copies of risk assessments and relevant safe systems of work/ working procedures_x002e_": "@triggerBody()?['answer15']",
+                            "Provide copies of the witness statements": "@triggerBody()?['answer17']",
+                            "REMARKS BY HEALTH AND SAFETY COMMITTEE": "@triggerBody()?['answer29']",
+                            "Recommended steps to prevent a recurrence": "@triggerBody()?['answer23']",
+                            "Short description of incident": "@triggerBody()?['answer21']",
+                            "Signature of chairperson of Health and Safety Committee (full name)": "@triggerBody()?['answer30']",
+                            "Signature of employer (full name)": "@triggerBody()?['answer27']",
+                            "Signature of investigator (full name)": "@triggerBody()?['answer24']",
+                            "Suspected cause of incident": "@triggerBody()?['answer22']",
+                            "Time of incident": "@triggerBody()?['answer6']",
+                            "Was the incident reported DOSH?": "@triggerBody()?['answer12_with_singular_value']",
+                            "Was the incident reported to the police? (fatality)": "@triggerBody()?['answer13_with_singular_value']",
+                            "Was there a Risk Assessment done with regards to the activities/ tasks being undertaken?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Were witness statements taken": "@triggerBody()?['answer16_with_singular_value']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21OE4Lc5Sx1SZwFdBOFz34o')}/items/@{encodeURIComponent('012DAKHSOBNU47746OVZGLDDFYDEJPJ65T')}/workbook/tables/@{encodeURIComponent('{11F650E2-7075-4165-B6B0-C528C6AE5A82}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_11": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Wild Elegance"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_2": {
+            "actions": {
+                "Add_a_row_into_a_table_2": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJLYMILMFHZNJEJU42LX7AKS6H2": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx",
+                        "012DAKHSJXM7ENPOHXPBFKGU72SRPYTDQ2": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "ACTION TAKEN BY EMPLOYER TO PREVENT THE RECURRENCE OF A SIMILAR INCIDENT": "@triggerBody()?['answer26']",
+                            "Date": "@triggerBody()?['answer25']",
+                            "Date of incident": "@triggerBody()?['answer5']",
+                            "Date of investigation": "@triggerBody()?['answer19']",
+                            "Date2": "@triggerBody()?['answer28']",
+                            "Date3": "@triggerBody()?['answer31']",
+                            "Description of occupational disease": "@triggerBody()?['question10']",
+                            "Designation of investigator": "@triggerBody()?['answer20']",
+                            "Effect on person": "@triggerBody()?['answer8_with_singular_value']",
+                            "Employment number of affected person": "@triggerBody()?['answer4']",
+                            "Expected period of disblement": "@triggerBody()?['answer9_with_singular_value']",
+                            "INVESTIGATION OF THE ABOVE INCIDENT BY A PERSON DESIGNATED THERETO_x002e_ Name of investigator": "@triggerBody()?['answer18']",
+                            "Machine/ process involved/ type of work performed/ exposure": "@triggerBody()?['answer11']",
+                            "Name of affected person": "@triggerBody()?['answer3']",
+                            "Name of employer": "@triggerBody()?['answer2']",
+                            "Part of body affected": "@triggerBody()?['answer7_with_singular_value']",
+                            "Provide copies of risk assessments and relevant safe systems of work/ working procedures_x002e_": "@triggerBody()?['answer15']",
+                            "Provide copies of the witness statements": "@triggerBody()?['answer17']",
+                            "REMARKS BY HEALTH AND SAFETY COMMITTEE": "@triggerBody()?['answer29']",
+                            "Recommended steps to prevent a recurrence": "@triggerBody()?['answer23']",
+                            "Short description of incident": "@triggerBody()?['answer21']",
+                            "Signature of chairperson of Health and Safety Committee (full name)": "@triggerBody()?['answer30']",
+                            "Signature of employer (full name)": "@triggerBody()?['answer27']",
+                            "Signature of investigator (full name)": "@triggerBody()?['answer24']",
+                            "Suspected cause of incident": "@triggerBody()?['answer22']",
+                            "Time of incident": "@triggerBody()?['answer6']",
+                            "Was the incident reported DOSH?": "@triggerBody()?['answer12_with_singular_value']",
+                            "Was the incident reported to the police? (fatality)": "@triggerBody()?['answer13_with_singular_value']",
+                            "Was there a Risk Assessment done with regards to the activities/ tasks being undertaken?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Were witness statements taken": "@triggerBody()?['answer16_with_singular_value']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20_IPQJOQqtRrh4P5a0Fiel')}/items/@{encodeURIComponent('012DAKHSJXM7ENPOHXPBFKGU72SRPYTDQ2')}/workbook/tables/@{encodeURIComponent('{11F650E2-7075-4165-B6B0-C528C6AE5A82}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Flexowork"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_3": {
+            "actions": {
+                "Add_a_row_into_a_table_3": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJLYMILMFHZNJEJU42LX7AKS6H2": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx",
+                        "012DAKHSK7B2H5AQEMCZAZN3DCOEBCAJO7": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "ACTION TAKEN BY EMPLOYER TO PREVENT THE RECURRENCE OF A SIMILAR INCIDENT": "@triggerBody()?['answer26']",
+                            "Date": "@triggerBody()?['answer25']",
+                            "Date of incident": "@triggerBody()?['answer5']",
+                            "Date of investigation": "@triggerBody()?['answer19']",
+                            "Date2": "@triggerBody()?['answer28']",
+                            "Date3": "@triggerBody()?['answer31']",
+                            "Description of occupational disease": "@triggerBody()?['question10']",
+                            "Designation of investigator": "@triggerBody()?['answer20']",
+                            "Effect on person": "@triggerBody()?['answer8_with_singular_value']",
+                            "Employment number of affected person": "@triggerBody()?['answer4']",
+                            "Expected period of disblement": "@triggerBody()?['answer9_with_singular_value']",
+                            "INVESTIGATION OF THE ABOVE INCIDENT BY A PERSON DESIGNATED THERETO_x002e_ Name of investigator": "@triggerBody()?['answer18']",
+                            "Machine/ process involved/ type of work performed/ exposure": "@triggerBody()?['answer11']",
+                            "Name of affected person": "@triggerBody()?['answer3']",
+                            "Name of employer": "@triggerBody()?['answer2']",
+                            "Part of body affected": "@triggerBody()?['answer7_with_singular_value']",
+                            "Provide copies of risk assessments and relevant safe systems of work/ working procedures_x002e_": "@triggerBody()?['answer15']",
+                            "Provide copies of the witness statements": "@triggerBody()?['answer17']",
+                            "REMARKS BY HEALTH AND SAFETY COMMITTEE": "@triggerBody()?['answer29']",
+                            "Recommended steps to prevent a recurrence": "@triggerBody()?['answer23']",
+                            "Short description of incident": "@triggerBody()?['answer21']",
+                            "Signature of chairperson of Health and Safety Committee (full name)": "@triggerBody()?['answer30']",
+                            "Signature of employer (full name)": "@triggerBody()?['answer27']",
+                            "Signature of investigator (full name)": "@triggerBody()?['answer24']",
+                            "Suspected cause of incident": "@triggerBody()?['answer22']",
+                            "Time of incident": "@triggerBody()?['answer6']",
+                            "Was the incident reported DOSH?": "@triggerBody()?['answer12_with_singular_value']",
+                            "Was the incident reported to the police? (fatality)": "@triggerBody()?['answer13_with_singular_value']",
+                            "Was there a Risk Assessment done with regards to the activities/ tasks being undertaken?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Were witness statements taken": "@triggerBody()?['answer16_with_singular_value']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK20Ih8Qra-VNQ5WlPcEmbDcI')}/items/@{encodeURIComponent('012DAKHSK7B2H5AQEMCZAZN3DCOEBCAJO7')}/workbook/tables/@{encodeURIComponent('{11F650E2-7075-4165-B6B0-C528C6AE5A82}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_2": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "MarketPower"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_4": {
+            "actions": {
+                "Add_a_row_into_a_table_4": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJLYMILMFHZNJEJU42LX7AKS6H2": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx",
+                        "012DAKHSK7D3YNDX7VNJCLFCVNSSLDFR2C": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "ACTION TAKEN BY EMPLOYER TO PREVENT THE RECURRENCE OF A SIMILAR INCIDENT": "@triggerBody()?['answer26']",
+                            "Date": "@triggerBody()?['answer25']",
+                            "Date of incident": "@triggerBody()?['answer5']",
+                            "Date of investigation": "@triggerBody()?['answer19']",
+                            "Date2": "@triggerBody()?['answer28']",
+                            "Date3": "@triggerBody()?['answer31']",
+                            "Description of occupational disease": "@triggerBody()?['question10']",
+                            "Designation of investigator": "@triggerBody()?['answer20']",
+                            "Effect on person": "@triggerBody()?['answer8_with_singular_value']",
+                            "Employment number of affected person": "@triggerBody()?['answer4']",
+                            "Expected period of disblement": "@triggerBody()?['answer9_with_singular_value']",
+                            "INVESTIGATION OF THE ABOVE INCIDENT BY A PERSON DESIGNATED THERETO_x002e_ Name of investigator": "@triggerBody()?['answer18']",
+                            "Machine/ process involved/ type of work performed/ exposure": "@triggerBody()?['answer11']",
+                            "Name of affected person": "@triggerBody()?['answer3']",
+                            "Name of employer": "@triggerBody()?['answer2']",
+                            "Part of body affected": "@triggerBody()?['answer7_with_singular_value']",
+                            "Provide copies of risk assessments and relevant safe systems of work/ working procedures_x002e_": "@triggerBody()?['answer15']",
+                            "Provide copies of the witness statements": "@triggerBody()?['answer17']",
+                            "REMARKS BY HEALTH AND SAFETY COMMITTEE": "@triggerBody()?['answer29']",
+                            "Recommended steps to prevent a recurrence": "@triggerBody()?['answer23']",
+                            "Short description of incident": "@triggerBody()?['answer21']",
+                            "Signature of chairperson of Health and Safety Committee (full name)": "@triggerBody()?['answer30']",
+                            "Signature of employer (full name)": "@triggerBody()?['answer27']",
+                            "Signature of investigator (full name)": "@triggerBody()?['answer24']",
+                            "Suspected cause of incident": "@triggerBody()?['answer22']",
+                            "Time of incident": "@triggerBody()?['answer6']",
+                            "Was the incident reported DOSH?": "@triggerBody()?['answer12_with_singular_value']",
+                            "Was the incident reported to the police? (fatality)": "@triggerBody()?['answer13_with_singular_value']",
+                            "Was there a Risk Assessment done with regards to the activities/ tasks being undertaken?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Were witness statements taken": "@triggerBody()?['answer16_with_singular_value']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22X5-_jdHAvQLoyxRsU7UeG')}/items/@{encodeURIComponent('012DAKHSK7D3YNDX7VNJCLFCVNSSLDFR2C')}/workbook/tables/@{encodeURIComponent('{11F650E2-7075-4165-B6B0-C528C6AE5A82}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_3": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Panthera"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_5": {
+            "actions": {
+                "Add_a_row_into_a_table_5": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJLYMILMFHZNJEJU42LX7AKS6H2": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx",
+                        "012DAKHSMW6F6RSA27ANAZQHLSAGJ6NXBK": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "ACTION TAKEN BY EMPLOYER TO PREVENT THE RECURRENCE OF A SIMILAR INCIDENT": "@triggerBody()?['answer26']",
+                            "Date": "@triggerBody()?['answer25']",
+                            "Date of incident": "@triggerBody()?['answer5']",
+                            "Date of investigation": "@triggerBody()?['answer19']",
+                            "Date2": "@triggerBody()?['answer28']",
+                            "Date3": "@triggerBody()?['answer31']",
+                            "Description of occupational disease": "@triggerBody()?['question10']",
+                            "Designation of investigator": "@triggerBody()?['answer20']",
+                            "Effect on person": "@triggerBody()?['answer8_with_singular_value']",
+                            "Employment number of affected person": "@triggerBody()?['answer4']",
+                            "Expected period of disblement": "@triggerBody()?['answer9_with_singular_value']",
+                            "INVESTIGATION OF THE ABOVE INCIDENT BY A PERSON DESIGNATED THERETO_x002e_ Name of investigator": "@triggerBody()?['answer18']",
+                            "Machine/ process involved/ type of work performed/ exposure": "@triggerBody()?['answer11']",
+                            "Name of affected person": "@triggerBody()?['answer3']",
+                            "Name of employer": "@triggerBody()?['answer2']",
+                            "Part of body affected": "@triggerBody()?['answer7_with_singular_value']",
+                            "Provide copies of risk assessments and relevant safe systems of work/ working procedures_x002e_": "@triggerBody()?['answer15']",
+                            "Provide copies of the witness statements": "@triggerBody()?['answer17']",
+                            "REMARKS BY HEALTH AND SAFETY COMMITTEE": "@triggerBody()?['answer29']",
+                            "Recommended steps to prevent a recurrence": "@triggerBody()?['answer23']",
+                            "Short description of incident": "@triggerBody()?['answer21']",
+                            "Signature of chairperson of Health and Safety Committee (full name)": "@triggerBody()?['answer30']",
+                            "Signature of employer (full name)": "@triggerBody()?['answer27']",
+                            "Signature of investigator (full name)": "@triggerBody()?['answer24']",
+                            "Suspected cause of incident": "@triggerBody()?['answer22']",
+                            "Time of incident": "@triggerBody()?['answer6']",
+                            "Was the incident reported DOSH?": "@triggerBody()?['answer12_with_singular_value']",
+                            "Was the incident reported to the police? (fatality)": "@triggerBody()?['answer13_with_singular_value']",
+                            "Was there a Risk Assessment done with regards to the activities/ tasks being undertaken?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Were witness statements taken": "@triggerBody()?['answer16_with_singular_value']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22h32uewUkkT5lZnlVNqBNw')}/items/@{encodeURIComponent('012DAKHSMW6F6RSA27ANAZQHLSAGJ6NXBK')}/workbook/tables/@{encodeURIComponent('{11F650E2-7075-4165-B6B0-C528C6AE5A82}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_4": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Polythene"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_6": {
+            "actions": {
+                "Add_a_row_into_a_table_6": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJHGEX7VPCAS5FLWHK3PQS6PNIL": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx",
+                        "012DAKHSJLYMILMFHZNJEJU42LX7AKS6H2": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "ACTION TAKEN BY EMPLOYER TO PREVENT THE RECURRENCE OF A SIMILAR INCIDENT": "@triggerBody()?['answer26']",
+                            "Date": "@triggerBody()?['answer25']",
+                            "Date of incident": "@triggerBody()?['answer5']",
+                            "Date of investigation": "@triggerBody()?['answer19']",
+                            "Date2": "@triggerBody()?['answer28']",
+                            "Date3": "@triggerBody()?['answer31']",
+                            "Description of occupational disease": "@triggerBody()?['question10']",
+                            "Designation of investigator": "@triggerBody()?['answer20']",
+                            "Effect on person": "@triggerBody()?['answer8_with_singular_value']",
+                            "Employment number of affected person": "@triggerBody()?['answer4']",
+                            "Expected period of disblement": "@triggerBody()?['answer9_with_singular_value']",
+                            "INVESTIGATION OF THE ABOVE INCIDENT BY A PERSON DESIGNATED THERETO_x002e_ Name of investigator": "@triggerBody()?['answer18']",
+                            "Machine/ process involved/ type of work performed/ exposure": "@triggerBody()?['answer11']",
+                            "Name of affected person": "@triggerBody()?['answer3']",
+                            "Name of employer": "@triggerBody()?['answer2']",
+                            "Part of body affected": "@triggerBody()?['answer7_with_singular_value']",
+                            "Provide copies of risk assessments and relevant safe systems of work/ working procedures_x002e_": "@triggerBody()?['answer15']",
+                            "Provide copies of the witness statements": "@triggerBody()?['answer17']",
+                            "REMARKS BY HEALTH AND SAFETY COMMITTEE": "@triggerBody()?['answer29']",
+                            "Recommended steps to prevent a recurrence": "@triggerBody()?['answer23']",
+                            "Short description of incident": "@triggerBody()?['answer21']",
+                            "Signature of chairperson of Health and Safety Committee (full name)": "@triggerBody()?['answer30']",
+                            "Signature of employer (full name)": "@triggerBody()?['answer27']",
+                            "Signature of investigator (full name)": "@triggerBody()?['answer24']",
+                            "Suspected cause of incident": "@triggerBody()?['answer22']",
+                            "Time of incident": "@triggerBody()?['answer6']",
+                            "Was the incident reported DOSH?": "@triggerBody()?['answer12_with_singular_value']",
+                            "Was the incident reported to the police? (fatality)": "@triggerBody()?['answer13_with_singular_value']",
+                            "Was there a Risk Assessment done with regards to the activities/ tasks being undertaken?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Were witness statements taken": "@triggerBody()?['answer16_with_singular_value']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22kk4tt4keDSZ_ZdgmrQkph')}/items/@{encodeURIComponent('012DAKHSJHGEX7VPCAS5FLWHK3PQS6PNIL')}/workbook/tables/@{encodeURIComponent('{11F650E2-7075-4165-B6B0-C528C6AE5A82}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_5": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "PPL"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_7": {
+            "actions": {
+                "Add_a_row_into_a_table_7": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJLYMILMFHZNJEJU42LX7AKS6H2": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx",
+                        "012DAKHSLNIWSNZXOBZZFKAMZ3L3ZCOQZQ": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "ACTION TAKEN BY EMPLOYER TO PREVENT THE RECURRENCE OF A SIMILAR INCIDENT": "@triggerBody()?['answer26']",
+                            "Date": "@triggerBody()?['answer25']",
+                            "Date of incident": "@triggerBody()?['answer5']",
+                            "Date of investigation": "@triggerBody()?['answer19']",
+                            "Date2": "@triggerBody()?['answer28']",
+                            "Date3": "@triggerBody()?['answer31']",
+                            "Description of occupational disease": "@triggerBody()?['question10']",
+                            "Designation of investigator": "@triggerBody()?['answer20']",
+                            "Effect on person": "@triggerBody()?['answer8_with_singular_value']",
+                            "Employment number of affected person": "@triggerBody()?['answer4']",
+                            "Expected period of disblement": "@triggerBody()?['answer9_with_singular_value']",
+                            "INVESTIGATION OF THE ABOVE INCIDENT BY A PERSON DESIGNATED THERETO_x002e_ Name of investigator": "@triggerBody()?['answer18']",
+                            "Machine/ process involved/ type of work performed/ exposure": "@triggerBody()?['answer11']",
+                            "Name of affected person": "@triggerBody()?['answer3']",
+                            "Name of employer": "@triggerBody()?['answer2']",
+                            "Part of body affected": "@triggerBody()?['answer7_with_singular_value']",
+                            "Provide copies of risk assessments and relevant safe systems of work/ working procedures_x002e_": "@triggerBody()?['answer15']",
+                            "Provide copies of the witness statements": "@triggerBody()?['answer17']",
+                            "REMARKS BY HEALTH AND SAFETY COMMITTEE": "@triggerBody()?['answer29']",
+                            "Recommended steps to prevent a recurrence": "@triggerBody()?['answer23']",
+                            "Short description of incident": "@triggerBody()?['answer21']",
+                            "Signature of chairperson of Health and Safety Committee (full name)": "@triggerBody()?['answer30']",
+                            "Signature of employer (full name)": "@triggerBody()?['answer27']",
+                            "Signature of investigator (full name)": "@triggerBody()?['answer24']",
+                            "Suspected cause of incident": "@triggerBody()?['answer22']",
+                            "Time of incident": "@triggerBody()?['answer6']",
+                            "Was the incident reported DOSH?": "@triggerBody()?['answer12_with_singular_value']",
+                            "Was the incident reported to the police? (fatality)": "@triggerBody()?['answer13_with_singular_value']",
+                            "Was there a Risk Assessment done with regards to the activities/ tasks being undertaken?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Were witness statements taken": "@triggerBody()?['answer16_with_singular_value']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK22UsYI9vqFGSazzeAY4Evkz')}/items/@{encodeURIComponent('012DAKHSLNIWSNZXOBZZFKAMZ3L3ZCOQZQ')}/workbook/tables/@{encodeURIComponent('{11F650E2-7075-4165-B6B0-C528C6AE5A82}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_6": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "Pressmaster"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_8": {
+            "actions": {
+                "Add_a_row_into_a_table_8": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJLYMILMFHZNJEJU42LX7AKS6H2": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx",
+                        "012DAKHSKA5FT5R2PY6FDJ2BGNX6QOSLJB": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "ACTION TAKEN BY EMPLOYER TO PREVENT THE RECURRENCE OF A SIMILAR INCIDENT": "@triggerBody()?['answer26']",
+                            "Date": "@triggerBody()?['answer25']",
+                            "Date of incident": "@triggerBody()?['answer5']",
+                            "Date of investigation": "@triggerBody()?['answer19']",
+                            "Date2": "@triggerBody()?['answer28']",
+                            "Date3": "@triggerBody()?['answer31']",
+                            "Description of occupational disease": "@triggerBody()?['question10']",
+                            "Designation of investigator": "@triggerBody()?['answer20']",
+                            "Effect on person": "@triggerBody()?['answer8_with_singular_value']",
+                            "Employment number of affected person": "@triggerBody()?['answer4']",
+                            "Expected period of disblement": "@triggerBody()?['answer9_with_singular_value']",
+                            "INVESTIGATION OF THE ABOVE INCIDENT BY A PERSON DESIGNATED THERETO_x002e_ Name of investigator": "@triggerBody()?['answer18']",
+                            "Machine/ process involved/ type of work performed/ exposure": "@triggerBody()?['answer11']",
+                            "Name of affected person": "@triggerBody()?['answer3']",
+                            "Name of employer": "@triggerBody()?['answer2']",
+                            "Part of body affected": "@triggerBody()?['answer7_with_singular_value']",
+                            "Provide copies of risk assessments and relevant safe systems of work/ working procedures_x002e_": "@triggerBody()?['answer15']",
+                            "Provide copies of the witness statements": "@triggerBody()?['answer17']",
+                            "REMARKS BY HEALTH AND SAFETY COMMITTEE": "@triggerBody()?['answer29']",
+                            "Recommended steps to prevent a recurrence": "@triggerBody()?['answer23']",
+                            "Short description of incident": "@triggerBody()?['answer21']",
+                            "Signature of chairperson of Health and Safety Committee (full name)": "@triggerBody()?['answer30']",
+                            "Signature of employer (full name)": "@triggerBody()?['answer27']",
+                            "Signature of investigator (full name)": "@triggerBody()?['answer24']",
+                            "Suspected cause of incident": "@triggerBody()?['answer22']",
+                            "Time of incident": "@triggerBody()?['answer6']",
+                            "Was the incident reported DOSH?": "@triggerBody()?['answer12_with_singular_value']",
+                            "Was the incident reported to the police? (fatality)": "@triggerBody()?['answer13_with_singular_value']",
+                            "Was there a Risk Assessment done with regards to the activities/ tasks being undertaken?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Were witness statements taken": "@triggerBody()?['answer16_with_singular_value']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK21Zbz70lhgeRrEUj-vRcpoJ')}/items/@{encodeURIComponent('012DAKHSKA5FT5R2PY6FDJ2BGNX6QOSLJB')}/workbook/tables/@{encodeURIComponent('{11F650E2-7075-4165-B6B0-C528C6AE5A82}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_7": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit1"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        },
+        "Condition_9": {
+            "actions": {
+                "Add_a_row_into_a_table_9": {
+                    "runAfter": {},
+                    "metadata": {
+                        "012DAKHSJLYMILMFHZNJEJU42LX7AKS6H2": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx",
+                        "012DAKHSMCVNHUJZHXGRGISCPWNTNIRPPY": "/EHS/EHS Reports/Incident Reports/Recording and investigation of incidents.xlsx"
+                    },
+                    "type": "ApiConnection",
+                    "inputs": {
+                        "body": {
+                            "ACTION TAKEN BY EMPLOYER TO PREVENT THE RECURRENCE OF A SIMILAR INCIDENT": "@triggerBody()?['answer26']",
+                            "Date": "@triggerBody()?['answer25']",
+                            "Date of incident": "@triggerBody()?['answer5']",
+                            "Date of investigation": "@triggerBody()?['answer19']",
+                            "Date2": "@triggerBody()?['answer28']",
+                            "Date3": "@triggerBody()?['answer31']",
+                            "Description of occupational disease": "@triggerBody()?['question10']",
+                            "Designation of investigator": "@triggerBody()?['answer20']",
+                            "Effect on person": "@triggerBody()?['answer8_with_singular_value']",
+                            "Employment number of affected person": "@triggerBody()?['answer4']",
+                            "Expected period of disblement": "@triggerBody()?['answer9_with_singular_value']",
+                            "INVESTIGATION OF THE ABOVE INCIDENT BY A PERSON DESIGNATED THERETO_x002e_ Name of investigator": "@triggerBody()?['answer18']",
+                            "Machine/ process involved/ type of work performed/ exposure": "@triggerBody()?['answer11']",
+                            "Name of affected person": "@triggerBody()?['answer3']",
+                            "Name of employer": "@triggerBody()?['answer2']",
+                            "Part of body affected": "@triggerBody()?['answer7_with_singular_value']",
+                            "Provide copies of risk assessments and relevant safe systems of work/ working procedures_x002e_": "@triggerBody()?['answer15']",
+                            "Provide copies of the witness statements": "@triggerBody()?['answer17']",
+                            "REMARKS BY HEALTH AND SAFETY COMMITTEE": "@triggerBody()?['answer29']",
+                            "Recommended steps to prevent a recurrence": "@triggerBody()?['answer23']",
+                            "Short description of incident": "@triggerBody()?['answer21']",
+                            "Signature of chairperson of Health and Safety Committee (full name)": "@triggerBody()?['answer30']",
+                            "Signature of employer (full name)": "@triggerBody()?['answer27']",
+                            "Signature of investigator (full name)": "@triggerBody()?['answer24']",
+                            "Suspected cause of incident": "@triggerBody()?['answer22']",
+                            "Time of incident": "@triggerBody()?['answer6']",
+                            "Was the incident reported DOSH?": "@triggerBody()?['answer12_with_singular_value']",
+                            "Was the incident reported to the police? (fatality)": "@triggerBody()?['answer13_with_singular_value']",
+                            "Was there a Risk Assessment done with regards to the activities/ tasks being undertaken?": "@triggerBody()?['answer14_with_singular_value']",
+                            "Were witness statements taken": "@triggerBody()?['answer16_with_singular_value']"
+                        },
+                        "host": {
+                            "connection": {
+                                "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                            }
+                        },
+                        "method": "post",
+                        "path": "/codeless/v1.2/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDLhfpxdwqWJBunzu_J-GK224_MWHSLrlToHLAKKgheJk')}/items/@{encodeURIComponent('012DAKHSMCVNHUJZHXGRGISCPWNTNIRPPY')}/workbook/tables/@{encodeURIComponent('{11F650E2-7075-4165-B6B0-C528C6AE5A82}')}/rows",
+                        "queries": {
+                            "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,17a75fb8-a970-4162-ba7c-eefc9f862b6d"
+                        }
+                    }
+                }
+            },
+            "runAfter": {
+                "Condition_8": [
+                    "Succeeded"
+                ]
+            },
+            "expression": {
+                "and": [
+                    {
+                        "equals": [
+                            "@triggerBody()?['answer1_with_singular_value']",
+                            "RPWL Unit2"
+                        ]
+                    }
+                ]
+            },
+            "type": "If"
+        }
+    },
+    "outputs": {}
+}

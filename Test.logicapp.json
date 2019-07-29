@@ -1,0 +1,75 @@
+{
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+            "defaultValue": {},
+            "type": "Object"
+        }
+    },
+    "triggers": {
+        "When_a_text_message_is_sent_on_a_group": {
+            "type": "ApiConnectionWebhook",
+            "inputs": {
+                "body": {
+                    "CallbackUrl": "@{listCallbackUrl()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['kaizala']['connectionId']"
+                    }
+                },
+                "path": "/v1/webhook/Group/TextMessageCreated",
+                "queries": {
+                    "objectId": "77085874-325f-4fa2-9fb1-e3b11c135101@2"
+                }
+            }
+        }
+    },
+    "actions": {
+        "Get_tables": {
+            "runAfter": {},
+            "metadata": {
+                "01KXXHG6NU62RXTTZJD5G2RHDW3HZ6W6MS": "/ICTA Interns TimeSheets/Daily Signin Sheet.xlsx"
+            },
+            "type": "ApiConnection",
+            "inputs": {
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                    }
+                },
+                "method": "get",
+                "path": "/codeless/v1.0/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDIl0s5y8z8JKn2i2Corkkn7emRWA4ba6Qq7fulyr6h3v')}/items/@{encodeURIComponent('01KXXHG6NU62RXTTZJD5G2RHDW3HZ6W6MS')}/workbook/tables",
+                "queries": {
+                    "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,9cb37489-cfbc-4ac2-9f68-b60a8ae4927e"
+                }
+            }
+        },
+        "List_rows_present_in_a_table": {
+            "runAfter": {
+                "Get_tables": [
+                    "Succeeded"
+                ]
+            },
+            "metadata": {
+                "01KXXHG6NU62RXTTZJD5G2RHDW3HZ6W6MS": "/ICTA Interns TimeSheets/Daily Signin Sheet.xlsx"
+            },
+            "type": "ApiConnection",
+            "inputs": {
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['excelonlinebusiness']['connectionId']"
+                    }
+                },
+                "method": "get",
+                "path": "/drives/@{encodeURIComponent('b!g4E1NDjZPEeFRCZufTiEDIl0s5y8z8JKn2i2Corkkn7emRWA4ba6Qq7fulyr6h3v')}/files/@{encodeURIComponent('01KXXHG6NU62RXTTZJD5G2RHDW3HZ6W6MS')}/tables/@{encodeURIComponent('{3A4BAE4F-A712-43A6-8FD5-7A6B9C3B45E7}')}/items",
+                "queries": {
+                    "$filter": "Date eq '@{formatDateTime(utcnow(),'yyyy-MM-dd')}'",
+                    "source": "sites/ramcogroupltd.sharepoint.com,34358183-d938-473c-8544-266e7d38840c,9cb37489-cfbc-4ac2-9f68-b60a8ae4927e"
+                }
+            }
+        }
+    },
+    "outputs": {}
+}
